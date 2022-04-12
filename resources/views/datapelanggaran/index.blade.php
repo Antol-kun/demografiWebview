@@ -71,6 +71,23 @@
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="mb-10">
+                    <!--begin::Label-->
+                    <label class="form-label fw-bold">Kelompok Kelas :</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <div>
+                        <select name="kel_kls" class="form-select form-select-solid filter" id="kel_kls">
+                            <option value="">Pilih Kelompok Kelas...</option>
+                            @foreach ($kel_kls as $kk)
+                                <option value="{{ $kk }}">{{ $kk }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <!--end::Input-->
+                </div>
+                <!--end::Input group-->
                 <!--begin::Actions-->
                 <div class="d-flex justify-content-end">
                     <button type="reset" class="btn btn-sm btn-white btn-active-light-primary me-2"

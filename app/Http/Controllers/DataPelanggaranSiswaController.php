@@ -20,18 +20,24 @@ class DataPelanggaranSiswaController extends Controller
     public function filterdata(Request $request)
     {
         $db = DB::table('v_pelanggaran_detail')->orderBy('id', 'DESC');
-        if($request->kelas && $request->tahun){
-            return $db->where('tingkat_kelas', $request->kelas)->where('tahunakademik', $request->tahun)->get();
+
+        if($request->kelas && $request->tahun && $request->kel_kls){
+            return $db->where('tingkat_kelas', $request->kelas)
+                        ->where('tahunakademik', $request->tahun)
+                        ->where('kode_kelompok', $request->kel_kls)->get();
         }elseif($request->kelas){
             return $db->where('tingkat_kelas', $request->kelas)->get();
         }elseif($request->tahun){
             return $db->where('tahunakademik', $request->tahun)->get();
+        }elseif($request->kel_kls){
+            return $db->where('kode_kelompok', $request->kel_kls)->get();
         }
     }
 
     public function index()
     {
-        $tahun = DB::table('tabeltahunajaran')->get()->pluck('tahunakademik');
+        $tahun   = DB::table('tabeltahunajaran')->get()->pluck('tahunakademik');
+        $kel_kls = DB::table('tblkelompokkelas')->orderBy('kode_kelompok', 'ASC')->get()->pluck('kode_kelompok');
 
         $data = [
             'title' => 'Data Pelanggaran Siswa',
@@ -41,8 +47,8 @@ class DataPelanggaranSiswaController extends Controller
                 ['url' => '/master' , 'name' => 'List Data Pelanggaran'],
             ],
             'tahun_ajaran' => $tahun,
+            'kel_kls'      => $kel_kls,
             'testVariable' => 'Pelanggaran Siswa'
-            
         ];
 
         return view('datapelanggaran.index', $data);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Alert;
 use DataTables;
@@ -123,8 +123,11 @@ class DatasiswaController extends Controller
     }
 
     public function getShow($id) {
-       $siswa = DB::table('tblsiswa')->where('idsiswa', base64_decode($id))
-                ->get();
+        $siswa     = DB::table('tblsiswa')->where('idsiswa', base64_decode($id))->get();
+        // $pelanggaran = DB::table('v_pelanggaran_detail')->where()->get();
+        $pelanggaran = DB::table('tblsiswa')
+                            ->join('v_pelanggaran_siswa', 'tblsiswa.nisn', '=', 'v_pelanggaran_siswa.nisn')
+                            ->where('tblsiswa.nisn', 90909090)->get();
 
         $data = [
             'title' => 'Detail Data Siswa',
@@ -134,9 +137,13 @@ class DatasiswaController extends Controller
                 ['url' => '/interface' , 'name' => 'Interface'],
                 ['url' => '/master' , 'name' => 'List Data'],
             ],
-            
+            'pelanggaran'  => $pelanggaran,
             'testVariable' => 'Data Siswa'
         ];
+
+        // dd($data, $id, $pelanggaran);
+
+        // dd($pelanggaran);
         
         return view('datasiswa.show', $data);
     }
