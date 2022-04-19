@@ -5,7 +5,7 @@
 @endpush
 
 @section('sub_header_action')
-<div class="me-4">
+{{-- <div class="me-4">
     <!--begin::Menu-->
     <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click"
         data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
@@ -64,7 +64,7 @@
                         <select name="tahun" class="form-select form-select-solid filter" id="tahun">
                             <option value="">Pilih Tahun Ajaran...</option>
                             @foreach ($tahun_ajaran as $ta)
-                                <option value="{{ $ta }}">{{ $ta }}</option>
+                            <option value="{{ $ta }}">{{ $ta }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -81,7 +81,7 @@
                         <select name="kel_kls" class="form-select form-select-solid filter" id="kel_kls">
                             <option value="">Pilih Kelompok Kelas...</option>
                             @foreach ($kel_kls as $kk)
-                                <option value="{{ $kk }}">{{ $kk }}</option>
+                            <option value="{{ $kk }}">{{ $kk }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -92,7 +92,8 @@
                 <div class="d-flex justify-content-end">
                     <button type="reset" class="btn btn-sm btn-white btn-active-light-primary me-2"
                         data-kt-menu-dismiss="true" onclick="resetfilter()">Reset</button>
-                    <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true" id="filter">Filter</button>
+                    <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true"
+                        id="filter">Filter</button>
                 </div>
                 <!--end::Actions-->
             </div>
@@ -101,10 +102,10 @@
     </div>
     <!--end::Menu 1-->
     <!--end::Menu-->
-</div>
+</div> --}}
 <!--end::Wrapper-->
 <!--begin::Button-->
-<a href="/datapelanggaransiswa/create" class="btn btn-sm btn-primary">Tambah {{$testVariable}}</a>
+<a href="{{ route('kehadiran.create') }}" class="btn btn-sm btn-primary">Tambah {{$testVariable}}</a>
 @endsection
 
 @section('content')
@@ -162,32 +163,28 @@
                                 <tr>
                                     <th width="50" style="text-align:center;">No</th>
                                     <th>Nama Siswa</th>
-                                    <th>Tgl Kejadian</th>
-                                    <th>Tempat Kejadian</th>
-                                    <th>Kasus</th>
-                                    <th>Sanksi</th>
-                                    <th>Jenis Hukuman</th>
-                                    <th>Bukti Pelanggaran</th>
+                                    <th>Kelas</th>
+                                    <th>Walikelas</th>
+                                    <th>Tgl Mulai</th>
+                                    <th>Tgl Selesai</th>
+                                    <th>Keterangan</th>
                                     <th width="100px">Action</th>
                                 </tr>
                             </thead>
-                            {{-- @php
+                            <tbody>
+                                @php
                                 $no = 1;
-                            @endphp
-                            @foreach ($siswa as $ssw)
+                                @endphp
+
+                                @forelse ($izin as $i)
                                 <tr style="height: 40px">
                                     <td style="text-align:center;">{{ $no++ }}</td>
-                                    <td>{{ $ssw->nisn }} - {{ $ssw->nama_siswa }}</td>
-                                    <td>{{ $ssw->tgl_kejadian }}</td>
-                                    <td>{{ $ssw->tempat_kejadian }}</td>
-                                    <td>{{ $ssw->kasus }}</td>
-                                    <td>{{ $ssw->jenis_sanksi }}</td>
-                                    <td>{{ $ssw->sanksi }}</td>
-                                    @if ($ssw->img_kasus)
-                                        <td><img src="/bukti_pelanggaran/{{ $ssw->img_kasus }}" alt="" style="width: 100px"></td>
-                                    @else
-                                        <td>Tidak Ada Bukti.</td>
-                                    @endif
+                                    <td>{{ $i->nisn }} - {{ $i->nama_siswa }}</td>
+                                    <td>{{ $i->kode_kelompok }}</td>
+                                    <td>{{ $i->Nama }}</td>
+                                    <td>{{ $i->tgl_mulai }}</td>
+                                    <td>{{ $i->tgl_selesai }}</td>
+                                    <td>{{ $i->keterangan }}</td>
                                     <td>
                                         <a style="background-color: deepskyblue; color: white" href="#"
                                             class="btn btn-light btn-active-light-primary btn-sm"
@@ -196,8 +193,8 @@
                                             <!--begin::Svg Icon | path: icons/duotone/Navigation/Angle-down.svg-->
                                             <span class="svg-icon svg-icon-5 m-0">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                    viewBox="0 0 24 24" version="1.1">
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                         <polygon points="0 0 24 0 24 24 0 24"></polygon>
                                                         <path
@@ -215,12 +212,13 @@
                                             data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="/datapelanggaransiswa/edit/{{ base64_encode($ssw->id) }}" class="menu-link px-3">Edit</a>
+                                                <a href="{{ route('kehadiran.edit', base64_encode($i->idizin)) }}"
+                                                    class="menu-link px-3">Edit</a>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="#" onclick="konfirmasi({{ $ssw->id }})"
+                                                <a href="#" onclick="konfirmasi({{ $i->idizin }})"
                                                     class="menu-link px-3">Hapus</a>
                                             </div>
                                             <!--end::Menu item-->
@@ -229,8 +227,11 @@
                                         <!--end::Menu-->
                                     </td>
                                 </tr>
-                            @endforeach --}}
-                            <tbody>
+                                @empty
+                                <tr>
+                                    <td colspan="8" class="text-center">Tidak ada data.</td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
 
@@ -257,89 +258,89 @@
         }
     });
 
-    function getData(){
-        const url = "{{url('datapelanggaransiswa/getdata')}}"
-        $.ajax({
-            url,
-            success: function(datapelanggar){
-                // console.log(datapelanggar)
-                let tampilan = '';
-                let no = 1;
-                $("#tabeldata tbody").children().remove()
-                for(let i=0;i<datapelanggar.length;i++){
-                    tampilan += `
-                        <tr>
-                            <td style="text-align:center;">${no++}</td>
-                            <td>${datapelanggar[i].nisn} - ${datapelanggar[i].nama_siswa}</td>
-                            <td>${datapelanggar[i].tgl_kejadian}</td>
-                            <td>${datapelanggar[i].tempat_kejadian}</td>
-                            <td>${datapelanggar[i].kasus}</td>
-                            <td>${datapelanggar[i].sanksi}</td>
-                            <td>${datapelanggar[i].jenis_sanksi}</td>
-                            <td><img src="${datapelanggar[i].img_kasus}" style="width: 130px"></td>
-                            <td>
-                                <div class="d-flex">
-                                    <a href="/datapelanggaransiswa/edit/${btoa(datapelanggar[i].id)}" class="btn btn-sm btn-success me-2">Edit</a>
-                                    <a href="#" onclick="konfirmasi(${datapelanggar[i].id})" class="btn btn-sm btn-primary">Hapus</a>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                }
-                $("#tabeldata tbody").append(tampilan);
-            },
-            error: function(e){
-                console.log(e)
-                alert("Terjadi kesalahan")
-            }
-        })
-    }
+    // function getData(){
+    //     const url = "{{url('datapelanggaransiswa/getdata')}}"
+    //     $.ajax({
+    //         url,
+    //         success: function(datapelanggar){
+    //             // console.log(datapelanggar)
+    //             let tampilan = '';
+    //             let no = 1;
+    //             $("#tabeldata tbody").children().remove()
+    //             for(let i=0;i<datapelanggar.length;i++){
+    //                 tampilan += `
+    //                     <tr>
+    //                         <td style="text-align:center;">${no++}</td>
+    //                         <td>${datapelanggar[i].nisn} - ${datapelanggar[i].nama_siswa}</td>
+    //                         <td>${datapelanggar[i].tgl_kejadian}</td>
+    //                         <td>${datapelanggar[i].tempat_kejadian}</td>
+    //                         <td>${datapelanggar[i].kasus}</td>
+    //                         <td>${datapelanggar[i].sanksi}</td>
+    //                         <td>${datapelanggar[i].jenis_sanksi}</td>
+    //                         <td><img src="${datapelanggar[i].img_kasus}" style="width: 130px"></td>
+    //                         <td>
+    //                             <div class="d-flex">
+    //                                 <a href="/datapelanggaransiswa/edit/${btoa(datapelanggar[i].id)}" class="btn btn-sm btn-success me-2">Edit</a>
+    //                                 <a href="#" onclick="konfirmasi(${datapelanggar[i].id})" class="btn btn-sm btn-primary">Hapus</a>
+    //                             </div>
+    //                         </td>
+    //                     </tr>
+    //                 `;
+    //             }
+    //             $("#tabeldata tbody").append(tampilan);
+    //         },
+    //         error: function(e){
+    //             console.log(e)
+    //             alert("Terjadi kesalahan")
+    //         }
+    //     })
+    // }
 
-    function resetfilter(){
-        $("#pelanggarfilter").trigger('reset')
-        getData()
-    }
+    // function resetfilter(){
+    //     $("#pelanggarfilter").trigger('reset')
+    //     getData()
+    // }
     
-    getData()
+    // getData()
 
-    $("#pelanggarfilter").click(function(e){
-        e.preventDefault();
+    // $("#pelanggarfilter").click(function(e){
+    //     e.preventDefault();
         
-        const url = "{{url('datapelanggaransiswa/filter')}}"
-        // console.log([kelas, tahun])
-        $.ajax({
-            url,
-            data: $("#pelanggarfilter").serialize(),
-            type: "GET",
-            dataType: 'json',
-            success: function(filter){
-                let single = '';
-                let no = 1;
-                $("#tabeldata tbody").children().remove()
-                for(let i=0;i<filter.length;i++){
-                    single += `
-                        <tr>
-                            <td style="text-align:center;">${no++}</td>
-                            <td>${filter[i].nisn} - ${filter[i].nama_siswa}</td>
-                            <td>${filter[i].tgl_kejadian}</td>
-                            <td>${filter[i].tempat_kejadian}</td>
-                            <td>${filter[i].kasus}</td>
-                            <td>${filter[i].sanksi}</td>
-                            <td>${filter[i].jenis_sanksi}</td>
-                            <td><img src="${filter[i].img_kasus}" style="width: 130px"></td>
-                            <td>
-                                <div class="d-flex">
-                                    <a href="/filteransiswa/edit/${btoa(filter[i].id)}" class="btn btn-sm btn-success me-2">Edit</a>
-                                    <a href="#" onclick="konfirmasi(${filter[i].id})" class="btn btn-sm btn-primary">Hapus</a>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                }
-                $("#tabeldata tbody").append(single);
-            }
-        })
-    })
+    //     const url = "{{url('datapelanggaransiswa/filter')}}"
+    //     // console.log([kelas, tahun])
+    //     $.ajax({
+    //         url,
+    //         data: $("#pelanggarfilter").serialize(),
+    //         type: "GET",
+    //         dataType: 'json',
+    //         success: function(filter){
+    //             let single = '';
+    //             let no = 1;
+    //             $("#tabeldata tbody").children().remove()
+    //             for(let i=0;i<filter.length;i++){
+    //                 single += `
+    //                     <tr>
+    //                         <td style="text-align:center;">${no++}</td>
+    //                         <td>${filter[i].nisn} - ${filter[i].nama_siswa}</td>
+    //                         <td>${filter[i].tgl_kejadian}</td>
+    //                         <td>${filter[i].tempat_kejadian}</td>
+    //                         <td>${filter[i].kasus}</td>
+    //                         <td>${filter[i].sanksi}</td>
+    //                         <td>${filter[i].jenis_sanksi}</td>
+    //                         <td><img src="${filter[i].img_kasus}" style="width: 130px"></td>
+    //                         <td>
+    //                             <div class="d-flex">
+    //                                 <a href="/filteransiswa/edit/${btoa(filter[i].id)}" class="btn btn-sm btn-success me-2">Edit</a>
+    //                                 <a href="#" onclick="konfirmasi(${filter[i].id})" class="btn btn-sm btn-primary">Hapus</a>
+    //                             </div>
+    //                         </td>
+    //                     </tr>
+    //                 `;
+    //             }
+    //             $("#tabeldata tbody").append(single);
+    //         }
+    //     })
+    // })
 
     function konfirmasi(id){
         Swal.fire({
@@ -354,7 +355,7 @@
             // console.log('Data:'+id);
             if (result.value) {
                 $.ajax({
-                    url: "/datapelanggaransiswa/hapus/"+id,
+                    url: "/datakehadiran/hapus/"+id,
                     type: "GET",
                     dataType: 'json',
                     success: function (data) {

@@ -182,21 +182,41 @@
                         </div>
                     </div>
 
-                    @if (Session::get('level') == "Admin")
                     <div class="menu-item">
                         <div class="menu-content pt-8 pb-0">
-                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Menu Pelanggaran Siswa</span>
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Menu Management Siswa</span>
                         </div>
                     </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="/datapelanggaransiswa">
+                    @if(Session::get('level') == 'Admin')
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
                             <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
                                 <span class="svg-icon svg-icon-2">
-                                    <i class="fas fa-users"></i>
+                                    <i class="fas fa-address-card"></i>
                                 </span>
+                                <!--end::Svg Icon-->
                             </span>
-                            <span class="menu-title">Data Pelanggaran Siswa</span>
-                        </a>
+                            <span class="menu-title">Managemen Siswa</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="/datapelanggaransiswa">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Data Pelanggaran Siswa</span>
+                                </a>
+                                <a class="menu-link" href="/datakehadiran">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Data Kehadiran Siswa</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     @endif
 

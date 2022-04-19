@@ -166,6 +166,14 @@ Route::get('/datapelanggaransiswa/getdata', [DataPelanggaranSiswaController::cla
 // Route Filter Data Pelanggar Siswa
 Route::get('/datapelanggaransiswa/filter', [DataPelanggaranSiswaController::class, 'filterdata']);
 
+// Route Kehadiran
+Route::get('/datakehadiran', [DataKehadiranSiswaController::class, 'index'])->name('kehadiran.index');
+Route::get('/datakehadiran/create', [DataKehadiranSiswaController::class, 'create'])->name('kehadiran.create');
+Route::post('/datakehadiran/store', [DataKehadiranSiswaController::class, 'store'])->name('kehadiran.store');
+Route::get('/datakehadiran/edit/{id}', [DataKehadiranSiswaController::class, 'edit'])->name('kehadiran.edit');
+Route::post('/datakehadiran/update/{id}', [DataKehadiranSiswaController::class, 'update'])->name('kehadiran.update');
+Route::get('/datakehadiran/hapus/{id}', [DataKehadiranSiswaController::class, 'destroy'])->name('kehadiran.delete');
+
 // Route Kelas Berjalan
 Route::post('/datakelasberjalan/store', [DatakelasberjalanController::class, 'store']);
 Route::post('/datakelasberjalan/update', [DatakelasberjalanController::class, 'update']);
