@@ -92,7 +92,7 @@
                 <div class="d-flex justify-content-end">
                     <button type="reset" class="btn btn-sm btn-white btn-active-light-primary me-2"
                         data-kt-menu-dismiss="true" onclick="resetfilter()">Reset</button>
-                    <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true" id="filter">Filter</button>
+                    <button type="button" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true" id="filter">Filter</button>
                 </div>
                 <!--end::Actions-->
             </div>
@@ -154,87 +154,8 @@
 
             <div class="card-body pt-0">
                 <!--begin::Table-->
-                <div id="kt_table_users_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                    <div class="table-responsive">
-
-                        <table class="table table-striped table-bordered table-responsive data-table" id="tabeldata">
-                            <thead>
-                                <tr>
-                                    <th width="50" style="text-align:center;">No</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Tgl Kejadian</th>
-                                    <th>Tempat Kejadian</th>
-                                    <th>Kasus</th>
-                                    <th>Sanksi</th>
-                                    <th>Jenis Hukuman</th>
-                                    <th>Bukti Pelanggaran</th>
-                                    <th width="100px">Action</th>
-                                </tr>
-                            </thead>
-                            {{-- @php
-                                $no = 1;
-                            @endphp
-                            @foreach ($siswa as $ssw)
-                                <tr style="height: 40px">
-                                    <td style="text-align:center;">{{ $no++ }}</td>
-                                    <td>{{ $ssw->nisn }} - {{ $ssw->nama_siswa }}</td>
-                                    <td>{{ $ssw->tgl_kejadian }}</td>
-                                    <td>{{ $ssw->tempat_kejadian }}</td>
-                                    <td>{{ $ssw->kasus }}</td>
-                                    <td>{{ $ssw->jenis_sanksi }}</td>
-                                    <td>{{ $ssw->sanksi }}</td>
-                                    @if ($ssw->img_kasus)
-                                        <td><img src="/bukti_pelanggaran/{{ $ssw->img_kasus }}" alt="" style="width: 100px"></td>
-                                    @else
-                                        <td>Tidak Ada Bukti.</td>
-                                    @endif
-                                    <td>
-                                        <a style="background-color: deepskyblue; color: white" href="#"
-                                            class="btn btn-light btn-active-light-primary btn-sm"
-                                            data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end"
-                                            data-kt-menu-flip="top-end">Action
-                                            <!--begin::Svg Icon | path: icons/duotone/Navigation/Angle-down.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                    viewBox="0 0 24 24" version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                        <path
-                                                            d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z"
-                                                            fill="#000000" fill-rule="nonzero"
-                                                            transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999)">
-                                                        </path>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->
-                                        </a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
-                                            data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="/datapelanggaransiswa/edit/{{ base64_encode($ssw->id) }}" class="menu-link px-3">Edit</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a href="#" onclick="konfirmasi({{ $ssw->id }})"
-                                                    class="menu-link px-3">Hapus</a>
-                                            </div>
-                                            <!--end::Menu item-->
-
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                </tr>
-                            @endforeach --}}
-                            <tbody>
-                            </tbody>
-                        </table>
-
-                    </div>
+                <div id="view_pelanggaran">
+                    {{ view('datapelanggaran.tablePelanggaran', compact('siswa')) }}
                 </div>
                 <!--end::Table-->
             </div>
@@ -251,95 +172,58 @@
 @endpush
 @push('js')
 <script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    function getData(){
-        const url = "{{url('datapelanggaransiswa/getdata')}}"
-        $.ajax({
-            url,
-            success: function(datapelanggar){
-                // console.log(datapelanggar)
-                let tampilan = '';
-                let no = 1;
-                $("#tabeldata tbody").children().remove()
-                for(let i=0;i<datapelanggar.length;i++){
-                    tampilan += `
-                        <tr>
-                            <td style="text-align:center;">${no++}</td>
-                            <td>${datapelanggar[i].nisn} - ${datapelanggar[i].nama_siswa}</td>
-                            <td>${datapelanggar[i].tgl_kejadian}</td>
-                            <td>${datapelanggar[i].tempat_kejadian}</td>
-                            <td>${datapelanggar[i].kasus}</td>
-                            <td>${datapelanggar[i].sanksi}</td>
-                            <td>${datapelanggar[i].jenis_sanksi}</td>
-                            <td><img src="${datapelanggar[i].img_kasus}" style="width: 130px"></td>
-                            <td>
-                                <div class="d-flex">
-                                    <a href="/datapelanggaransiswa/edit/${btoa(datapelanggar[i].id)}" class="btn btn-sm btn-success me-2">Edit</a>
-                                    <a href="#" onclick="konfirmasi(${datapelanggar[i].id})" class="btn btn-sm btn-primary">Hapus</a>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                }
-                $("#tabeldata tbody").append(tampilan);
-            },
-            error: function(e){
-                console.log(e)
-                alert("Terjadi kesalahan")
-            }
-        })
-    }
-
     function resetfilter(){
-        $("#pelanggarfilter").trigger('reset')
-        getData()
+        $("#pelanggarfilter").trigger('reset');
+        location.href = "/datapelanggaransiswa/";
     }
-    
-    getData()
 
     $("#pelanggarfilter").click(function(e){
         e.preventDefault();
-        
-        const url = "{{url('datapelanggaransiswa/filter')}}"
-        // console.log([kelas, tahun])
-        $.ajax({
-            url,
-            data: $("#pelanggarfilter").serialize(),
-            type: "GET",
-            dataType: 'json',
-            success: function(filter){
-                let single = '';
-                let no = 1;
-                $("#tabeldata tbody").children().remove()
-                for(let i=0;i<filter.length;i++){
-                    single += `
-                        <tr>
-                            <td style="text-align:center;">${no++}</td>
-                            <td>${filter[i].nisn} - ${filter[i].nama_siswa}</td>
-                            <td>${filter[i].tgl_kejadian}</td>
-                            <td>${filter[i].tempat_kejadian}</td>
-                            <td>${filter[i].kasus}</td>
-                            <td>${filter[i].sanksi}</td>
-                            <td>${filter[i].jenis_sanksi}</td>
-                            <td><img src="${filter[i].img_kasus}" style="width: 130px"></td>
-                            <td>
-                                <div class="d-flex">
-                                    <a href="/filteransiswa/edit/${btoa(filter[i].id)}" class="btn btn-sm btn-success me-2">Edit</a>
-                                    <a href="#" onclick="konfirmasi(${filter[i].id})" class="btn btn-sm btn-primary">Hapus</a>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                }
-                $("#tabeldata tbody").append(single);
-            }
-        })
-    })
+
+        $("#filter").click(function(){
+            $.ajax({
+                url: '{{route('filterData')}}',
+                data: $("#pelanggarfilter").serialize(),
+                // dataType: 'json',
+                type: 'GET',
+                success: function(res){
+                    $("#view_pelanggaran").html(res);
+                },
+                error: function(err){
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Oops',
+                        text: 'Gagal Ambil Data!'
+                    });
+                    console.log(err);
+                },
+            });
+        });
+    });
+
+    // $("#pelanggarfilter").click(function(e){
+    //     e.preventDefault();
+
+    //     $("#filter").click(function(){
+    //         $.ajax({
+    //             url: '{{route('filterData')}}',
+    //             data: $("#pelanggarfilter").serialize(),
+    //             // dataType: 'json',
+    //             type: 'GET',
+    //             success: function(res){
+    //                 $("#view_pelanggaran").html(res);
+    //             },
+    //             error: function(err){
+    //                 Swal.fire({
+    //                     type: 'error',
+    //                     title: 'Oops',
+    //                     text: 'Gagal Ambil Data!'
+    //                 });
+    //                 console.log(err);
+    //             },
+    //         });
+    //     });
+    // });
 
     function konfirmasi(id){
         Swal.fire({

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use \App\Models\Pelanggaran;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -11,29 +11,49 @@ use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Facades\DataTables;
 
 class DataPelanggaranSiswaController extends Controller
-{   
-    public function getdata()
-    {
-        return DB::table('v_pelanggaran_detail')->orderBy('id', 'DESC')->get();
-    }
-
+{ 
     public function filterdata(Request $request)
     {
+        // dd($request->all());
         $db = DB::table('v_pelanggaran_detail')->orderBy('id', 'DESC');
 
-        if($request->kelas && $request->tahun && $request->kel_kls){
-            return $db->where('tingkat_kelas', $request->kelas)
+        // if($request->kelas == null && $request->tahun == null && $request->kel_kls == null){
+        //     return $db->get();
+        // }elseif($request->kelas){
+        //     return $db->where('tingkat_kelas', $request->kelas)->get();
+        // }elseif($request->tahun){
+        //     return $db->where('tahunakademik', $request->tahun)->get();
+        // }elseif($request->kel_kls){
+        //     return $db->where('kode_kelompok', $request->kel_kls)->get();
+        // }elseif($request->kelas && $request->tahun && $request->kel_kls){
+        //     return $db->where('tingkat_kelas', $request->kelas)
+        //                 ->where('tahunakademik', $request->tahun)
+        //                 ->where('kode_kelompok', $request->kel_kls)->get();
+        // }
+
+        // if($request->kelas == null && $request->tahun == null && $request->kel_kls == null){
+        //     $hasil = view('datapelanggaran.tablePelanggaran', ['siswa' => $db->get()]);
+        //     // return $db->get();
+        // }else
+        if($request->kelas){
+            $siswa = $db->where('tingkat_kelas', $request->kelas)->get();
+            $hasil = view('datapelanggaran.tablePelanggaran', compact('siswa'));
+        }elseif($request->tahun){
+            $siswa = $db->where('tahunakademik', $request->tahun)->get();
+            $hasil = view('datapelanggaran.tablePelanggaran', compact('siswa'));
+        }elseif($request->kel_kls){
+            $siswa = $db->where('kode_kelompok', $request->kel_kls)->get();
+            $hasil = view('datapelanggaran.tablePelanggaran', compact('siswa'));
+        }elseif($request->kelas && $request->tahun && $request->kel_kls){
+            $siswa = $db->where('tingkat_kelas', $request->kelas)
                         ->where('tahunakademik', $request->tahun)
                         ->where('kode_kelompok', $request->kel_kls)->get();
-        }elseif($request->kelas){
-            return $db->where('tingkat_kelas', $request->kelas)->get();
-        }elseif($request->tahun){
-            return $db->where('tahunakademik', $request->tahun)->get();
-        }elseif($request->kel_kls){
-            return $db->where('kode_kelompok', $request->kel_kls)->get();
+            $hasil = view('datapelanggaran.tablePelanggaran', compact('siswa'));
         }
-    }
 
+        echo $hasil;
+    }
+    
     public function index()
     {
         $tahun   = DB::table('tabeltahunajaran')->get()->pluck('tahunakademik');
@@ -46,11 +66,15 @@ class DataPelanggaranSiswaController extends Controller
                 ['url' => '/interface' , 'name' => 'Interface'],
                 ['url' => '/master' , 'name' => 'List Data Pelanggaran'],
             ],
-            'tahun_ajaran' => $tahun,
-            'kel_kls'      => $kel_kls,
-            'testVariable' => 'Pelanggaran Siswa'
+            'tahun_ajaran'   => $tahun,
+            'kel_kls'        => $kel_kls,
+            'tingkat_kls'    => DB::table('v_pelanggaran_detail')->select('tingkat_kelas')->groupBy('tingkat_kelas')->get(),
+            'tahun_akademik' => DB::table('v_pelanggaran_detail')->select('tahunakademik')->groupBy('tahunakademik')->get(),
+            'kode_kelompok'  => DB::table('v_pelanggaran_detail')->select('kode_kelompok')->groupBy('kode_kelompok')->get(),
+            'siswa'          => DB::table('v_pelanggaran_detail')->orderBy('id', 'DESC')->get(),
+            'testVariable'   => 'Pelanggaran Siswa'
         ];
-
+        
         return view('datapelanggaran.index', $data);
     }
 

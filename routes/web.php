@@ -164,7 +164,7 @@ Route::post('/datapelanggaransiswa/update/{id}', [DataPelanggaranSiswaController
 Route::get('/datapelanggaransiswa/hapus/{id}', [DataPelanggaranSiswaController::class, 'destroy']);
 Route::get('/datapelanggaransiswa/getdata', [DataPelanggaranSiswaController::class, 'getdata']);
 // Route Filter Data Pelanggar Siswa
-Route::get('/datapelanggaransiswa/filter', [DataPelanggaranSiswaController::class, 'filterdata']);
+Route::get('/datapelanggaransiswa/filter', [DataPelanggaranSiswaController::class, 'filterdata'])->name('filterData');
 
 // Route Kehadiran
 Route::get('/datakehadiran', [DataKehadiranSiswaController::class, 'index'])->name('kehadiran.index');

@@ -45,7 +45,8 @@ class SiswaImport implements ToModel, WithHeadingRow
             'nik' => $row['nik'],
         );
 
-        $hakakses = DB::table('tblhakakses')->where('nama_akses','Siswa')->first();
+        $hak_ortu = DB::table('tblhakakses')->where('nama_akses', 'Orang Tua')->first();
+        $hakakses = DB::table('tblhakakses')->where('nama_akses', 'Siswa')->first();
 
         $seq = DB::table('tbuser')->max('id') + 1; 
 
@@ -58,6 +59,18 @@ class SiswaImport implements ToModel, WithHeadingRow
                     'created_at' => Carbon::now()->toDateTimeString(),
                     'active' => 'TRUE',
                     'id_hakakses' => $hakakses->idhakakses
+        ]);
+
+        $datakun_ortu = DB::table('tbuser')->insert([
+            'id' => $seq + 1,
+            'username' => 'wali'.$row['nisn'],
+            'password' => password_hash('12345678', PASSWORD_DEFAULT),
+            'nama' => $row['nama_ayah'],
+            'email' => $row['email_wali'],
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'active' => 'TRUE',
+            'id_hakakses' => $hak_ortu->idhakakses,
+            'id_siswa'   => $row['nisn']
         ]);
 
         $siswa = DB::table('tblsiswa')->insert($data);

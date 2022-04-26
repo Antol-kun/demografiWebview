@@ -283,7 +283,7 @@
                                         @php
                                             $no = 1;
                                         @endphp
-                                        @foreach ($pelanggaran as $ssw)
+                                        @forelse ($pelanggaran as $ssw)
                                             <tr style="height: 40px">
                                                 <td style="text-align:center;">{{ $no++ }}</td>
                                                 <td>{{ $ssw->tgl_kejadian }}</td>
@@ -297,7 +297,11 @@
                                                     <td>Tidak Ada Bukti.</td>
                                                 @endif
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                            <tr class="text-center">
+                                                <td colspan="7">Tidak ada riwayat pelanggaran</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
