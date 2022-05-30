@@ -93,6 +93,11 @@
 		                                    <!--end::Menu item-->
 		                                    <!--begin::Menu item-->
 											<div class="menu-item px-3">
+                                                <a href="/datauser/ubahpass/{{ base64_encode($data->id) }}" class="menu-link px-3">Ubah Password</a>
+                                               </div>
+                                              <!--end::Menu item-->
+		                                    <!--begin::Menu item-->
+											<div class="menu-item px-3">
 		                                      <a href="javascript:;" onclick="konfirmasi({{$data->id}})" class="menu-link px-3">Hapus</a>
 		                                 	</div>
 		                                    <!--end::Menu item-->

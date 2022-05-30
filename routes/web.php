@@ -341,6 +341,8 @@ Route::get('/datauser/showuser/{id}', [DataUserController::class, 'getUser']);
 Route::get('/datauser/show/{id}', [DataUserController::class, 'getDetail']);
 Route::post('/datauser/update', [DataUserController::class, 'update']);
 Route::get('/datauser/hapus/{id}', [DataUserController::class, 'destroy']);
+Route::get('/datauser/ubahpass/{id}', [DataUserController::class, 'getUbahPass']);
+Route::post('/datauser/postubahpass/{id}', [DataUserController::class, 'postUbahPass']);
 
 Route::get('/datapaket/paketpembayaran',[Duit::class, 'paketpembayaran'])->name('paketpembayaran');
 Route::get('/datapaket/rekappembayaransiswa',[Duit::class, 'rekappembayaransiswa'])->name('rekappembayaransiswa');

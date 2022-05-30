@@ -192,6 +192,38 @@ class DataUserController extends Controller
         return view('datauser.show', $data);
     }
 
+    public function getUbahPass($id)
+    {
+        $detailuser = DB::table('tbuser')->where('id', base64_decode($id))->first();
+
+        $data = [
+            'title'  => 'Reset Password User',
+            'duser'  => $detailuser,
+            'breadcrumb' => [
+                ['url' => '/' , 'name' => 'Home'],
+                ['url' => '/interface' , 'name' => 'Interface'],
+                ['url' => '/master' , 'name' => 'List Data'],
+            ],
+            
+            'testVariable' => 'Data User'
+        ];
+        
+        return view('datauser.ubahpass', $data);
+    }
+
+    public function postUbahPass($id, Request $request)
+    {
+        $data = DB::table('tbuser')->where('id', $id)->update([
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
+        ]);
+
+        if($data) {                
+            return response()->json(['message'=>'Berhasil']);
+        }else{
+            return response()->json(['message'=>'Gagal !']);
+        }
+    }
+
     public function store(Request $request)
     {
 
