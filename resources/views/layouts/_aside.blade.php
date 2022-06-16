@@ -6,10 +6,10 @@
     <!--begin::Brand-->
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
-        <a href="/dashboard">
+        {{-- <a href="/dashboard">
             <img alt="Logo" src="https://guru-edsy.bakultani.com/theme2/gambar/symbolsip2.png "
                 class="h-15px logo text-blue my-1 fs-3" /> Edsy Apps
-        </a>
+        </a> --}}
         <!--end::Logo-->
         <!--begin::Aside toggler-->
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
