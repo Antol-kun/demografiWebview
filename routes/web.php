@@ -154,6 +154,24 @@ Route::get('/offline', [HomeController::class, 'offline']);
 // Route::get('/galeri/kategori/edit/{id}', [GaleriController::class, 'editCategori']);
 // Route::delete('/galeri/kategori/{id}', [GaleriController::class, 'deleteCategori']);
 
+// Route Demografi
+Route::get('/demografi/kesiswaan', [DemografiKesiswaan::class, 'kesiswaan'])->name('demo_kesiswaan');
+
+// Demografi Guru
+Route::get('/demografi/guru/semua', [DemografiGuru::class, 'jumlahGuru'])->name('demoguru');
+Route::get('/demografi/guru/jeniskelamin', [DemografiGuru::class, 'jkGuru'])->name('demogurujk');
+Route::get('/demografi/guru/pegawai', [DemografiGuru::class, 'pegawaiGuru'])->name('demogurup');
+Route::get('/demografi/guru/sertifikasi', [DemografiGuru::class, 'sertifikasiGuru'])->name('demogurus');
+Route::get('/demografi/guru/pendidikan', [DemografiGuru::class, 'pendidikanGuru'])->name('demogurupd');
+Route::get('/demografi/guru/marital', [DemografiGuru::class, 'maritalGuru'])->name('demogurum');
+
+// Demografi Siswa
+Route::get('/demografi/siswa/semua', [DemografiSiswa::class, 'semua'])->name('demosiswa');
+Route::get('/demografi/siswa/tingkatkelas', [DemografiSiswa::class, 'tingkatKelas'])->name('demosiswatk');
+Route::get('/demografi/siswa/tahunmasuk', [DemografiSiswa::class, 'tahunMasuk'])->name('demosiswatm');
+Route::get('/demografi/siswa/jeniskelamin', [DemografiSiswa::class, 'jenisKelamin'])->name('demosiswajk');
+Route::get('/demografi/siswa/agama', [DemografiSiswa::class, 'agama'])->name('demosiswaa');
+Route::get('/demografi/siswa/statussiswa', [DemografiSiswa::class, 'statusSiswa'])->name('demosiswass');
 
 // Route Data Pelanggar Siswa
 Route::get('/datapelanggaransiswa', [DataPelanggaranSiswaController::class, 'index']);

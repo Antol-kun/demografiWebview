@@ -95,6 +95,58 @@
 
                     <div class="menu-item">
                         <div class="menu-content pt-8 pb-0">
+                            <span class="menu-section text-muted text-uppercase fs-8 ls-1">Data Statistik</span>
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs042.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <i class="fas fa-chart-line"></i>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Data Statistik</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="/demografi/kesiswaan">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Demografi Kesiswaan</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{route('demoguru')}}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Demografi Guru</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{route('demosiswa')}}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Demografi Siswa</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-content pt-8 pb-0">
                             <span class="menu-section text-muted text-uppercase fs-8 ls-1">Menu Master</span>
                         </div>
                     </div>

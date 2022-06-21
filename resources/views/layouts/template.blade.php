@@ -29,6 +29,7 @@
 			border-radius: 50%;
 		}
 	</style>
+	@yield('css')
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -120,6 +121,8 @@
 	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 	<!--end::Global Javascript Bundle-->
 	<!--end::Javascript-->
 	@stack('lib-js')

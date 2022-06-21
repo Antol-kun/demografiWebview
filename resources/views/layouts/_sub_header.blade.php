@@ -2,6 +2,7 @@
     <!--begin::Container-->
     <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
         <!--begin::Page title-->
+        @if (request()->segment(2) != 'guru' && request()->segment(2) != 'siswa')
         <div data-kt-place="true" data-kt-place-mode="prepend" data-kt-place-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center me-3 flex-wrap mb-5 mb-lg-0 lh-1">
             <!--begin::Title-->
             <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{ $title }}</h1>
@@ -28,6 +29,7 @@
             @endisset
             <!--end::Breadcrumb-->
         </div>
+        @endif
         <!--end::Page title-->
         <!--begin::Actions-->
         <div class="d-flex align-items-center py-1">
