@@ -69,7 +69,7 @@
 						</div>
 						<!--end::Copyright-->
 						<!--begin::Menu-->
-						<ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
+						<ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1" style="display: none">
 							<li class="menu-item">
 								<a href="https://keenthemes.com/faqs" target="_blank" class="menu-link px-2">About</a>
 							</li>
