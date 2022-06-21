@@ -34,7 +34,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Data Jumlah Siswa Per Kelas Jurusan</h3>
+                    <h3 class="card-label">Data Jumlah Siswa Per Kelompok Kelas</h3>
                 </div>
             </div>
             <div class="card-body" style="position: relative;">
@@ -96,7 +96,7 @@
             },
             yaxis: {
                 title: {
-                    text: 'Jumlah Siswa'
+                    text: 'Jumlah Seluruh Siswa'
                 }
             },
             fill: {
@@ -150,12 +150,7 @@
                 colors: ['transparent']
             },
             xaxis: {
-                categories: ['MTK', 'B. Indo', 'B. Ing', 'Sejarah', 'Agama'],
-            },
-            yaxis: {
-                title: {
-                    text: 'Mata Pelajaran Akademik'
-                }
+                categories: ['X MIPA', 'X IPS', 'XI MIPA', 'XI IPS', 'XII MIPA'],
             },
             fill: {
                 opacity: 1
@@ -163,7 +158,7 @@
             tooltip: {
                 y: {
                     formatter: function (val) {
-                    return val + " Akademik"
+                        return val;
                     }
                 }
             }
