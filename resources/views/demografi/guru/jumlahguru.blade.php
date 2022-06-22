@@ -78,19 +78,21 @@
     var guruChart = {
             series: [{
                 name: 'Jumlah Guru',
-                data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 28]
+                data: [19, 22, 36, 36, 38, 44, 56, 66, 72, 76]
             }],
             chart: {
                 stacked: true,
                 type: 'bar',
                 height: 350
             },
+            colors: ['#DC8C67', '#DC6967', '#DC67AB', '#DC67CE', '#C767DC', '#A367DC', '#8067DC', '#6771DC', '#6794DC', '#67B7DC'],
             plotOptions: {
                 bar: {
                     borderRadius: 5,
                     horizontal: false,
                     columnWidth: '55%',
                     endingShape: 'rounded',
+                    distributed: true,
                     dataLabels: {
                         position: 'center', // top, center, bottom
                     },

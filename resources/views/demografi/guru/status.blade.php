@@ -325,6 +325,7 @@
                     borderRadius: 5,
                     horizontal: false,
                     columnWidth: '55%',
+                    distributed: true,
                     endingShape: 'rounded'
                 },
             },
