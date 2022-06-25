@@ -13,22 +13,18 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container">
+        {{-- tingkat kelas chart --}}
         <div class="row">
             <div class="col-md-6">
                 <!--begin::Card-->
                 <div class="card card-custom gutter-b mb-3">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Data Jenis Kelamin Siswa</h3>
+                            <h3 class="card-label">Jumlah Siswa per Jenis Kelamin</h3>
                         </div>
                     </div>
-                    <div class="card-body" style="position: relative;">
-                        <div class="row">
-                            <h3 class="text-center">Keseluruhan</h3>
-                            <div class="col-md-12">
-                                <div id="keseluruhanChart"></div>
-                            </div>
-                        </div>
+                    <div class="card-body">
+                        <div id="jenisKelaminChart"></div>
                     </div>
                 </div>
                 <!--end::Card-->
@@ -38,21 +34,44 @@
                 <div class="card card-custom gutter-b mb-3">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Data Jenis Kelamin Siswa</h3>
+                            <h3 class="card-label">Jumlah Siswa per Jenis Kelamin berdasarkan Tingkat Kelas</h3>
                         </div>
                     </div>
-                    <div class="card-body" style="position: relative;">
-                        <div class="row">
-                            <h3 class="text-center">Sudah Menikah</h3>
-                            <div class="col-md-12">
-                                <div id="smChart"></div>
-                            </div>
-                        </div>
+                    <div class="card-body">
+                        <div id="tkChart"></div>
                     </div>
                 </div>
                 <!--end::Card-->
             </div>
         </div>
+
+        {{-- tahun masuk chart --}}
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b mb-3">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">Jumlah Siswa per Jenis Kelamin berdasarkan Tahun Masuk</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="tmChart"></div>
+            </div>
+        </div>
+        <!--end::Card-->
+
+        {{-- kelompok kelas chart --}}
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b mb-3">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">Jumlah Siswa per Jenis Kelamin berdasarkan Kelompok Kelas</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="kkChart"></div>
+            </div>
+        </div>
+        <!--end::Card-->
     </div>
     <!--end::Container-->
 </div>
@@ -60,67 +79,173 @@
 
 @push('lib-js')
 <script>
-    // Keseluruhan Chart
-    var keseluruhanOptions = {
-        series: [36, 44],
-        chart: {
-            type: 'pie',
-        },
-        labels: ['Laki - Laki', 'Perempuan'],
-        colors: ['#50cd89', '#f64e60'],
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 100
-            },
-            legend: {
-              position: 'bottom',
-              
-            }
-          }
-        }],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " orang"
-                }
-            }
-        }
-    };
-    new ApexCharts(document.querySelector("#keseluruhanChart"), keseluruhanOptions).render();
-    // End Keseluruhan Chart
+    var kelompokkls = ['X IPA 1', 'X IPA 2', 'X IPS 1', 'X IPS 2', 'XI IPA 1', 'XI IPA 2', 'XI IPS', 'XII IPA', 'XII IPS'];
+    var datal = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
+    var datap = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
 
-    // Sudah Menikah Chart
-    var smOptions = {
-        series: [64, 16],
-        chart: {
-            type: 'pie',
-        },
+    var tahun = []
+    for(i=2019;i<=2023;i++){
+      tahun.push(i)
+    }
+    // JenisKelamin Chart
+    var jkOptions = {
+        series: [189, 221],
         labels: ['Laki - Laki', 'Perempuan'],
-        colors: ['#f7a305', '#8950fc'],
+        chart: {
+            width: 425,
+            type: 'donut',
+        },
+        legend: {
+            position: 'bottom',
+            itemMargin: {
+                vertical: 5
+            }
+        },
         responsive: [{
           breakpoint: 480,
           options: {
             chart: {
-              width: 100
+              width: 200
             },
             legend: {
-              position: 'bottom',
-              
+              position: 'bottom'
             }
           }
+        }]
+    };
+    new ApexCharts(document.querySelector("#jenisKelaminChart"), jkOptions).render();
+    // End JenisKelamin Chart
+
+    // tingkat kelas
+    var tkOptions = {
+        series: [{
+          name: 'Laki - laki',
+          data: [44, 55, 57]
+        }, {
+          name: 'Perempuan',
+          data: [76, 85, 98]
         }],
+          chart: {
+          type: 'bar',
+          height: 350
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 5,
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent']
+        },
+        xaxis: {
+          categories: ['Kelas X', 'Kelas XI', 'Kelas XII']
+        },
+        fill: {
+          opacity: 1
+        },
         tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " orang"
-                }
+          y: {
+            formatter: function (val) {
+              return val + " siswa"
             }
+          }
         }
     };
-    new ApexCharts(document.querySelector("#smChart"), smOptions).render();
-    // End Sudah Menikah Chart
+    new ApexCharts(document.querySelector("#tkChart"), tkOptions).render();
+    // end tingkat kelas
+
+    // tahun masuk
+    var tmOptions = {
+        series: [{
+            name: 'Laki - laki',
+            data: [31, 40, 28, 30, 27]
+          }, {
+            name: 'Perempuan',
+            data: [11, 32, 45, 35, 48]
+        }],
+        chart: {
+          height: 350,
+          type: 'area'
+        },
+        dataLabels: {
+          enabled: false
+        },
+        legend: {
+          itemMargin: {
+            horizontal: 15
+          }
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        xaxis: {
+          categories: tahun
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + " siswa"
+            }
+          }
+        },
+    };
+    new ApexCharts(document.querySelector("#tmChart"), tmOptions).render();
+    // end tahun masuk
+
+    // kelompok kelas
+    var kkOptions = {
+        series: [{
+          name: 'Laki - laki',
+          data: datal
+        }, {
+          name: 'Perempuan',
+          data: datap
+        }],
+        chart: {
+          type: 'bar',
+          height: 350
+        },
+        colors: ['#17c0eb', '#3ae374'],
+        plotOptions: {
+          bar: {
+            borderRadius: 5,
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent']
+        },
+        xaxis: {
+          categories: kelompokkls
+        },
+        fill: {
+          opacity: 1
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + " siswa"
+            }
+          }
+        }
+    };
+    new ApexCharts(document.querySelector("#kkChart"), kkOptions).render();
+    // end kelompok kelas
 </script>
 @endpush
 @push('js')

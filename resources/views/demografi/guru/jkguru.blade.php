@@ -12,15 +12,16 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container">
+        {{-- jenis kelamin chart --}}
         <!--begin::Card-->
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Data Guru Berdasarkan Jenis Kelamin</h3>
+                    <h3 class="card-label">Jumlah Guru Berdasarkan Jenis Kelamin</h3>
                 </div>
             </div>
-            <div class="card-body" style="position: relative;">
-                <div class="row d-flex justify-content-center">
+            <div class="card-body">
+                <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div id="jkChart"></div>
                     </div>
@@ -28,105 +29,54 @@
             </div>
         </div>
         <!--end::Card-->
-        <div class="row pt-3">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!--begin::Card-->
-                        <div class="card card-custom gutter-b">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h3 class="card-label">Data Jenis Kelamin Berdasarkan Status Marital</h3>
-                                </div>
-                            </div>
-                            <div class="card-body" style="position: relative;">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-md-12 text-center">
-                                        <h5 style="color: #777e90">Belum Menikah</h5>
-                                        <div id="bmChart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Card-->
-                    </div>
-                </div>
-            </div>
+        {{-- end jenis kelamin --}}
 
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!--begin::Card-->
-                        <div class="card card-custom gutter-b">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h3 class="card-label">Data Jenis Kelamin Berdasarkan Status Marital</h3>
-                                </div>
-                            </div>
-                            <div class="card-body" style="position: relative;">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-md-12 text-center">
-                                        <h5 style="color: #777e90">Sudah Menikah</h5>
-                                        <div id="smChart"></div>
-                                    </div>
-                                </div>
-                            </div>
+        {{-- chart pendidikan & status marital --}}
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <!--begin::Card-->
+                <div class="card card-custom gutter-b">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-label">Jumlah Guru berdasarkan Jenis Kelamin per Jenjang Pendidikan</h3>
                         </div>
-                        <!--end::Card-->
+                    </div>
+                    <div class="card-body">
+                        <div id="pendidikanChart"></div>
                     </div>
                 </div>
+                <!--end::Card-->
+            </div>
+            <div class="col-md-4">
+                <!--begin::Card-->
+                <div class="card card-custom gutter-b">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-label">Jumlah Guru berdasarkan Jenis Kelamin per Status Kepegawaian</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="pegawaiChart"></div>
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+            <div class="col-md-4">
+                <!--begin::Card-->
+                <div class="card card-custom gutter-b">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-label">Jumlah Guru berdasarkan Jenis Kelamin per Status Marital</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="statusChart"></div>
+                    </div>
+                </div>
+                <!--end::Card-->
             </div>
         </div>
-
-        <div class="row pt-3">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!--begin::Card-->
-                        <div class="card card-custom gutter-b">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h3 class="card-label">Data Jenis Kelamin Berdasarkan Status Kepegawaiaan</h3>
-                                </div>
-                            </div>
-                            <div class="card-body" style="position: relative;">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-md-12 text-center">
-                                        <h5 style="color: #777e90">Guru Tetap Yayasan (GTY)</h5>
-                                        <div id="bmkChart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Card-->
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!--begin::Card-->
-                        <div class="card card-custom gutter-b">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h3 class="card-label">Data Jenis Kelamin Berdasarkan Status Kepegawaiaan</h3>
-                                </div>
-                            </div>
-                            <div class="card-body" style="position: relative;">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-md-12 text-center">
-                                        <h5 style="color: #777e90">Guru Tidak Tetap (GTT)</h5>
-                                        <div id="smkChart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Card-->
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{-- end chart pendidikan & status marital --}}
     </div>
     <!--end::Container-->
 </div>
@@ -134,165 +84,171 @@
 
 @push('lib-js')
 <script>
-    var jkChart = {
-        series: [12, 35],
+    // chart JenisKelamin
+    var jkOptions = {
+        series: [44, 55],
         chart: {
-            type: 'donut',
+            height: 350,
+            type: 'pie',
+        },
+        colors: ['#0652DD', '#C4E538'],
+        labels: ['Laki - laki', 'Perempuan'],
+        legend: {
+            position: 'bottom',
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 300
+            }
+          }
+        }],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " guru"
+                }
+            }
+        },
+    };
+    new ApexCharts(document.querySelector("#jkChart"), jkOptions).render();
+    // end chart JenisKelamin
+
+    // pendidikan chart
+    var pendidikanOptions = {
+        series: [{
+            name: 'Laki - laki',
+            data: [10, 22, 32, 8, 7]
+        }, {
+            name: 'Perempuan',
+            data: [9, 10, 28, 17, 10]
+        }],
+        colors: ['#d63031', '#fed330'],
+        chart: {
+          type: 'bar',
+          height: 350
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 4,
+            horizontal: true,
+          }
         },
         dataLabels: {
-            style: {
-                fontSize: '18px',
-                fontWeight: 'bold',
-            },
+          enabled: true
         },
-        labels: ['Laki - laki', 'Perempuan'],
-        colors: ['#f64e60', '#8950fc'],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " orang"
+                }
+            }
+        },
+        xaxis: {
+          categories: ['SLTA', 'D3', 'S1', 'S2', 'S3'],
+        }
+    };
+    new ApexCharts(document.querySelector("#pendidikanChart"), pendidikanOptions).render();
+    // end pendidikan chart
+
+    // chart status marital
+    var pegawaiOptions = {
+        series: [{
+          name: 'Laki - laki',
+          data: [44, 55]
+        }, {
+          name: 'Perempuan',
+          data: [76, 85]
+        }],
+        chart: {
+          type: 'bar',
+          height: 350
+        },
+        colors: ['#FFC312', '#B53471'],
         plotOptions: {
-            pie: {
-                donut: {
-                    labels: {
-                        show: true,
-                    }
-                }
-            }
+          bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded',
+            borderRadius: 10
+          },
         },
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 20
-            },
-            legend: {
-              position: 'bottom'
+        dataLabels: {
+          enabled: true
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent']
+        },
+        xaxis: {
+          categories: ['GTY', 'GTT'],
+        },
+        fill: {
+          opacity: 1
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + " orang"
             }
           }
-        }],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " orang"
-                }
-            }
         }
     };
-    var jkchart = new ApexCharts(document.querySelector("#jkChart"), jkChart);
-    jkchart.render();
+    new ApexCharts(document.querySelector("#pegawaiChart"), pegawaiOptions).render();
+    // end chart status marital
 
-    var bmChart = {
-        series: [36, 44],
+    // chart status marital
+    var statusOptions = {
+        series: [{
+          name: 'Laki - laki',
+          data: [44, 55]
+        }, {
+          name: 'Perempuan',
+          data: [13, 23]
+        }],
+        colors: ['#0652DD', '#9980FA'],
         chart: {
-            type: 'pie',
+          type: 'bar',
+          height: 350,
+          stacked: true,
+          toolbar: {
+            show: true
+          },
+          zoom: {
+            enabled: true
+          }
         },
-        labels: ['Laki - laki', 'Perempuan'],
-        colors: ['#50cd89', '#f64e60'],
         responsive: [{
           breakpoint: 480,
           options: {
-            chart: {
-              width: 100
-            },
             legend: {
-              position: 'bottom'
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0
             }
           }
         }],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " orang"
-                }
-            }
-        }
-    };
-    var bmchart = new ApexCharts(document.querySelector("#bmChart"), bmChart);
-    bmchart.render();
-
-    var smChart = {
-        series: [64, 16],
-        chart: {
-            type: 'pie',
+        plotOptions: {
+          bar: {
+            columnWidth: '35%',
+            horizontal: false,
+            borderRadius: 10
+          },
         },
-        labels: ['Laki - laki', 'Perempuan'],
-        colors: ['#f7a305', '#8950fc'],
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 100
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " orang"
-                }
-            }
-        }
-    };
-    var smchart = new ApexCharts(document.querySelector("#smChart"), smChart);
-    smchart.render();
-
-    var bmkChart = {
-        series: [36, 44],
-        chart: {
-            type: 'pie',
+        xaxis: {
+          categories: ['Belum Menikah', 'Sudah Menikah'],
         },
-        labels: ['Laki - laki', 'Perempuan'],
-        colors: ['#f7a305', '#50cd89'],
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 100
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " orang"
-                }
-            }
-        }
-    };
-    var bmkchart = new ApexCharts(document.querySelector("#bmkChart"), bmkChart);
-    bmkchart.render();
-
-    var smkChart = {
-        series: [64, 16],
-        chart: {
-            type: 'pie',
+        legend: {
+            show: false
         },
-        labels: ['Laki - laki', 'Perempuan'],
-        colors: ['#31befb', '#f64e60'],
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 100
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " orang"
-                }
-            }
+        fill: {
+          opacity: 1
         }
     };
-    var smkchart = new ApexCharts(document.querySelector("#smkChart"), smkChart);
-    smkchart.render();
+    new ApexCharts(document.querySelector("#statusChart"), statusOptions).render();
+    // end chart status marital
 </script>
 @endpush
 @push('js')

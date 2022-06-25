@@ -3,9 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DemografiSiswa extends Controller
 {
+    function getJumlahSiswaPerKelas($kelas){
+        return DB::table('v_jadwal_siswa')
+                ->where('tingkat_kelas', $kelas)
+                ->where('statusta', 'Y')
+                ->distinct('nisn')
+                ->count();
+    }
+
+    function getTingkatKelas(){
+        // $dataTK = 
+        return DB::table('tblkelompokkelas')->select('tingkat_kelas')->distinct('tingkat_kelas')->get();
+        // $tkls = [];
+        // foreach($dataTK as $tk){
+        //     array_push($tkls, $tk->tingkat_kelas);
+        // }
+        // return $tkls;
+    }
+
     public function semua(){
         $data = [
             'title' => 'Demografi Siswa',
@@ -14,7 +33,7 @@ class DemografiSiswa extends Controller
                 ['url' => '/interface' , 'name' => 'Interface'],
                 ['url' => '/master' , 'name' => 'List Data'],
             ],
-            'testVariable' => 'Demografi Siswa'
+            'testVariable' => 'Demografi Siswa',
         ];
         return view('demografi.siswa.semua', $data);
     }
@@ -29,6 +48,13 @@ class DemografiSiswa extends Controller
             ],
             'testVariable' => 'Demografi Siswa'
         ];
+
+        $data['kelasX'] = $this->getJumlahSiswaPerKelas('X');
+        $data['kelasXI'] = $this->getJumlahSiswaPerKelas('XI');
+        $data['kelasXII'] = $this->getJumlahSiswaPerKelas('XII');
+
+        $data['tingkatKelas'] = $this->getTingkatKelas();
+        // dd($data['tingkatKelas']);
         return view('demografi.siswa.tingkatkelas', $data);
     }
     

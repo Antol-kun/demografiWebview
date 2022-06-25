@@ -1,5 +1,5 @@
 <div class="d-flex align-items-center">
-    <a href="{{route('demoguru')}}" class="btn btn-sm {{request()->segment(3) == 'semua' ? 'btn-primary' : ''}} me-3">Semua</a>
+    <a href="{{route('demoguru')}}" class="btn btn-sm {{request()->segment(3) == 'semua' ? 'btn-primary' : ''}} me-3">Umum</a>
     <a href="{{route('demogurujk')}}" class="btn btn-sm {{request()->segment(3) == 'jeniskelamin' ? 'btn-primary' : ''}} me-3">Jenis Kelamin</a>
     <a href="{{route('demogurup')}}" class="btn btn-sm {{request()->segment(3) == 'pegawai' ? 'btn-primary' : ''}} me-3">Status Kepegawaian</a>
     <a href="{{route('demogurus')}}" class="btn btn-sm {{request()->segment(3) == 'sertifikasi' ? 'btn-primary' : ''}} me-3">Sertifikasi</a>

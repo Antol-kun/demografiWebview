@@ -4,6 +4,17 @@
 @endpush
 @section('css')
   <style>
+    .cards {
+      border: 1px solid #aaaeb9;
+      border-radius: 10px;
+      box-sizing: border-box;
+      padding: 15px 10px;
+      margin: 10px;
+    }
+    .contain {
+      height: 235px;
+      overflow-y: scroll;
+    }
     .infoguru {
       display: flex;
       justify-content: start;
@@ -43,33 +54,29 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container">
         <!--begin::Card-->
-        <div class="card card-custom gutter-b">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">Data Guru Berdasarkan Status Guru</h3>
-                </div>
-            </div>
-            <div class="card-body" style="position: relative;">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="statusChart"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end::Card-->
+        <div class="card card-custom gutter-b mb-3">
+          <div class="card-header">
+              <div class="card-title">
+                  <h3 class="card-label">Jumlah Guru berdasarkan Status Kepegawaian</h3>
+              </div>
+          </div>
+          <div class="card-body">
+              <div id="statusGuruChart"></div>
+          </div>
+      </div>
+      <!--end::Card-->
 
         <!--begin::Card-->
         <div class="card card-custom gutter-b my-5">
           <div class="card-header">
               <div class="card-title">
-                  <h3 class="card-label">Data Status Guru Berdasarkan Masa Bakti</h3>
+                  <h3 class="card-label">Data Status Guru Berdasarkan Durasi Kerja</h3>
               </div>
           </div>
           <div class="card-body" style="position: relative;">
               <div class="row">
                   <div class="col-md-12">
-                      <div id="masaBChart"></div>
+                      <div id="durasiKerjaChart"></div>
                   </div>
               </div>
           </div>
@@ -90,123 +97,261 @@
                   </div>
               </div>
               <div class="row justify-content-center">
-                <div class="col-md-3" style="border: 1px solid #aaaeb9; border-radius: 10px; box-sizing: border-box; padding: 10px; margin: 10px;">
+                <div class="col-md-4 cards">
                   <h5>Tabel Guru Menuju Pensiun</h5>
                   <p>Kurun Waktu < 1 Tahun</p>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                  <div class="contain">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Siti Anissa S. Pd</p>
+                        <p>NIP: 190219789</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Aminah S. Kom</p>
+                        <p>NIP: 190210099</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Bambang Mujianto M. Pd</p>
+                        <p>NIP: 19021009991</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Tiara Leksmana S. Pd, M. Pd</p>
+                        <p>NIP: 1902121209</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Kesuma Tri Yanto S. Pd</p>
+                        <p>NIP: 1982109012</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
-                    </div>
-                  </div>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                    </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Siti Munawaroh S. Pd</p>
+                        <p>NIP: 1902192212</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3" style="border: 1px solid #aaaeb9; border-radius: 10px; box-sizing: border-box; padding: 10px; margin: 10px;">
+                <div class="col-md-4 cards">
                   <h5>Tabel Guru Menuju Pensiun</h5>
-                  <p>Kurun Waktu < 1 Tahun</p>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                  <p>Kurun Waktu 1-5 Tahun</p>
+                  <div class="contain">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Rika Anggraini S. Pd</p>
+                        <p>NIP: 190289129</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Mila Puspa Sari S. Pd</p>
+                        <p>NIP: 1902090998</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Karunia Pertiwi S. Pd</p>
+                        <p>NIP: 198023319</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Bintang Apriliani S. Pd</p>
+                        <p>NIP: 192213319</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Nabila Saputri S. Pd</p>
+                        <p>NIP: 1909998319</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
-                    </div>
-                  </div>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                    </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Khairunisa S. Pd</p>
+                        <p>NIP: 190210919</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3" style="border: 1px solid #aaaeb9; border-radius: 10px; box-sizing: border-box; padding: 10px; margin: 10px;">
+                <div class="col-md-4 cards">
                   <h5>Tabel Guru Menuju Pensiun</h5>
-                  <p>Kurun Waktu < 1 Tahun</p>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                  <p>Kurun Waktu 5-10 Tahun</p>
+                  <div class="contain">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Salsabila Pertiwi S. Pd</p>
+                        <p>NIP: 190290019</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Siti Nurhalijah S. Pd</p>
+                        <p>NIP: 19809819</p>
+                      </div>
+                    </div>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Pertiwi Dwi Putri S. Pd</p>
+                        <p>NIP: 198201919</p>
+                      </div>
+                    </div>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Titi Khairunisa S. Pd</p>
+                        <p>NIP: 190219319</p>
+                      </div>
+                    </div>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Siti Nurhalijah S. Pd</p>
+                        <p>NIP: 19809819</p>
+                      </div>
+                    </div>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Pertiwi Dwi Putri S. Pd</p>
+                        <p>NIP: 198201919</p>
+                      </div>
                     </div>
                   </div>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                </div>
+                <div class="col-md-4 cards">
+                  <h5>Tabel Guru Menuju Pensiun</h5>
+                  <p>Kurun Waktu > 10 Tahun</p>
+                  <div class="contain">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Bambang Mujianto M. Pd</p>
+                        <p>NIP: 19021009991</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Tiara Leksmana S. Pd, M. Pd</p>
+                        <p>NIP: 1902121209</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Kesuma Tri Yanto S. Pd</p>
+                        <p>NIP: 1982109012</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Siti Munawaroh S. Pd</p>
+                        <p>NIP: 1902192212</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="infoguru">
-                    <div class="img-guru">
-                      <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Salsabila Pertiwi S. Pd</p>
+                        <p>NIP: 190290019</p>
+                      </div>
                     </div>
-                    <div class="isi">
-                      <p>Titi Khairunisa S. Pd</p>
-                      <p>NIP: 190219319</p>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Siti Nurhalijah S. Pd</p>
+                        <p>NIP: 19809819</p>
+                      </div>
+                    </div>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Titi Khairunisa S. Pd</p>
+                        <p>NIP: 190219319</p>
+                      </div>
+                    </div>
+                    <div class="infoguru">
+                      <div class="img-guru">
+                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                      </div>
+                      <div class="isi">
+                        <p>Titi Khairunisa S. Pd</p>
+                        <p>NIP: 190219319</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -221,63 +366,66 @@
 
 @push('lib-js')
 <script>
-    var tahun = []
-    for(let i=2014;i<=2020;i++){
-        tahun.push(i)
-    }
-    var options = {
-          series: [{
-          name: 'Guru Tetap Yayasan (GTY)',
-          data: [31, 40, 28, 51, 42, 109, 100]
-        }, {
-          name: 'Guru Tidak Tetap (GTT)',
-          data: [11, 32, 45, 32, 34, 52, 41]
+    // chart GTY && GTT
+    var statusGuruOptions = {
+        series: [44, 55],
+        chart: {
+            height: 350,
+            type: 'pie',
+        },
+        labels: ['Guru Tetap Yayasan (GTY)', 'Guru Tidak Tetap (GTT)'],
+        legend: {
+            position: 'bottom',
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 300
+            }
+          }
         }],
-          chart: {
-          height: 350,
-          type: 'area'
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " guru"
+                }
+            }
         },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'smooth'
-        },
-        xaxis: {
-          categories: tahun
-        },
-        // tooltip: {
-        //   x: {
-        //     format: 'dd/MM/yy HH:mm'
-        //   },
-        // },
     };
+    new ApexCharts(document.querySelector("#statusGuruChart"), statusGuruOptions).render();
+    // end chart GTY && GTT
 
-    var statusChart = new ApexCharts(document.querySelector("#statusChart"), options);
-    statusChart.render();
-
-    // Masa Bakti Chart
-    var masaBChart = {
+    // Pensiun Chart
+    var pensiunChart = {
             series: [{
-                name: 'Masa Bakti',
-                data: [40, 30, 30, 20, 20]
+                name: 'Jumlah',
+                data: [12, 18, 22, 28]
             }],
             chart: {
                 stacked: true,
                 type: 'bar',
                 height: 350
             },
-            colors: ["#50cd89"],
+            colors: ['#1289A7', '#A3CB38', '#5758BB', '#1B1464'],
             plotOptions: {
                 bar: {
                     borderRadius: 5,
                     horizontal: false,
                     columnWidth: '55%',
+                    distributed: true,
                     endingShape: 'rounded'
                 },
             },
             dataLabels: {
-                enabled: false
+                enabled: true,
+                style: {
+                    fontSize: '12px',
+                    colors: ["#FFFFFF"]
+                }
+            },
+            legend: {
+                show: false
             },
             stroke: {
                 show: true,
@@ -285,12 +433,7 @@
                 colors: ['transparent']
             },
             xaxis: {
-                categories: ["< 1 Tahun", "1-5 Tahun", "6-10 Tahun", "10-15 Tahun", "> 15 Tahun"],
-            },
-            yaxis: {
-                title: {
-                    text: 'Masa Bakti'
-                }
+                categories: ["< 1 Tahun", "1-5 Tahun", "5-10 Tahun", "> 10 Tahun"],
             },
             fill: {
                 opacity: 1
@@ -298,21 +441,20 @@
             tooltip: {
                 y: {
                     formatter: function (val) {
-                    return val + " Tahun"
+                    return val + " Guru"
                     }
                 }
             }
         };
 
-    var mBChart = new ApexCharts(document.querySelector("#masaBChart"), masaBChart);
-    mBChart.render();
-    // End Masa Bakti chart
+    new ApexCharts(document.querySelector("#pensiunChart"), pensiunChart).render();
+    // End Pensiun chart
 
-    // Pensiun Chart
-    var pensiunChart = {
+    // Durasi Kerja Chart
+    var durasiKerjaOptions = {
             series: [{
-                name: 'Tahun Menuju Pensiun',
-                data: [89, 82, 89]
+                name: 'Jumlah',
+                data: [12, 18, 22, 28, 25]
             }],
             chart: {
                 stacked: true,
@@ -330,7 +472,14 @@
                 },
             },
             dataLabels: {
-                enabled: false
+                enabled: true,
+                style: {
+                    fontSize: '12px',
+                    colors: ["#FFFFFF"]
+                }
+            },
+            legend: {
+                show: false
             },
             stroke: {
                 show: true,
@@ -338,7 +487,7 @@
                 colors: ['transparent']
             },
             xaxis: {
-                categories: ["< 1 Tahun", "1-5 Tahun", "> 5 Tahun"],
+                categories: ["< 1 Tahun", "1-5 Tahun", "5-10 Tahun", "10-15 Tahun", "> 15 Tahun"],
             },
             fill: {
                 opacity: 1
@@ -346,15 +495,14 @@
             tooltip: {
                 y: {
                     formatter: function (val) {
-                    return val + " Tahun"
+                    return val + " Guru"
                     }
                 }
             }
         };
 
-    var pChart = new ApexCharts(document.querySelector("#pensiunChart"), pensiunChart);
-    pChart.render();
-    // End Pensiun chart
+    new ApexCharts(document.querySelector("#durasiKerjaChart"), durasiKerjaOptions).render();
+    // End Durasi Kerja chart
 </script>
 @endpush
 @push('js')

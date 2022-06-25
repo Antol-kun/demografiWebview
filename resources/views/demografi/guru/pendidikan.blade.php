@@ -16,7 +16,7 @@
         <div class="card card-custom gutter-b">
             <div class="card-header">
                 <div class="card-title">
-                    <h3 class="card-label">Data Guru Berdasarkan Pendidikan Akhir</h3>
+                    <h3 class="card-label">Data Guru Berdasarkan Jenjang Pendidikan</h3>
                 </div>
             </div>
             <div class="card-body" style="position: relative;">
@@ -35,74 +35,58 @@
 
 @push('lib-js')
 <script>
-    var tahun = [];
-    for(let i=2013;i<=2022;i++){
-        tahun.push(i);
-    }
-
-    var options = {
+  // Pendidikan Chart
+  var pendidikanOptions = {
         series: [{
-          name: 'SLTA',
-            data: Array.from({length: 9}, () => Math.floor(Math.random() * 20))
-          }, {
-            name: 'D3',
-            data: Array.from({length: 9}, () => Math.floor(Math.random() * 20))
-          }, {
-            name: 'S1',
-            data: Array.from({length: 9}, () => Math.floor(Math.random() * 20))
-          }, {
-            name: 'S2',
-            data: Array.from({length: 9}, () => Math.floor(Math.random() * 20))
-          }, {
-            name: 'S3',
-            data: Array.from({length: 9}, () => Math.floor(Math.random() * 20))
+            name: 'Jumlah',
+            data: [12, 18, 22, 28, 25]
         }],
-        colors: ['#F64E60', '#8950FC', '#31BEFB', '#00D97E', '#FFB800'],
         chart: {
-          type: 'bar',
-          height: 350
+            stacked: true,
+            type: 'bar',
+            height: 350
         },
+        colors: ['#DC8C67', '#DC6967', '#DC67AB', '#DC67CE', '#C767DC', '#A367DC', '#8067DC', '#6771DC', '#6794DC', '#67B7DC'],
         plotOptions: {
-          bar: {
-            borderRadius: 5,
-            horizontal: false,
-            columnWidth: '70%',
-            endingShape: 'rounded',
-            dataLabels: {
-              position: 'top', // top, center, bottom
+            bar: {
+                borderRadius: 5,
+                horizontal: false,
+                columnWidth: '40%',
+                distributed: true,
+                endingShape: 'rounded'
             },
-          },
         },
         dataLabels: {
-          enabled: true,
-          offsetY: -20,
-          style: {
-            fontSize: '10px',
-            colors: ["#304758"]
-          }
+            enabled: true,
+            style: {
+                fontSize: '12px',
+                colors: ["#FFFFFF"]
+            }
+        },
+        legend: {
+            show: false
         },
         stroke: {
-          show: true,
-          width: 2,
-          colors: ['transparent']
+            show: true,
+            width: 2,
+            colors: ['transparent']
         },
         xaxis: {
-          categories: tahun,
+            categories: ['SLTA', 'D3', 'S1', 'S2', 'S3'],
         },
         fill: {
-          opacity: 1
+            opacity: 1
         },
         tooltip: {
-          y: {
-            formatter: function (val) {
-              return val + " guru"
+            y: {
+                formatter: function (val) {
+                return val + " Guru"
+                }
             }
-          }
         }
     };
-
-    var chart = new ApexCharts(document.querySelector("#pendidikanChart"), options);
-    chart.render();
+    new ApexCharts(document.querySelector("#pendidikanChart"), pendidikanOptions).render();
+    // End Pendidikan Chart
 </script>
 @endpush
 @push('js')
