@@ -46,10 +46,15 @@
                 <div class="header-menu align-items-center justify-content-center" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-place="true" data-kt-place-mode="prepend" data-kt-place-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
                     <!--begin::Menu-->
                     {{-- masih percobaan --}}
+                    @php
+                        $html = '<h3><b style="color: #777e90">Demografi ></b> ' .$title.'</h3>';
+                    @endphp
                     @if (request()->segment(2) == 'guru')
-                        <h3><b style="color: #777e90">Demografi ></b> {{$title}}</h3>
+                        {!! $html !!}
                     @elseif (request()->segment(2) == 'siswa')
-                        <h3><b style="color: #777e90">Demografi ></b> {{$title}}</h3>
+                        {!! $html !!}
+                    @elseif (request()->segment(2) == 'pegawai')
+                        {!! $html !!}
                     @endif
                     <!--end::Menu-->
                 </div>
