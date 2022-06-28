@@ -130,7 +130,7 @@
     </div>
     <!--end::Container-->
 </div>
-@endsection
+@endsection 
 
 @push('lib-js')
 <script>

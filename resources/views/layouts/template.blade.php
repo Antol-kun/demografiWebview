@@ -29,6 +29,14 @@
 			border-radius: 50%;
 		}
 	</style>
+	@if (request()->segment(2) != 'guru' && request()->segment(2) != 'siswa' && request()->segment(2) != 'pegawai')
+		<style>
+			#kt_header_nav {
+				width: 100%;
+				justify-content: center;
+			}
+		</style>
+	@endif
 	@yield('css')
 </head>
 <!--end::Head-->

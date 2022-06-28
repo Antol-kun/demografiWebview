@@ -49,7 +49,7 @@
                 id="#kt_aside_menu" data-kt-menu="true">
                 @php $sekolah = DB::table('tblsekolah')->first(); @endphp
                 <center>
-                    <img src="{{ asset('logo/'.$sekolah->logo) }}" class="logo2" alt="Logo Sekolah" width="30%">
+                    <img src="{{ asset('logo/'. $sekolah->logo) }}" class="logo2" alt="Logo Sekolah" width="30%">
                 </center><br />
 
                 <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
@@ -384,15 +384,6 @@
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">Setting Pindah Kelas</span>
-                                </a>
-                                @endif
-
-                                @if($mn2->nama_fitur == 'Pengumuman')
-                                <a class="menu-link" href="/atapengumuman">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Pengumuman</span>
                                 </a>
                                 @endif
 
