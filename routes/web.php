@@ -181,6 +181,14 @@ Route::get('/demografi/siswa/jeniskelamin', [DemografiSiswa::class, 'jenisKelami
 Route::get('/demografi/siswa/agama', [DemografiSiswa::class, 'agama'])->name('demosiswaa');
 Route::get('/demografi/siswa/statussiswa', [DemografiSiswa::class, 'statusSiswa'])->name('demosiswass');
 
+// Demografi Presensi Siswa
+Route::get('/demografi/presensi/semua', [DemografiPresensiController::class, 'semua'])->name('demopresensi');
+Route::get('/demografi/presensi/kelompokkelas', [DemografiPresensiController::class, 'kelompokKelas'])->name('demopresensik');
+
+// Demografi Keuangan Siswa
+Route::get('/demografi/keuangan/semua', [DemografiKeuanganSiswaController::class, 'semua'])->name('demokeuangan');
+Route::get('/demografi/keuangan/kelompokkelas', [DemografiKeuanganSiswaController::class, 'kelompokkelas'])->name('demokeuangankk');
+
 // Route Data Pelanggar Siswa
 Route::get('/datapelanggaransiswa', [DataPelanggaranSiswaController::class, 'index']);
 Route::get('/datapelanggaransiswa/create', [DataPelanggaranSiswaController::class, 'create']);

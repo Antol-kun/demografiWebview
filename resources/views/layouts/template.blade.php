@@ -29,7 +29,7 @@
 			border-radius: 50%;
 		}
 	</style>
-	@if (request()->segment(2) != 'guru' && request()->segment(2) != 'siswa' && request()->segment(2) != 'pegawai')
+	@if (request()->segment(1) != 'demografi')
 		<style>
 			#kt_header_nav {
 				width: 100%;
@@ -38,6 +38,7 @@
 		</style>
 	@endif
 	@yield('css')
+	@stack('lib-css')
 </head>
 <!--end::Head-->
 <!--begin::Body-->

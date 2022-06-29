@@ -154,6 +154,28 @@
                                 </a>
                             </div>
                         </div>
+
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{route('demopresensi')}}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Statistik Presensi Siswa</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{route('demokeuangan')}}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Statistik Keuangan Siswa</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="menu-item">

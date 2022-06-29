@@ -49,15 +49,8 @@
                     @endif
                     <!--begin::Menu-->
                     {{-- masih percobaan --}}
-                    @php
-                        $html = '<h3><b style="color: #777e90">Demografi ></b> ' .$title.'</h3>';
-                    @endphp
-                    @if (request()->segment(2) == 'guru')
-                        {!! $html !!}
-                    @elseif (request()->segment(2) == 'siswa')
-                        {!! $html !!}
-                    @elseif (request()->segment(2) == 'pegawai')
-                        {!! $html !!}
+                    @if (request()->segment(1) == 'demografi')
+                        {!! '<h3><b style="color: #777e90">Demografi ></b> ' .$title.'</h3>' !!}
                     @endif
                     <!--end::Menu-->
                 </div>
