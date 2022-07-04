@@ -163,6 +163,10 @@
 
 	<script>
 		$(document).ready(function () {
+				$('#cok').dataTable({
+					scrollY: '55vh',
+        			scrollCollapse: true,
+				});
 				$('#tabeldata').dataTable();
 				$('#tabeldatas').dataTable();
                 // initToast('Berhasil', 'Dokumen berhasil dihapus!', 'success', '11 menit yang lalu')

@@ -165,6 +165,14 @@ Route::get('/demografi/guru/sertifikasi', [DemografiGuru::class, 'sertifikasiGur
 Route::get('/demografi/guru/pendidikan', [DemografiGuru::class, 'pendidikanGuru'])->name('demogurupd');
 Route::get('/demografi/guru/marital', [DemografiGuru::class, 'maritalGuru'])->name('demogurum');
 
+// Demografi Kinerja Guru
+Route::get('/demografi/kinerja/presensi', [DemografiKinerjaGuruController::class, 'presensi'])->name('demo_kinerja');
+Route::get('/demografi/kinerja/materi', [DemografiKinerjaGuruController::class, 'materi'])->name('demo_kinerjam');
+Route::get('/demografi/kinerja/tugas', [DemografiKinerjaGuruController::class, 'tugas'])->name('demo_kinerjat');
+Route::get('/demografi/kinerja/quiz', [DemografiKinerjaGuruController::class, 'quiz'])->name('demo_kinerjaq');
+Route::get('/demografi/kinerja/banksoal', [DemografiKinerjaGuruController::class, 'banksoal'])->name('demo_kinerjabs');
+Route::get('/demografi/kinerja/bankmateri', [DemografiKinerjaGuruController::class, 'bankmateri'])->name('demo_kinerjabm');
+
 // Demografi Pegawai
 Route::get('/demografi/pegawai/semua', [DemografiPegawai::class, 'jumlahPegawai'])->name('demopegawai');
 Route::get('/demografi/pegawai/jeniskelamin', [DemografiPegawai::class, 'jkPegawai'])->name('demopegawaijk');

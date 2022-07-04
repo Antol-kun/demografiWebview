@@ -50,7 +50,7 @@
                     <!--begin::Menu-->
                     {{-- masih percobaan --}}
                     @if (request()->segment(1) == 'demografi')
-                        {!! '<h3><b style="color: #777e90">Demografi ></b> ' .$title.'</h3>' !!}
+                        <h3><b style="color: #777e90">Demografi ></b> {{$title}}</h3>
                     @endif
                     <!--end::Menu-->
                 </div>
