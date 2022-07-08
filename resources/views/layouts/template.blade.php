@@ -163,9 +163,17 @@
 
 	<script>
 		$(document).ready(function () {
+				$('.alldtb').DataTable({
+					// scrollY: '55vh',
+					// scrollCollapse: true,
+				});
 				$('#cok').dataTable({
 					scrollY: '55vh',
         			scrollCollapse: true,
+				});
+				$('#myTab a').on('click', function (event) {
+					event.preventDefault()
+					$(this).tab('show')
 				});
 				$('#tabeldata').dataTable();
 				$('#tabeldatas').dataTable();
