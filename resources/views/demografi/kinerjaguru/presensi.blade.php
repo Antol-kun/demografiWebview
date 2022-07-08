@@ -66,7 +66,20 @@
             <div class="col-md-6">
                 <div class="card card-custom gutter-b position-relative">
                     <div class="card-body">
-                        <h3 class="m-0 fw-bolder fs-3 mb-4"><i class="fas fa-user" style="font-size: 18px; color: #000"></i>&nbsp;Data Presensi Mengajar Guru Per Bulan</h3>
+                        <div class="d-flex justify-content-between align-items-baseline">
+                            <h3 class="m-0 fw-bolder fs-3"><i class="fas fa-user" style="font-size: 18px; color: #000"></i>&nbsp;Data Presensi Mengajar Guru Per Bulan</h3>
+                            <form action="">
+                                <select name="bulan" class="form-select form-select-solid" required>
+                                    @foreach ($bulan as $key => $item)
+                                        @if ($item == date('M'))
+                                            <option value="{{$key}}" selected>{{date('M')}}</option>
+                                        @else
+                                            <option value="{{$key}}">{{$item}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </form>
+                        </div>
                         <div id="kt_table_users_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="table-responsive">
                                 <table class="table data-table" id="cok">

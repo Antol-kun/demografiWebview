@@ -18,6 +18,15 @@ class DemografiKinerjaGuruController extends Controller
             ],
             'testVariable' => $this->title,
         ];
+
+        // generate data filter bulan
+        $bulan = [];
+        for ($i = 12; $i > 0; $i--) { 
+            $timestamp = mktime(0, 0, 0, date('n') - $i, 1); 
+            $bulan[date('n', $timestamp)] = date('M', $timestamp); 
+        }
+        $data['bulan'] = $bulan;
+
         return view('demografi.kinerjaguru.presensi', $data);
     }
 
