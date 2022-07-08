@@ -150,7 +150,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Statistik Siswa</span>
+                                    <span class="menu-title">Demografi Siswa</span>
                                 </a>
                             </div>
                         </div>

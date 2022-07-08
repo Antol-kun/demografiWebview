@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class DemografiSiswa extends Controller
 {
-    protected $title = 'Statistik Siswa';
+    protected $title = 'Demografi Siswa';
 
     function getJumlahSiswaPerKelas($kelas){
         return DB::table('v_jadwal_siswa')
