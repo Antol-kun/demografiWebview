@@ -276,35 +276,37 @@
 @push('lib-js')
 <script>
     var options = {
-        series: [70],
-        labels: ['Materi'],
+        series: [15],
+        labels: ['Tugas'],
         chart: {
             height: 200,
             type: 'radialBar',
         },
         colors: ['#1B305B'],
-        dataLabels: {
-            showOn: "always",
-            name: {
-                show: false,
-                fontWeight: '700',
-            },
-            position: 'bottom',
-            value: {
-                fontSize: "30px",
-                fontWeight: '800',
-                show: true,
-                formatter: function (val) {
-                    return val;
-                }
-            }
-        },
         plotOptions: {
             radialBar: {
                 hollow: {
                     size: '60%',
+                },
+                dataLabels: {
+                showOn: "always",
+                position: 'bottom',
+                name: {
+                    show: true,
+                },
+                value: {
+                    fontSize: "22px",
+                    fontWeight: '700'
+                },
+                total: {
+                    show: true,
+                    label: 'Tugas',
+                    formatter: function (w) {
+                        return 15
+                    }
                 }
             },
+            }
         },
         stroke: {
             lineCap: "round",

@@ -75,44 +75,6 @@
                     <!--end::Body-->
                 </div>
             </div>
-            {{-- <div class="col-md-6">
-                <!--begin::Card-->
-                <div class="card card-custom gutter-b position-relative">
-                    <div
-                        style="width: 100%; background-color: #ffa685; box-sizing: border-box; padding: 10px 20px; border-radius: 5px;">
-                        <h4 class="text-white" style="margin-bottom: 25px"><i class="fas fa-chart-area text-white"
-                                style="font-size: 18px"></i> Statistik Pemberian Materi</h4>
-                        <div class="text-center text-white">
-                            <div class="mapel">
-                                <h3>203</h3>
-                                <p>Kelas Mapel</p>
-                            </div>
-                            <div class="materi">
-                                <h3>3.201</h3>
-                                <p>Materi Terupload</p>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center" style="width: 100%; gap: 5%">
-                                <div class="file">
-                                    <h3>2.921</h3>
-                                    <p>File</p>
-                                </div>
-                                <div class="tautan">
-                                    <h3>4.390</h3>
-                                    <p>Tautan</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body text-center d-flex justify-content-center">
-                        <div style="width: 80%">
-                            <h3 style="font-weight: 400">Rata-Rata Jumlah Materi Terupload di Setiap Kelas</h3>
-                            <div id="materiChart"></div>
-                            <h5>Rata - rata Sekolah</h5>
-                        </div>
-                    </div>
-                </div>
-                <!--end::Card-->
-            </div> --}}
             <div class="col-md-6">
                 <div class="card card-custom gutter-b position-relative mb-3">
                     <div class="card-body">
@@ -326,35 +288,37 @@
 @push('lib-js')
 <script>
     var options = {
-        series: [25],
+        series: [30],
         labels: ['Materi'],
         chart: {
             height: 200,
             type: 'radialBar',
         },
         colors: ['#1B305B'],
-        dataLabels: {
-            showOn: "always",
-            name: {
-                show: false,
-                fontWeight: '700',
-            },
-            position: 'bottom',
-            value: {
-                fontSize: "30px",
-                fontWeight: '800',
-                show: true,
-                formatter: function (val) {
-                    return val;
-                }
-            }
-        },
         plotOptions: {
             radialBar: {
                 hollow: {
                     size: '60%',
+                },
+                dataLabels: {
+                showOn: "always",
+                position: 'bottom',
+                name: {
+                    show: true,
+                },
+                value: {
+                    fontSize: "22px",
+                    fontWeight: '700'
+                },
+                total: {
+                    show: true,
+                    label: 'Materi',
+                    formatter: function (w) {
+                        return 30
+                    }
                 }
             },
+            }
         },
         stroke: {
             lineCap: "round",

@@ -299,35 +299,37 @@
 @push('lib-js')
 <script>
     var materiOptions = {
-        series: [93],
-        labels: ['Juni 2022'],
+        series: [85],
+        labels: ['Persensi Harian'],
         chart: {
             height: 200,
             type: 'radialBar',
         },
         colors: ['#1B305B'],
-        dataLabels: {
-            showOn: "always",
-            name: {
-                show: false,
-                fontWeight: '700',
-            },
-            position: 'bottom',
-            value: {
-                fontSize: "30px",
-                fontWeight: '800',
-                show: true,
-                formatter: function (val) {
-                    return val;
-                }
-            }
-        },
         plotOptions: {
             radialBar: {
                 hollow: {
                     size: '60%',
+                },
+                dataLabels: {
+                showOn: "always",
+                position: 'bottom',
+                name: {
+                    show: true,
+                },
+                value: {
+                    fontSize: "22px",
+                    fontWeight: '700'
+                },
+                total: {
+                    show: true,
+                    label: 'Juni 2022',
+                    formatter: function (w) {
+                        return 35
+                    }
                 }
             },
+            }
         },
         stroke: {
             lineCap: "round",
