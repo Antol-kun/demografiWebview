@@ -98,23 +98,27 @@
 <script>
     // PerTingkatKelas Chart
     var tingkatKlsOptions = {
-        series: [46, 37, 42],
+        series: {!!json_encode($jmlkelas)!!},
         chart: {
           height: 250,
           type: 'pie',
         },
-        labels: ['Kelas X', 'Kelas XI', 'Kelas XII'],
+        labels: {!!json_encode($tkls)!!},
         responsive: [{
           breakpoint: 480,
           options: {
-            chart: {
-              width: 200
-            },
             legend: {
               position: 'bottom',
             }
           }
-        }]
+        }],
+        tooltip: {
+          y: {
+            formatter: function (val) {
+                return val + " Orang"
+            }
+          }
+        }
     };
     new ApexCharts(document.querySelector("#tingkatKlsChart"), tingkatKlsOptions).render();
     // End PerTingkatKelas Chart
@@ -123,10 +127,10 @@
     var jkOptions = {
         series: [{
             name: 'Laki - Laki',
-            data: [44, 55, 57]
+            data: [{{$kelasX_LK}}, {{$kelasXI_LK}}, {{$kelasXII_LK}}]
             }, {
             name: 'Perempuan',
-            data: [76, 85, 101]
+            data: [{{$kelasX_P}}, {{$kelasXI_P}}, {{$kelasXII_P}}]
         }],
         chart: {
           type: 'bar',
@@ -184,19 +188,22 @@
     var agamaOptions = {
         series: [{
             name: 'Islam',
-            data: [102, 190, 200]
+            data: {!!json_encode($Islam)!!}
             }, {
             name: 'Hindu',
-            data: [76, 85, 101]
+            data: {!!json_encode($Hindu)!!}
         }, {
             name: 'Katolik',
-            data: [76, 85, 101]
+            data: {!!json_encode($Katolik)!!}
         }, {
-            name: 'Kristen',
-            data: [76, 85, 101]
+            name: 'Protestan',
+            data: {!!json_encode($Protestan)!!}
         }, {
-            name: 'Budha',
-            data: [76, 85, 101]
+            name: 'Buddha',
+            data: {!!json_encode($Buddha)!!}
+        }, {
+            name: 'Konghuchu',
+            data: {!!json_encode($Konghuchu)!!}
         }],
         chart: {
           type: 'bar',
@@ -259,16 +266,16 @@
     var statusOptions = {
         series: [{
                 name: 'Aktif',
-                data: [66, 54, 48]
+                data: {!!json_encode($Aktif)!!}
             }, {
                 name: 'Lulus',
-                data: [78, 75, 88]
+                data: {!!json_encode($Lulus)!!}
             },{
                 name: 'Drop Out',
-                data: [25, 30, 11]
+                data: {!!json_encode($DO)!!}
             }, {
                 name: 'Mutasi',
-                data: [12, 18, 16]
+                data: {!!json_encode($Mutasi)!!}
         }],
         chart: {
           type: 'bar',

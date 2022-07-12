@@ -86,7 +86,7 @@
 <script>
     // Agama Chart
     var agamaOptions = {
-        series: [76, 67, 5, 10, 40, 22],
+        series: [{{$Islam}}, {{$Protestan}}, {{$Katolik}}, {{$Hindu}}, {{$Buddha}}, {{$Konghuchu}}],
         chart: {
           height: 350,
           type: 'radialBar',
@@ -113,7 +113,7 @@
           }
         },
         colors: ['#3498db', '#2ecc71', '#e74c3c', '#2c3e50', '#fff200', '#17c0eb'],
-        labels: ['Islam', 'Protestan', 'Katolik', 'Hindu', 'Budha', 'Khonghucu'],
+        labels: {!!json_encode($agama)!!},
         legend: {
           show: true,
           floating: true,
@@ -218,25 +218,26 @@
     new ApexCharts(document.querySelector("#agamaTaChart"), agamaTaOptions).render();
     // End Chart TA Agama
 
+    // Tingkat Kelas Chart
     var tkOptions = {
         series: [{
-                name: 'Hindu',
-                data: [38, 38, 38, 38]
-            }, {
-                name: 'Islam',
-                data: [98, 98, 98, 98]
-            }, {
-                name: 'Kristen',
-                data: [84, 84, 84, 84]
-            }, {
-                name: 'Katolik',
-                data: [26, 26, 26, 26]
-            }, {
-                name: 'Budha',
-                data: [26, 26, 26, 26]
-            }, {
-                name: 'Konghucu',
-                data: [8, 8, 8, 8]
+            name: 'Islam',
+            data: {!!json_encode($TKIslam)!!}
+        }, {
+            name: 'Protestan',
+            data: {!!json_encode($TKProtestan)!!}
+        }, {
+            name: 'Katolik',
+            data: {!!json_encode($TKKatolik)!!}
+        }, {
+            name: 'Hindu',
+            data: {!!json_encode($TKHindu)!!}
+        }, {
+            name: 'Buddha',
+            data: {!!json_encode($TKBuddha)!!}
+        }, {
+            name: 'Konghuchu',
+            data: {!!json_encode($TKKonghuchu)!!}
         }],
         chart: {
           type: 'bar',
@@ -268,7 +269,7 @@
           colors: ['transparent']
         },
         xaxis: {
-          categories: ['X', 'XI', 'XII'],
+          categories: {!!json_encode($tingkatkls)!!},
         },
         fill: {
           opacity: 1
@@ -282,34 +283,27 @@
         }
     };
     new ApexCharts(document.querySelector("#tkChart"), tkOptions).render();
-
-    var kelompokkls = ['X IPA 1', 'X IPA 2', 'X IPS 1', 'X IPS 2', 'XI IPA 1', 'XI IPA 2', 'XI IPS', 'XII IPA', 'XII IPS'];
-    var hindu = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
-    var islam = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
-    var kristen = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
-    var katolik = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
-    var budha = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
-    var konghucu = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
+    // End Tingkat Kelas Chart
 
     var kkOptions = {
         series: [{
-                name: 'Hindu',
-                data: hindu
-            }, {
-                name: 'Islam',
-                data: islam
-            }, {
-                name: 'Kristen',
-                data: kristen
-            }, {
-                name: 'Katolik',
-                data: katolik
-            }, {
-                name: 'Budha',
-                data: budha
-            }, {
-                name: 'Konghucu',
-                data: konghucu
+            name: 'Islam',
+            data: {!!json_encode($kk_Islam)!!}
+        }, {
+            name: 'Protestan',
+            data: {!!json_encode($kk_Protestan)!!}
+        }, {
+            name: 'Katolik',
+            data: {!!json_encode($kk_Katolik)!!}
+        }, {
+            name: 'Hindu',
+            data: {!!json_encode($kk_Hindu)!!}
+        }, {
+            name: 'Buddha',
+            data: {!!json_encode($kk_Buddha)!!}
+        }, {
+            name: 'Konghuchu',
+            data: {!!json_encode($kk_Konghuchu)!!}
         }],
         chart: {
           type: 'bar',
@@ -341,7 +335,7 @@
           colors: ['transparent']
         },
         xaxis: {
-          categories: kelompokkls,
+          categories: {!!json_encode($cat_kls)!!},
         },
         fill: {
           opacity: 1

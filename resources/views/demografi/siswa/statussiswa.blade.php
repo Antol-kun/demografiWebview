@@ -69,7 +69,7 @@
     var statOptions = {
         series: [{
             name: 'Jumlah Siswa',
-            data: [248, 302, 16, 32]
+            data: {!!json_encode($jmlStat)!!}
         }],
         chart: {
           type: 'bar',
@@ -102,7 +102,7 @@
             }
         },
         xaxis: {
-          categories: ['Aktif', 'Lulus', 'Drop Out', 'Mutasi'],
+          categories: {!!json_encode($catStat)!!},
         }
     };
     new ApexCharts(document.querySelector("#jsChart"), statOptions).render();
@@ -112,16 +112,16 @@
     var TKOptions = {
         series: [{
           name: 'Aktif',
-          data: [44, 55, 57]
+          data: {!!json_encode($Stat_Aktif)!!}
         }, {
           name: 'Lulus',
-          data: [76, 85, 94]
+          data: {!!json_encode($Stat_Lulus)!!}
         }, {
           name: 'Drop out',
-          data: [35, 41, 36]
+          data: {!!json_encode($Stat_DO)!!}
         }, {
           name: 'Mutasi',
-          data: [56, 61, 58]
+          data: {!!json_encode($Stat_Mutasi)!!}
         }],
         chart: {
           type: 'bar',
@@ -167,16 +167,16 @@
     var TMOptions = {
         series: [{
           name: 'Aktif',
-          data: [24, 36, 48, 29]
+          data: {!!json_encode($TM_Aktif)!!}
         }, {
           name: 'Lulus',
-          data: [36, 67, 89, 100]
+          data: {!!json_encode($TM_Lulus)!!}
         }, {
           name: 'Drop out',
-          data: [10, 27, 33, 11]
+          data: {!!json_encode($TM_DO)!!}
         }, {
           name: 'Mutasi',
-          data: [12, 23, 22, 5]
+          data: {!!json_encode($TM_Mutasi)!!}
         }],
         chart: {
           height: 350,
@@ -189,7 +189,7 @@
           curve: 'smooth'
         },
         xaxis: {
-          categories: [2019, 2020, 2021, 2022]
+          categories: {!!json_encode($catTahun)!!}
         },
         tooltip: {
           y: {

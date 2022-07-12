@@ -19,7 +19,7 @@
             <div class="card card-custom gutter-b mb-3">
               <div class="card-header">
                   <div class="card-title">
-                      <h3 class="card-label">Jumlah Siswa Baru Per Tahun Masuk</h3>
+                      <h3 class="card-label">Jumlah Siswa Per Tahun Masuk</h3>
                   </div>
               </div>
               <div class="card-body">
@@ -33,7 +33,7 @@
            <div class="card card-custom gutter-b mb-3">
                <div class="card-header">
                    <div class="card-title">
-                       <h3 class="card-label">Jumlah Siswa Baru Per Tahun Masuk Berdasarkan Jenis Kelamin</h3>
+                       <h3 class="card-label">Jumlah Siswa Per Tahun Masuk Berdasarkan Jenis Kelamin</h3>
                    </div>
                </div>
                <div class="card-body">
@@ -48,7 +48,7 @@
         <div class="card card-custom gutter-b mb-3">
           <div class="card-header">
               <div class="card-title">
-                  <h3 class="card-label">Jumlah Siswa Baru Per Tahun Masuk Berdasarkan Agama</h3>
+                  <h3 class="card-label">Jumlah Siswa Per Tahun Masuk Berdasarkan Agama</h3>
               </div>
           </div>
           <div class="card-body">
@@ -63,7 +63,7 @@
 
 @push('lib-js')
 <script>
-    // siswa baru Chart
+    // siswa Chart
     var tahun = []
     for(i=2021;i<=2023;i++){
       tahun.push(i)
@@ -71,7 +71,7 @@
     var siswaBaruOptions = {
         series: [{
             name: 'Jumlah',
-            data: [44, 55, 57]
+            data: {!!json_encode($jmlTahunMasuk)!!}
         }],
         chart: {
           type: 'bar',
@@ -96,7 +96,7 @@
           colors: ['transparent']
         },
         xaxis: {
-          categories: tahun,
+          categories: {!!json_encode($tahunmasuk)!!},
         },
         fill: {
           opacity: 1
@@ -110,16 +110,16 @@
         }
         };
     new ApexCharts(document.querySelector("#siswaBaruChart"), siswaBaruOptions).render();
-    // End Chart siswa baru
+    // End Chart siswa
 
-    // siswa baru per ta berdasarkan jenis kelamin
+    // siswa per ta berdasarkan jenis kelamin
     var jkOptions = {
         series: [{
             name: 'Laki - laki',
-            data: [44, 55, 41]
+            data: {!!json_encode($jmLKTMJK)!!}
           }, {
             name: 'Perempuan',
-            data: [53, 32, 33]
+            data: {!!json_encode($jmPTMJK)!!}
         }],
         colors: ['#4b4b4b', '#fff200'],
         chart: {
@@ -153,7 +153,7 @@
           intersect: false
         },
         xaxis: {
-          categories: tahun,
+          categories: {!!json_encode($tahunmasuk)!!},
         },
     };
     new ApexCharts(document.querySelector("#jkChart"), jkOptions).render();
@@ -163,20 +163,23 @@
     var agamaOptions = {
         series: [{
             name: 'Islam',
-            data: [44, 55, 57]
-          }, {
-            name: 'Kristen',
-            data: [76, 85, 45]
+            data: {!!json_encode($Islam)!!}
           }, {
             name: 'Katolik',
-            data: [35, 41, 36]
+            data: {!!json_encode($Katolik)!!}
+          }, {
+            name: 'Protestan',
+            data: {!!json_encode($Protestan)!!}
+          }, {
+            name: 'Buddha',
+            data: {!!json_encode($Buddha)!!}
+          }, {
+            name: 'Konghuchu',
+            data: {!!json_encode($Konghuchu)!!}
           }, {
             name: 'Hindu',
-            data: [26, 45, 48]
-          }, {
-            name: 'Budha',
-            data: [45, 48, 52]
-        }],
+            data: {!!json_encode($Hindu)!!}
+          }],
         chart: {
           type: 'bar',
           height: 350
@@ -203,7 +206,7 @@
           colors: ['transparent']
         },
         xaxis: {
-          categories: tahun,
+          categories: {!!json_encode($tahunmasuk)!!},
         },
         fill: {
           opacity: 1
@@ -216,7 +219,6 @@
           }
         }
     };
-
     new ApexCharts(document.querySelector("#agamaChart"), agamaOptions).render();
     // end agama
 </script>

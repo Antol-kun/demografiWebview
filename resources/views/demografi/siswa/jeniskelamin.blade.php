@@ -79,20 +79,12 @@
 
 @push('lib-js')
 <script>
-    var kelompokkls = ['X IPA 1', 'X IPA 2', 'X IPS 1', 'X IPS 2', 'XI IPA 1', 'XI IPA 2', 'XI IPS', 'XII IPA', 'XII IPS'];
-    var datal = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
-    var datap = Array.from({length: kelompokkls.length}, () => Math.floor(Math.random() * 20));
-
-    var tahun = []
-    for(i=2019;i<=2023;i++){
-      tahun.push(i)
-    }
     // JenisKelamin Chart
     var jkOptions = {
-        series: [189, 221],
+        series: [{{$laki}}, {{$perempuan}}],
         labels: ['Laki - Laki', 'Perempuan'],
         chart: {
-            width: 425,
+            height: 350,
             type: 'donut',
         },
         legend: {
@@ -104,9 +96,6 @@
         responsive: [{
           breakpoint: 480,
           options: {
-            chart: {
-              width: 200
-            },
             legend: {
               position: 'bottom'
             }
@@ -120,14 +109,14 @@
     var tkOptions = {
         series: [{
           name: 'Laki - laki',
-          data: [44, 55, 57]
+          data: {!!json_encode($TK_L)!!}
         }, {
           name: 'Perempuan',
-          data: [76, 85, 98]
+          data: {!!json_encode($TK_P)!!}
         }],
           chart: {
           type: 'bar',
-          height: 350
+          height: 320
         },
         plotOptions: {
           bar: {
@@ -166,10 +155,10 @@
     var tmOptions = {
         series: [{
             name: 'Laki - laki',
-            data: [31, 40, 28, 30, 27]
+            data: {!!json_encode($jmLKTMJK)!!}
           }, {
             name: 'Perempuan',
-            data: [11, 32, 45, 35, 48]
+            data: {!!json_encode($jmPTMJK)!!}
         }],
         chart: {
           height: 350,
@@ -187,7 +176,7 @@
           curve: 'smooth'
         },
         xaxis: {
-          categories: tahun
+          categories: {!!json_encode($tahunmasuk)!!}
         },
         tooltip: {
           y: {
@@ -204,10 +193,10 @@
     var kkOptions = {
         series: [{
           name: 'Laki - laki',
-          data: datal
+          data: {!!json_encode($JmlSiswaLKelKls)!!}
         }, {
           name: 'Perempuan',
-          data: datap
+          data: {!!json_encode($JmlSiswaPKelKls)!!}
         }],
         chart: {
           type: 'bar',
@@ -231,7 +220,7 @@
           colors: ['transparent']
         },
         xaxis: {
-          categories: kelompokkls
+          categories: {!!json_encode($kelKlsNew)!!}
         },
         fill: {
           opacity: 1

@@ -14,22 +14,74 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container">
         {{-- chart semua siswa --}}
-        <!--begin::Card-->
-        <div class="card card-custom gutter-b mb-3">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">Jumlah Semua Siswa Per Tahun Ajaran</h3>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="jumlahSiswaChart"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <!--begin::Card-->
+                <div class="card card-custom gutter-b mb-3">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-label">Jumlah Siswa Keseluruhan</h3>
+                        </div>
+                    </div>
+                    <div class="card-body" style="height: 260px">
+                        <div class="d-flex justify-content-center align-items-center" style="height: 100%; gap: 10%">
+                            <div class="d-flex flex-wrap d-grid gap-5 mb-10">
+                                <!--begin::Item-->
+                                <div class="border-end-dashed border-end border-gray-300 pe-xxl-7 me-xxl-5">
+                                    <!--begin::Statistics-->
+                                    <div class="d-flex mb-2">
+                                        <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2">{{$Seluruh}}</span>
+                                    </div>
+                                    <!--end::Statistics-->
+                                    <!--begin::Description-->
+                                    <span class="fs-6 fw-semibold text-gray-400">Keseluruhan</span>
+                                    <!--end::Description-->
+                                </div>
+                                <!--end::Item-->
+                                <!--begin::Item-->
+                                <div class="m-0">
+                                    <!--begin::Statistics-->
+                                    <div class="d-flex align-items-center mb-2">
+                                        <!--begin::Value-->
+                                        <span class="fs-2hx fw-bold text-gray-800 me-2 lh-1 ls-n2">{{$jmlAkhir}}</span>
+                                        <!--end::Value-->
+                                    </div>
+                                    <!--end::Statistics-->
+                                    <!--begin::Description-->
+                                    <span class="fs-6 fw-semibold text-gray-400">Tahun {{$tahunAkhir}}</span>
+                                    <!--end::Description-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                        </div>
+                        {{-- <div class="row">
+                            <div class="col-md-12">
+                                <div id="jumlahSiswaChart"></div>
+                            </div>
+                        </div> --}}
                     </div>
                 </div>
+                <!--end::Card-->
+            </div>
+            <div class="col-md-8">
+                <!--begin::Card-->
+                <div class="card card-custom gutter-b mb-3">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="card-label">Data Jumlah Siswa Per Status</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="statusChart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Card-->
             </div>
         </div>
-        <!--end::Card-->
 
         {{-- chart perkelompok kelas && pertingkat kelas --}}
         <div class="row">
@@ -110,23 +162,6 @@
                 <!--end::Card-->
             </div>
         </div>
-
-        <!--begin::Card-->
-        <div class="card card-custom gutter-b mb-3">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">Data Jumlah Siswa Per Status</h3>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="statusChart"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end::Card-->
     </div>
     <!--end::Container-->
 </div>
@@ -138,7 +173,7 @@
     var siswaOptions = {
             series: [{
                 name: 'Jumlah Siswa',
-                data: [19, 22, 36, 36, 38, 44, 56, 66, 72, 76]
+                data: [19, 22, 36]
             }],
             chart: {
                 stacked: true,
@@ -178,7 +213,7 @@
                 colors: ['transparent']
             },
             xaxis: {
-                categories: ['13/14', '14/15', '15/16', '16/17', '17/18', '18/19', '19/20', '20/21', '21/22', '22/23'],
+                categories: ['13/14', '14/15', '15/16'],
             },
             fill: {
                 opacity: 1
@@ -197,12 +232,12 @@
 
     // chart per kelompok kelas
     var siswaKlsOptions = {
-        series: [46, 37, 42, 47, 33, 27],
+        series: {!!json_encode($series)!!},
         chart: {
-          width: 380,
+          height: 250,
           type: 'pie',
         },
-        labels: ['X IPA', 'X IPS', 'XI IPA', 'XI IPS', 'XII IPA', 'XII IPS'],
+        labels: {!!json_encode($labels)!!},
         responsive: [{
           breakpoint: 480,
           options: {
@@ -215,15 +250,14 @@
           }
         }]
     };
-
     new ApexCharts(document.querySelector("#siswaKlsChart"), siswaKlsOptions).render();
     // end chart per kelompok kelas
 
     // PerTingkatKelas Chart
     var tingkatKlsOptions = {
-        series: [46, 37, 42],
+        series: {!!json_encode($jmlkelas)!!},
         chart: {
-          width: 480,
+          height: 350,
           type: 'pie',
         },
         legend: {
@@ -233,13 +267,10 @@
             },
             position: 'bottom'
         },
-        labels: ['Kelas X', 'Kelas XI', 'Kelas XII'],
+        labels: {!!json_encode($tkls)!!},
         responsive: [{
           breakpoint: 480,
           options: {
-            chart: {
-              width: 200
-            },
             legend: {
               position: 'bottom'
             }
@@ -251,18 +282,15 @@
 
     // JenisKelamin Chart
     var jkOptions = {
-        series: [189, 221],
+        series: [{{$laki}}, {{$perempuan}}],
         labels: ['Laki - Laki', 'Perempuan'],
         chart: {
-            width: 425,
+            height: 250,
             type: 'donut',
         },
         responsive: [{
           breakpoint: 480,
           options: {
-            chart: {
-              width: 200
-            },
             legend: {
               position: 'bottom'
             }
@@ -274,9 +302,9 @@
 
     // Agama Chart
     var agamaOptions = {
-        series: [76, 67, 5, 10, 40, 22],
+        series: [{{$Islam}}, {{$Protestan}}, {{$Katolik}}, {{$Hindu}}, {{$Buddha}}, {{$Konghuchu}}],
         chart: {
-          height: 400,
+          height: 350,
           type: 'radialBar',
         },
         plotOptions: {
@@ -301,14 +329,14 @@
           }
         },
         colors: ['#3498db', '#2ecc71', '#e74c3c', '#2c3e50', '#fff200', '#17c0eb'],
-        labels: ['Islam', 'Protestan', 'Katolik', 'Hindu', 'Budha', 'Khonghucu'],
+        labels: ['Islam', 'Protestan', 'Katolik', 'Hindu', 'Buddha', 'Konghuchu'],
         legend: {
           show: true,
           floating: true,
           fontSize: '12px',
           position: 'left',
-          offsetX: 60,
-        //   offsetY: 15,
+          offsetX: 80,
+          offsetY: -20,
           labels: {
             useSeriesColors: true,
           },
@@ -338,7 +366,7 @@
     var statOptions = {
         series: [{
             name: 'Jumlah Siswa',
-            data: [248, 302, 16, 32]
+            data: [{{$Aktif}}, {{$Lulus}}, {{$DO}}, {{$Mutasi}}]
         }],
         chart: {
           type: 'bar',
