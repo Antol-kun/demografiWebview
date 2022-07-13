@@ -113,78 +113,64 @@
 
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
+                                @foreach($menus as $mn8)
+                                @if ($mn8->nama_fitur == "Demografi Kesiswaan")   
                                 <a class="menu-link" href="/demografi/kesiswaan">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">Demografi Kesiswaan</span>
                                 </a>
-                            </div>
-                        </div>
-
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
+                                @endif
+                                @if ($mn8->nama_fitur == "Demografi Guru")  
                                 <a class="menu-link" href="{{route('demoguru')}}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">Demografi Guru</span>
                                 </a>
-                            </div>
-                        </div>
-
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{route('demopegawai')}}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Demografi Pegawai</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{route('demosiswa')}}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Demografi Siswa</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{route('demopresensi')}}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Statistik Presensi Siswa</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{route('demokeuangan')}}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Statistik Keuangan Siswa</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="{{route('demo_kinerja')}}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Statistik Kinerja Guru</span>
-                                </a>
+                                @endif
+                                @if ($mn8->nama_fitur == "Demografi Pegawai")    
+                                    <a class="menu-link" href="{{route('demopegawai')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Demografi Pegawai</span>
+                                    </a>
+                                @endif
+                                @if ($mn8->nama_fitur == "Demografi Siswa")  
+                                    <a class="menu-link" href="{{route('demosiswa')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Demografi Siswa</span>
+                                    </a>
+                                @endif
+                                @if ($mn8->nama_fitur == "Statistik Presensi Siswa")
+                                    <a class="menu-link" href="{{route('demopresensi')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Statistik Presensi Siswa</span>
+                                    </a>
+                                @endif
+                                @if ($mn8->nama_fitur == "Statistik Keuangan Siswa")
+                                    <a class="menu-link" href="{{route('demokeuangan')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Statistik Keuangan Siswa</span>
+                                    </a>
+                                @endif
+                                @if ($mn8->nama_fitur == "Statistik Kinerja Guru")
+                                    <a class="menu-link" href="{{route('demo_kinerja')}}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Statistik Kinerja Guru</span>
+                                    </a>
+                                @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>

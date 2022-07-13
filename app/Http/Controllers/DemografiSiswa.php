@@ -27,8 +27,8 @@ class DemografiSiswa extends Controller
     }
 
     function getKelompokKls(){
-        $arrKls = DB::table('v_tblsiswa')->distinct('kode_kelompok')->pluck('kode_kelompok');
-        $jmlKls = DB::table('v_tblsiswa')->pluck('kode_kelompok');
+        $arrKls = DB::table('v_jadwal_siswa')->distinct('kode_kelompok')->pluck('kode_kelompok');
+        $jmlKls = DB::table('v_jadwal_siswa')->pluck('kode_kelompok');
         
         $dataKls = [];
         foreach($arrKls as $k){
@@ -54,13 +54,17 @@ class DemografiSiswa extends Controller
             if($j != null){
                 foreach($dataKls as $dk){
                     if($dk == $j){
-                        $dataCampur[$dk] = DB::table('v_tblsiswa')->where('kode_kelompok', $j)->count();
+                        $dataCampur[$dk] = DB::table('v_jadwal_siswa')->distinct('nisn')->where('kode_kelompok', $j)->count();
                     }
                 }
             }
         }
-
-        $combine = array_merge($klskosong, $dataCampur);
+        
+        if($klskosong == 0){
+            $combine = array_merge($klskosong, $dataCampur);
+        }else{
+            $combine = $dataCampur;
+        }
         return $combine;
     }
     // end function Umum
@@ -111,7 +115,7 @@ class DemografiSiswa extends Controller
         ];
 
         // Stat Semua
-        $data['Seluruh'] = DB::table('tblsiswa')->count();
+        $data['Seluruh'] = DB::table('v_jadwal_siswa')->distinct('nisn')->count();
 
         $data['tahunAkhir'] = DB::table('tblsiswa')->distinct('tahunmasuk')->orderBy('tahunmasuk', 'desc')->limit(1)->pluck('tahunmasuk')->first();
         $data['jmlAkhir'] = DB::table('tblsiswa')->distinct('tahunmasuk')->orderBy('tahunmasuk', 'desc')->limit(1)->count();
