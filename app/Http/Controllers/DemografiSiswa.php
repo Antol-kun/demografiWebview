@@ -15,7 +15,7 @@ class DemografiSiswa extends Controller
     }
 
     function getTingkatKelas($tk){
-        return DB::table('tblsiswa')->where('tingkatkelas', $tk)->count();
+        return DB::table('v_jadwal_siswa')->distinct('nisn')->where('tingkat_kelas', $tk)->count();
     }
 
     function getStatusSiswa($stat){
@@ -27,7 +27,8 @@ class DemografiSiswa extends Controller
     }
 
     function getKelompokKls(){
-        $arrKls = DB::table('v_jadwal_siswa')->distinct('kode_kelompok')->pluck('kode_kelompok');
+        // $arrKls = DB::table('v_jadwal_siswa')->distinct('kode_kelompok')->pluck('kode_kelompok');
+        $arrKls = DB::table('tblkelompokkelas')->pluck('kode_kelompok');
         $jmlKls = DB::table('v_jadwal_siswa')->pluck('kode_kelompok');
         
         $dataKls = [];
@@ -65,21 +66,22 @@ class DemografiSiswa extends Controller
         }else{
             $combine = $dataCampur;
         }
+        // dd($combine);
         return $combine;
     }
     // end function Umum
 
     // function tingkat kls
     function getTKelasJenkel($jk, $tk){
-        return DB::table('tblsiswa')->where('tingkatkelas', $tk)->where('jenkel', $jk)->count();
+        return DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('tingkat_kelas', $tk)->where('jenkel', $jk)->count();
     }
 
     function getTKelasAgama($agama, $tk){
-        return DB::table('tblsiswa')->where('tingkatkelas', $tk)->where('agama', $agama)->count();
+        return DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('tingkat_kelas', $tk)->where('agama', $agama)->count();
     }
 
     function getTKelasStatus($status, $tk){
-        return DB::table('tblsiswa')->where('tingkatkelas', $tk)->where('statussiswa', $status)->count();
+        return DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('tingkat_kelas', $tk)->where('statussiswa', $status)->count();
     }
     // end function tingkat kls
 
@@ -99,7 +101,7 @@ class DemografiSiswa extends Controller
 
     // function jenis kelamin
     function getJKTingkatKls($jk, $tk){
-        return DB::table('tblsiswa')->where('jenkel', $jk)->where('tingkatkelas', $tk)->count();
+        return DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('jenkel', $jk)->where('tingkat_kelas', $tk)->count();
     }
     // end function jenis kelamin
 
@@ -132,7 +134,7 @@ class DemografiSiswa extends Controller
         $tingkatkls = DB::table('tblkelompokkelas')->distinct('tingkat_kelas')->pluck('tingkat_kelas');
         foreach($tingkatkls as $tk){
             array_push($data['jmlkelas'], $this->getTingkatKelas($tk));
-            array_push($data['tkls'], 'kelas'.$tk);
+            array_push($data['tkls'], 'Kelas '.$tk);
         }
         // End Tingkat Kelas
 
@@ -297,7 +299,7 @@ class DemografiSiswa extends Controller
         // End Per Tahun Masuk
 
         // Per Kelompok Kelas
-        $kelKlsOld = DB::table('v_tblsiswa')->distinct('kode_kelompok')->pluck('kode_kelompok'); // data asli
+        $kelKlsOld = DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->distinct('kode_kelompok')->pluck('kode_kelompok'); // data asli
         $kelKlsNew = []; // penampung data baru null = belum disetting
         foreach($kelKlsOld as $k){
             // get data kelompok kelas tidak null
@@ -311,8 +313,8 @@ class DemografiSiswa extends Controller
         $data['JmlSiswaLKelKls'] = [];
         $data['JmlSiswaPKelKls'] = [];
         foreach($kelKlsOld as $klsNew){
-            array_push($data['JmlSiswaLKelKls'], DB::table('v_tblsiswa')->where('kode_kelompok', $klsNew)->where('jenkel', 'l')->count());
-            array_push($data['JmlSiswaPKelKls'], DB::table('v_tblsiswa')->where('kode_kelompok', $klsNew)->where('jenkel', 'p')->count());
+            array_push($data['JmlSiswaLKelKls'], DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('kode_kelompok', $klsNew)->where('jenkel', 'l')->count());
+            array_push($data['JmlSiswaPKelKls'], DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('kode_kelompok', $klsNew)->where('jenkel', 'p')->count());
         }
         // End Per Kelompok Kelas
 
@@ -342,17 +344,29 @@ class DemografiSiswa extends Controller
         }
         // End Agama
 
+        // Per Tahun Ajaran
+        $taArr = DB::table('tabeltahunajaran')->distinct('tahunakademik')->orderBy('tahunakademik', 'asc')->limit('5')->pluck('tahunakademik');
+        foreach($agamaArr as $ag){
+            $data['TH'.$ag] = [];
+            foreach($taArr as $ta){
+                array_push($data['TH'.$ag], DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('tahunakademik', $ta)->where('agama', $ag)->count());
+            }
+        }
+        $data['TahunAjaran'] = $taArr;
+        // End Pertahun Ajaran
+
         // Agama Per Tingkat Kelas
         foreach($agamaArr as $ag){
             $data['TK'.$ag] = [];
             foreach($tingkatkls as $tk){
-                array_push($data['TK'.$ag], DB::table('tblsiswa')->where('agama', $ag)->where('tingkatkelas', $tk)->count());
+                array_push($data['TK'.$ag], DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('agama', $ag)->where('tingkat_kelas', $tk)->count());
             }
         }
         // End Agama Per Tingkat Kelas
 
         // Agama Per Kelompok Kelas
-        $kelKlsOld = DB::table('v_tblsiswa')->distinct('kode_kelompok')->pluck('kode_kelompok'); // data asli
+        // $kelKlsOld = DB::table('v_tblsiswa')->distinct('kode_kelompok')->pluck('kode_kelompok'); // data asli
+        $kelKlsOld = DB::table('v_jadwal_siswa_demografi')->distinct('kode_kelompok')->pluck('kode_kelompok'); // data asli
         $kelKlsNew = []; // penampung data baru null = belum disetting
         foreach($kelKlsOld as $k){
             // get data kelompok kelas tidak null
@@ -367,7 +381,7 @@ class DemografiSiswa extends Controller
         foreach($agamaArr as $ag){
             $data['kk_'.$ag] = [];
             foreach($kelKlsOld as $kko){
-                array_push($data['kk_'.$ag], DB::table('v_tblsiswa')->where('kode_kelompok', $kko)->where('agama', $ag)->count());
+                array_push($data['kk_'.$ag], DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('kode_kelompok', $kko)->where('agama', $ag)->count());
             }
         }
         // End Agama Per kelompok kelas
@@ -404,7 +418,7 @@ class DemografiSiswa extends Controller
         foreach($statusArr as $ss){
             $data['Stat_'.$ss] = [];
             foreach($tingkatkls as $tk){
-                array_push($data['Stat_'.$ss], DB::table('tblsiswa')->where('statussiswa', $ss)->where('tingkatkelas', $tk)->count());
+                array_push($data['Stat_'.$ss], DB::table('v_jadwal_siswa_demografi')->distinct('nisn')->where('statussiswa', $ss)->where('tingkat_kelas', $tk)->count());
             }
         }
         // End Status Siswa Per Tingkat Kls

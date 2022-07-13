@@ -154,23 +154,23 @@
     }
     var agamaTaOptions = {
         series: [{
-                name: 'Hindu',
-                data: [38, 38, 38, 38]
-            }, {
-                name: 'Islam',
-                data: [98, 98, 98, 98]
-            }, {
-                name: 'Kristen',
-                data: [84, 84, 84, 84]
-            }, {
-                name: 'Katolik',
-                data: [26, 26, 26, 26]
-            }, {
-                name: 'Budha',
-                data: [26, 26, 26, 26]
-            }, {
-                name: 'Konghucu',
-                data: [8, 8, 8, 8]
+            name: 'Islam',
+            data: {!!json_encode($THIslam)!!}
+        }, {
+            name: 'Katolik',
+            data: {!!json_encode($THKatolik)!!}
+        }, {
+            name: 'Protestan',
+            data: {!!json_encode($THProtestan)!!}
+        }, {
+            name: 'Buddha',
+            data: {!!json_encode($THBuddha)!!}
+        }, {
+            name: 'Konghuchu',
+            data: {!!json_encode($THKonghuchu)!!}
+        }, {
+            name: 'Hindu',
+            data: {!!json_encode($THHindu)!!}
         }],
         chart: {
           type: 'bar',
@@ -202,7 +202,7 @@
           colors: ['transparent']
         },
         xaxis: {
-          categories: ['19/20', '20/21', '21/22', '22/23'],
+          categories: {!!json_encode($TahunAjaran)!!},
         },
         fill: {
           opacity: 1
