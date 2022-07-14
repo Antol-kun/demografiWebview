@@ -117,10 +117,10 @@ class DemografiSiswa extends Controller
         ];
 
         // Stat Semua
-        $data['Seluruh'] = DB::table('v_jadwal_siswa')->distinct('nisn')->count();
+        $data['Seluruh'] = DB::table('tblsiswa')->count();
 
         $data['tahunAkhir'] = DB::table('tblsiswa')->distinct('tahunmasuk')->orderBy('tahunmasuk', 'desc')->limit(1)->pluck('tahunmasuk')->first();
-        $data['jmlAkhir'] = DB::table('tblsiswa')->distinct('tahunmasuk')->orderBy('tahunmasuk', 'desc')->limit(1)->count();
+        $data['jmlAkhir'] = DB::table('v_jadwal_siswa')->distinct('nisn')->where('tahunakademik', $data['tahunAkhir'])->count();
         // End Stat Semua
 
         // Perjenis kelamin
