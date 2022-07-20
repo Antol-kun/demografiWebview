@@ -162,14 +162,10 @@
 @push('lib-js')
 <script>
     // Chart Jumlah guru
-    var tahun = [];
-    for(let i=2013;i<=new Date().getFullYear();i++){
-        tahun.push(i);
-    }
     var guruChart = {
         series: [{
             name: 'Jumlah Guru',
-            data: [19, 22, 36, 36, 38, 44, 56, 66, 72, 76]
+            data: {!!json_encode($JumlahGuruFinal)!!}
         }],
         chart: {
             stacked: true,
@@ -205,7 +201,7 @@
             colors: ['transparent']
         },
         xaxis: {
-            categories: tahun,
+            categories: {!!json_encode($tahunGuruLabels)!!}.reverse(),
         },
         yaxis: {
             title: {
@@ -228,12 +224,12 @@
 
     // chart GTY && GTT
     var statusGuruOptions = {
-        series: [44, 55],
+        series: [{{$BelumDiset}}, {{$GTY}}, {{$GTT}}],
         chart: {
             height: 350,
             type: 'pie',
         },
-        labels: ['Guru Tetap Yayasan (GTY)', 'Guru Tidak Tetap (GTT)'],
+        labels: {!!json_encode($statLabel)!!},
         legend: {
             position: 'bottom',
         },
@@ -258,7 +254,7 @@
 
     // chart JenisKelamin
     var jkOptions = {
-        series: [44, 55],
+        series: [{{$Laki}}, {{$Perempuan}}],
         chart: {
             height: 300,
             type: 'pie',
@@ -289,13 +285,13 @@
 
     // chart Marital
     var maritalOptions = {
-        series: [44, 55],
+        series: [{{$BelumMenikah}}, {{$Menikah}}, {{$Cerai}}],
         chart: {
             height: 300,
             type: 'pie',
         },
-        colors: ['#B53471', '#12CBC4'],
-        labels: ['Belum Menikah', 'Sudah Menikah'],
+        colors: ['#B53471', '#12CBC4', '#5C82FF'],
+        labels: ['Belum Menikah', 'Sudah Menikah', 'Cerai'],
         legend: {
             position: 'bottom',
         },
@@ -322,7 +318,7 @@
     var pensiunChart = {
             series: [{
                 name: 'Jumlah',
-                data: [12, 18, 22, 28]
+                data: [{{json_encode($kurangSetahunPensiun)}}, {{json_encode($satuSampaiLimaPensiun)}}, {{json_encode($limaSampaiSepuluhPensiun)}}, {{json_encode($lebihSepuluhPensiun)}}]
             }],
             chart: {
                 stacked: true,
@@ -376,7 +372,7 @@
     var durasiKerjaOptions = {
         series: [{
             name: 'Jumlah',
-            data: [12, 18, 22, 28, 25]
+            data: [{{json_encode($kurangSetahunMK)}}, {{json_encode($satuSampaiLimaMK)}}, {{json_encode($limaSampaiSepuluhMK)}}, {{json_encode($sepuluhSampaiLimaBelasMK)}}, {{json_encode($lebihLimaBelasMK)}}]
         }],
         chart: {
             stacked: true,
@@ -427,7 +423,7 @@
 
     // Pendidikan Chart
     var pendidikanOptions = {
-        series: [36, 12, 28, 19, 6],
+        series: [{{json_encode($sma)}}, {{json_encode($smk)}}, {{json_encode($diploma)}}, {{json_encode($s1)}}, {{json_encode($s2)}}, {{json_encode($s3)}}],
         chart: {
           height: 390,
           type: 'radialBar',
@@ -439,7 +435,7 @@
             endAngle: 270,
             hollow: {
               margin: 5,
-              size: '30%',
+              size: '35%',
               background: 'transparent',
               image: undefined,
             },
@@ -454,14 +450,14 @@
           }
         },
         colors: ['#1ab7ea', '#0084ff', '#39539E', '#833471', '#5758BB'],
-        labels: ['SLTA', 'D3', 'S1', 'S2', 'S3'],
+        labels: {!!json_encode($penLabels)!!},
         legend: {
           show: true,
           floating: true,
           fontSize: '12px',
           position: 'left',
           offsetX: 80,
-          offsetY: 10,
+          offsetY: -20,
           labels: {
             useSeriesColors: true,
           },
@@ -491,13 +487,13 @@
     var sertifikasiOptions = {
             series: [{
                 name: 'Jumlah',
-                data: [12, 18, 22]
+                data: [{{$BelumSetting}}, {{$BelumSerti}}, {{$ProsesSerti}}, {{$SudahSerti}}]
             }],
             chart: {
                 type: 'bar',
                 height: 350
             },
-            colors: ['#F64E60', '#F7A305', '#32ff7e'],
+            colors: ['#F64E60', '#F7A305', '#32ff7e', '#8788ED'],
             plotOptions: {
                 bar: {
                     borderRadius: 5,
@@ -519,7 +515,7 @@
                 colors: ['transparent']
             },
             xaxis: {
-                categories: ["Belum Sertifikasi", "Dalam Proses Sertifikasi", "Sudah Sertifikasi"],
+                categories: ["Belum Disetting", "Belum Sertifikasi", "Dalam Proses Sertifikasi", "Sudah Sertifikasi"],
             },
             fill: {
                 opacity: 1

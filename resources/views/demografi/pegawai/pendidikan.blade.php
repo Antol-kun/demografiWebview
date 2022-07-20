@@ -35,59 +35,59 @@
 
 @push('lib-js')
 <script>
-  // Pendidikan Chart
-  var pendidikanOptions = {
-        series: [{
-            name: 'Jumlah',
-            data: [12, 18, 22, 28, 25]
-        }],
-        chart: {
-            stacked: true,
-            type: 'bar',
-            height: 350
-        },
-        colors: ['#DC8C67', '#DC6967', '#DC67AB', '#DC67CE', '#C767DC', '#A367DC', '#8067DC', '#6771DC', '#6794DC', '#67B7DC'],
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                horizontal: false,
-                columnWidth: '40%',
-                distributed: true,
-                endingShape: 'rounded'
-            },
-        },
-        dataLabels: {
-            enabled: true,
-            style: {
-                fontSize: '12px',
-                colors: ["#FFFFFF"]
-            }
-        },
-        legend: {
-            show: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-            categories: ['SLTA', 'D3', 'S1', 'S2', 'S3'],
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                return val + " Pegawai"
-                }
-            }
-        }
-    };
-    new ApexCharts(document.querySelector("#pendidikanChart"), pendidikanOptions).render();
-    // End Pendidikan Chart
-</script>
+    // Pendidikan Chart
+    var pendidikanOptions = {
+          series: [{
+              name: 'Jumlah',
+              data: [{{json_encode($sma)}}, {{json_encode($smk)}}, {{json_encode($diploma)}}, {{json_encode($s1)}}, {{json_encode($s2)}}, {{json_encode($s3)}}],
+          }],
+          chart: {
+              stacked: true,
+              type: 'bar',
+              height: 350
+          },
+          colors: ['#DC8C67', '#DC6967', '#DC67AB', '#DC67CE', '#C767DC', '#A367DC', '#8067DC', '#6771DC', '#6794DC', '#67B7DC'],
+          plotOptions: {
+              bar: {
+                  borderRadius: 5,
+                  horizontal: false,
+                  columnWidth: '40%',
+                  distributed: true,
+                  endingShape: 'rounded'
+              },
+          },
+          dataLabels: {
+              enabled: true,
+              style: {
+                  fontSize: '12px',
+                  colors: ["#FFFFFF"]
+              }
+          },
+          legend: {
+              show: false
+          },
+          stroke: {
+              show: true,
+              width: 2,
+              colors: ['transparent']
+          },
+          xaxis: {
+              categories: {!!json_encode($penLabels)!!},
+          },
+          fill: {
+              opacity: 1
+          },
+          tooltip: {
+              y: {
+                  formatter: function (val) {
+                  return val + " Guru"
+                  }
+              }
+          }
+      };
+      new ApexCharts(document.querySelector("#pendidikanChart"), pendidikanOptions).render();
+      // End Pendidikan Chart
+  </script>
 @endpush
 @push('js')
 @endpush

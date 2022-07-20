@@ -13,41 +13,45 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container">
         {{-- jenis kelamin chart --}}
-        <!--begin::Card-->
-        <div class="card card-custom gutter-b">
-            <div class="card-header">
-                <div class="card-title">
-                    <h3 class="card-label">Jumlah Guru Berdasarkan Jenis Kelamin</h3>
+        <div class="row">
+          <div class="col-md-7">
+            <!--begin::Card-->
+            <div class="card card-custom gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">Jumlah Guru Berdasarkan Jenis Kelamin</h3>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div id="jkChart"></div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div id="jkChart"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!--end::Card-->
+          </div>
+          <div class="col-md-5">
+              <!--begin::Card-->
+              <div class="card card-custom gutter-b">
+                  <div class="card-header">
+                      <div class="card-title">
+                          <h3 class="card-label">Jumlah Guru berdasarkan Jenis Kelamin per Jenjang Pendidikan</h3>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div id="pendidikanChart"></div>
+                  </div>
+              </div>
+              <!--end::Card-->
+          </div>
         </div>
-        <!--end::Card-->
         {{-- end jenis kelamin --}}
 
         {{-- chart pendidikan & status marital --}}
         <div class="row mt-3">
-            <div class="col-md-4">
-                <!--begin::Card-->
-                <div class="card card-custom gutter-b">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h3 class="card-label">Jumlah Guru berdasarkan Jenis Kelamin per Jenjang Pendidikan</h3>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div id="pendidikanChart"></div>
-                    </div>
-                </div>
-                <!--end::Card-->
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <!--begin::Card-->
                 <div class="card card-custom gutter-b">
                     <div class="card-header">
@@ -61,7 +65,7 @@
                 </div>
                 <!--end::Card-->
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <!--begin::Card-->
                 <div class="card card-custom gutter-b">
                     <div class="card-header">
@@ -86,7 +90,7 @@
 <script>
     // chart JenisKelamin
     var jkOptions = {
-        series: [44, 55],
+        series: [{{$Laki}}, {{$Perempuan}}],
         chart: {
             height: 350,
             type: 'pie',
@@ -119,10 +123,10 @@
     var pendidikanOptions = {
         series: [{
             name: 'Laki - laki',
-            data: [10, 22, 32, 8, 7]
+            data: [{{json_encode($Pend_L_sma)}}, {{json_encode($Pend_L_smk)}}, {{json_encode($Pend_L_diploma)}}, {{json_encode($Pend_L_s1)}}, {{json_encode($Pend_L_s2)}}, {{json_encode($Pend_L_s3)}}]
         }, {
             name: 'Perempuan',
-            data: [9, 10, 28, 17, 10]
+            data: [{{json_encode($Pend_P_sma)}}, {{json_encode($Pend_P_smk)}}, {{json_encode($Pend_P_diploma)}}, {{json_encode($Pend_P_s1)}}, {{json_encode($Pend_P_s2)}}, {{json_encode($Pend_P_s3)}}]
         }],
         colors: ['#d63031', '#fed330'],
         chart: {
@@ -146,7 +150,7 @@
             }
         },
         xaxis: {
-          categories: ['SLTA', 'D3', 'S1', 'S2', 'S3'],
+          categories: {!!json_encode($penLabels)!!},
         }
     };
     new ApexCharts(document.querySelector("#pendidikanChart"), pendidikanOptions).render();
@@ -156,10 +160,10 @@
     var pegawaiOptions = {
         series: [{
           name: 'Laki - laki',
-          data: [44, 55]
+          data: {!!json_encode($L)!!}
         }, {
           name: 'Perempuan',
-          data: [76, 85]
+          data: {!!json_encode($P)!!}
         }],
         chart: {
           type: 'bar',
@@ -183,7 +187,7 @@
           colors: ['transparent']
         },
         xaxis: {
-          categories: ['GTY', 'GTT'],
+          categories: {!!json_encode($statLabel)!!},
         },
         fill: {
           opacity: 1
@@ -203,10 +207,10 @@
     var statusOptions = {
         series: [{
           name: 'Laki - laki',
-          data: [44, 55]
+          data: {!!json_encode($MartialJK_L)!!}
         }, {
           name: 'Perempuan',
-          data: [13, 23]
+          data: {!!json_encode($MartialJK_P)!!}
         }],
         colors: ['#0652DD', '#9980FA'],
         chart: {
@@ -238,7 +242,7 @@
           },
         },
         xaxis: {
-          categories: ['Belum Menikah', 'Sudah Menikah'],
+          categories: ['Belum Menikah', 'Cerai', 'Sudah Menikah'],
         },
         legend: {
             show: false

@@ -51,13 +51,13 @@
 <script>
     // chart Marital
     var maritalOptions = {
-        series: [44, 55],
+        series: [{{$BelumMenikah}}, {{$Menikah}}, {{$Cerai}}],
         chart: {
             height: 300,
             type: 'pie',
         },
-        colors: ['#B53471', '#12CBC4'],
-        labels: ['Belum Menikah', 'Sudah Menikah'],
+        colors: ['#B53471', '#12CBC4', '#5C82FF'],
+        labels: ['Belum Menikah', 'Sudah Menikah', 'Cerai'],
         legend: {
             position: 'bottom',
         },
@@ -84,10 +84,10 @@
     var maritalJkOptions = {
         series: [{
             name: 'Laki - laki',
-            data: [44, 55]
+            data: {!!json_encode($MaritalLaki)!!}
         }, {
             name: 'Perempuan',
-            data: [53, 32]
+            data: {!!json_encode($MaritalPerempuan)!!}
         }],
         chart: {
           type: 'bar'
@@ -120,7 +120,7 @@
           intersect: false
         },
         xaxis: {
-          categories: ['Belum Menikah', 'Sudah Menikah'],
+          categories: ['Belum Menikah', 'Sudah Menikah', 'Cerai'],
         },
     };
     new ApexCharts(document.querySelector("#maritalJkChart"), maritalJkOptions).render();

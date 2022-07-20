@@ -20,9 +20,9 @@ class DemografiKesiswaan extends Controller
             'testVariable' => 'Statistik Kesiswaan'
         ];
         
-        $data['berat'] = DB::table('tblpelanggaran')->where('jenis_sanksi', 'Berat')->count();
-        $data['sedang'] = DB::table('tblpelanggaran')->where('jenis_sanksi', 'Sedang')->count();
-        $data['ringan'] = DB::table('tblpelanggaran')->where('jenis_sanksi', 'Ringan')->count();
+        $data['berat'] = DB::table('v_pelanggaran_siswa')->where('jenis_sanksi', 'Berat')->count();
+        $data['sedang'] = DB::table('v_pelanggaran_siswa')->where('jenis_sanksi', 'Sedang')->count();
+        $data['ringan'] = DB::table('v_pelanggaran_siswa')->where('jenis_sanksi', 'Ringan')->count();
 
         // dd( $data['berat'],  $data['sedang'],  $data['ringan']);
 

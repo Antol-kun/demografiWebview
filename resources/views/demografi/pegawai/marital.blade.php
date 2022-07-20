@@ -49,82 +49,82 @@
 
 @push('lib-js')
 <script>
-    // chart Marital
-    var maritalOptions = {
-        series: [44, 55],
-        chart: {
-            height: 300,
-            type: 'pie',
-        },
-        colors: ['#B53471', '#12CBC4'],
-        labels: ['Belum Menikah', 'Sudah Menikah'],
-        legend: {
-            position: 'bottom',
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 300
-            }
+  // chart Marital
+  var maritalOptions = {
+      series: [{{$BelumMenikah}}, {{$Menikah}}, {{$Cerai}}],
+      chart: {
+          height: 300,
+          type: 'pie',
+      },
+      colors: ['#B53471', '#12CBC4', '#5C82FF'],
+      labels: ['Belum Menikah', 'Sudah Menikah', 'Cerai'],
+      legend: {
+          position: 'bottom',
+      },
+      responsive: [{
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 300
           }
-        }],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " Pegawai"
-                }
-            }
-        },
-    };
-    new ApexCharts(document.querySelector("#maritalChart"), maritalOptions).render();
-    // end chart marital
+        }
+      }],
+      tooltip: {
+          y: {
+              formatter: function (val) {
+                  return val + " guru"
+              }
+          }
+      },
+  };
+  new ApexCharts(document.querySelector("#maritalChart"), maritalOptions).render();
+  // end chart marital
 
-    // chart marital jk
-    var maritalJkOptions = {
-        series: [{
-            name: 'Laki - laki',
-            data: [44, 55]
-        }, {
-            name: 'Perempuan',
-            data: [53, 32]
-        }],
-        chart: {
-          type: 'bar'
-        },
-        plotOptions: {
-          bar: {
-            borderRadius: 5,
-            barHeight: '45%',
-            horizontal: true,
-            dataLabels: {
-              position: 'top',
-            },
-          }
-        },
-        dataLabels: {
-          enabled: true,
-          offsetX: -6,
-          style: {
-            fontSize: '12px',
-            colors: ['#fff']
-          }
-        },
-        stroke: {
-          show: true,
-          width: 1,
+  // chart marital jk
+  var maritalJkOptions = {
+      series: [{
+          name: 'Laki - laki',
+          data: {!!json_encode($MaritalLaki)!!}
+      }, {
+          name: 'Perempuan',
+          data: {!!json_encode($MaritalPerempuan)!!}
+      }],
+      chart: {
+        type: 'bar'
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 5,
+          barHeight: '45%',
+          horizontal: true,
+          dataLabels: {
+            position: 'top',
+          },
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        offsetX: -6,
+        style: {
+          fontSize: '12px',
           colors: ['#fff']
-        },
-        tooltip: {
-          shared: true,
-          intersect: false
-        },
-        xaxis: {
-          categories: ['Belum Menikah', 'Sudah Menikah'],
-        },
-    };
-    new ApexCharts(document.querySelector("#maritalJkChart"), maritalJkOptions).render();
-    // end chart marital jk
+        }
+      },
+      stroke: {
+        show: true,
+        width: 1,
+        colors: ['#fff']
+      },
+      tooltip: {
+        shared: true,
+        intersect: false
+      },
+      xaxis: {
+        categories: ['Belum Menikah', 'Sudah Menikah', 'Cerai'],
+      },
+  };
+  new ApexCharts(document.querySelector("#maritalJkChart"), maritalJkOptions).render();
+  // end chart marital jk
 </script>
 @endpush
 @push('js')

@@ -39,13 +39,13 @@
     var sertifikasiOptions = {
             series: [{
                 name: 'Jumlah',
-                data: [12, 18, 22]
+                data: [{{$BelumSetting}}, {{$BelumSerti}}, {{$ProsesSerti}}, {{$SudahSerti}}]
             }],
             chart: {
                 type: 'bar',
                 height: 350
             },
-            colors: ['#F64E60', '#F7A305', '#32ff7e'],
+            colors: ['#F64E60', '#F7A305', '#32ff7e', '#8788ED'],
             plotOptions: {
                 bar: {
                     borderRadius: 5,
@@ -67,7 +67,7 @@
                 colors: ['transparent']
             },
             xaxis: {
-                categories: ["Belum Sertifikasi", "Dalam Proses Sertifikasi", "Sudah Sertifikasi"],
+                categories: ["Belum Disetting", "Belum Sertifikasi", "Dalam Proses Sertifikasi", "Sudah Sertifikasi"],
             },
             fill: {
                 opacity: 1
@@ -75,7 +75,7 @@
             tooltip: {
                 y: {
                     formatter: function (val) {
-                        return val + " Guru"
+                        return val + " guru"
                     }
                 }
             }

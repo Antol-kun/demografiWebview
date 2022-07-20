@@ -39,7 +39,7 @@
   var pendidikanOptions = {
         series: [{
             name: 'Jumlah',
-            data: [12, 18, 22, 28, 25]
+            data: [{{json_encode($sma)}}, {{json_encode($smk)}}, {{json_encode($diploma)}}, {{json_encode($s1)}}, {{json_encode($s2)}}, {{json_encode($s3)}}],
         }],
         chart: {
             stacked: true,
@@ -72,7 +72,7 @@
             colors: ['transparent']
         },
         xaxis: {
-            categories: ['SLTA', 'D3', 'S1', 'S2', 'S3'],
+            categories: {!!json_encode($penLabels)!!},
         },
         fill: {
             opacity: 1

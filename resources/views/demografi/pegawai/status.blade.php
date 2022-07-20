@@ -99,260 +99,94 @@
               <div class="row justify-content-center">
                 <div class="col-md-4 cards">
                   <h5>Tabel Pegawai Menuju Pensiun</h5>
-                  <p>Kurun Waktu < 1 Tahun</p>
+                  <p>Kurun Waktu < 1 Tahun ({{$kurangSetahunPensiun . ' Pegawai'}})</p>
                   <div class="contain">
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    @if ($detailKurangSetahunPensiun != null)
+                      @foreach ($detailKurangSetahunPensiun as $setahun)
+                        <div class="infoguru">
+                          <div class="img-guru">
+                            <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                          </div>
+                          <div class="isi">
+                            <p>{{$setahun->Gelardepan.' '.$setahun->Nama.' '.$setahun->Gelarbelakang}}</p>
+                            <p>NIP: {{$setahun->Nip}}</p>
+                          </div>
+                        </div>
+                      @endforeach
+                    @else  
+                      <div class="infoguru">
+                        <p class="text-center" style="width: 100%">Tidak ada data.</p>
                       </div>
-                      <div class="isi">
-                        <p>Siti Anissa S. Pd</p>
-                        <p>NIP: 190219789</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Aminah S. Kom</p>
-                        <p>NIP: 190210099</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Bambang Mujianto M. Pd</p>
-                        <p>NIP: 19021009991</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Tiara Leksmana S. Pd, M. Pd</p>
-                        <p>NIP: 1902121209</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Kesuma Tri Yanto S. Pd</p>
-                        <p>NIP: 1982109012</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Siti Munawaroh S. Pd</p>
-                        <p>NIP: 1902192212</p>
-                      </div>
-                    </div>
+                    @endif
                   </div>
                 </div>
                 <div class="col-md-4 cards">
                   <h5>Tabel Pegawai Menuju Pensiun</h5>
-                  <p>Kurun Waktu 1-5 Tahun</p>
+                  <p>Kurun Waktu 1-5 Tahun ({{$satuSampaiLimaPensiun . ' Pegawai'}})</p>
                   <div class="contain">
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    @if ($detailSatuSampaiLimaPensiun != null)
+                      @foreach ($detailSatuSampaiLimaPensiun as $setahun)
+                        <div class="infoguru">
+                          <div class="img-guru">
+                            <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                          </div>
+                          <div class="isi">
+                            <p>{{$setahun->Gelardepan.' '.$setahun->Nama.' '.$setahun->Gelarbelakang}}</p>
+                            <p>NIP: {{$setahun->Nip}}</p>
+                          </div>
+                        </div>
+                      @endforeach
+                    @else  
+                      <div class="infoguru">
+                        <p class="text-center" style="width: 100%">Tidak ada data.</p>
                       </div>
-                      <div class="isi">
-                        <p>Rika Anggraini S. Pd</p>
-                        <p>NIP: 190289129</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Mila Puspa Sari S. Pd</p>
-                        <p>NIP: 1902090998</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Karunia Pertiwi S. Pd</p>
-                        <p>NIP: 198023319</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Bintang Apriliani S. Pd</p>
-                        <p>NIP: 192213319</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Nabila Saputri S. Pd</p>
-                        <p>NIP: 1909998319</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Khairunisa S. Pd</p>
-                        <p>NIP: 190210919</p>
-                      </div>
-                    </div>
+                    @endif
                   </div>
                 </div>
                 <div class="col-md-4 cards">
                   <h5>Tabel Pegawai Menuju Pensiun</h5>
-                  <p>Kurun Waktu 5-10 Tahun</p>
+                  <p>Kurun Waktu 5-10 Tahun ({{$limaSampaiSepuluhPensiun . ' Pegawai'}})</p>
                   <div class="contain">
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    @if ($detailLimaSampaiSepuluhPensiun != null)
+                      @foreach ($detailLimaSampaiSepuluhPensiun as $setahun)
+                        <div class="infoguru">
+                          <div class="img-guru">
+                            <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                          </div>
+                          <div class="isi">
+                            <p>{{$setahun->Gelardepan.' '.$setahun->Nama.' '.$setahun->Gelarbelakang}}</p>
+                            <p>NIP: {{$setahun->Nip}}</p>
+                          </div>
+                        </div>
+                      @endforeach
+                    @else  
+                      <div class="infoguru">
+                        <p class="text-center" style="width: 100%">Tidak ada data.</p>
                       </div>
-                      <div class="isi">
-                        <p>Salsabila Pertiwi S. Pd</p>
-                        <p>NIP: 190290019</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Siti Nurhalijah S. Pd</p>
-                        <p>NIP: 19809819</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Pertiwi Dwi Putri S. Pd</p>
-                        <p>NIP: 198201919</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Titi Khairunisa S. Pd</p>
-                        <p>NIP: 190219319</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Siti Nurhalijah S. Pd</p>
-                        <p>NIP: 19809819</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Pertiwi Dwi Putri S. Pd</p>
-                        <p>NIP: 198201919</p>
-                      </div>
-                    </div>
+                    @endif
                   </div>
                 </div>
                 <div class="col-md-4 cards">
                   <h5>Tabel Pegawai Menuju Pensiun</h5>
-                  <p>Kurun Waktu > 10 Tahun</p>
+                  <p>Kurun Waktu > 10 Tahun ({{$lebihSepuluhPensiun . ' Pegawai'}})</p>
                   <div class="contain">
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                    @if ($detailLebihSepuluhPensiun != null)
+                      @foreach ($detailLebihSepuluhPensiun as $setahun)
+                        <div class="infoguru">
+                          <div class="img-guru">
+                            <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
+                          </div>
+                          <div class="isi">
+                            <p>{{$setahun->Gelardepan.' '.$setahun->Nama.' '.$setahun->Gelarbelakang}}</p>
+                            <p>NIP: {{$setahun->Nip}}</p>
+                          </div>
+                        </div>
+                      @endforeach
+                    @else  
+                      <div class="infoguru">
+                        <p class="text-center" style="width: 100%">Tidak ada data.</p>
                       </div>
-                      <div class="isi">
-                        <p>Bambang Mujianto M. Pd</p>
-                        <p>NIP: 19021009991</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Tiara Leksmana S. Pd, M. Pd</p>
-                        <p>NIP: 1902121209</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Kesuma Tri Yanto S. Pd</p>
-                        <p>NIP: 1982109012</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Siti Munawaroh S. Pd</p>
-                        <p>NIP: 1902192212</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Salsabila Pertiwi S. Pd</p>
-                        <p>NIP: 190290019</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Siti Nurhalijah S. Pd</p>
-                        <p>NIP: 19809819</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Titi Khairunisa S. Pd</p>
-                        <p>NIP: 190219319</p>
-                      </div>
-                    </div>
-                    <div class="infoguru">
-                      <div class="img-guru">
-                        <img src="{{asset('pasfoto/guru/no-image.png')}}" alt="">
-                      </div>
-                      <div class="isi">
-                        <p>Titi Khairunisa S. Pd</p>
-                        <p>NIP: 190219319</p>
-                      </div>
-                    </div>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -366,14 +200,14 @@
 
 @push('lib-js')
 <script>
-    // chart GTY && GTT
+    // chart PTY && PTT
     var statusGuruOptions = {
-        series: [44, 55],
+        series: [{{$BelumDiset}}, {{$PTY}}, {{$PTT}}],
         chart: {
             height: 350,
             type: 'pie',
         },
-        labels: ['Pegawai Tetap Yayasan (PTY)', 'Pegawai Tidak Tetap (PTT)'],
+        labels: {!!json_encode($statLabel)!!},
         legend: {
             position: 'bottom',
         },
@@ -388,19 +222,19 @@
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return val + " Pegawai"
+                    return val + " guru"
                 }
             }
         },
     };
     new ApexCharts(document.querySelector("#statusGuruChart"), statusGuruOptions).render();
-    // end chart GTY && GTT
+    // end chart PTY && PTT
 
     // Pensiun Chart
     var pensiunChart = {
             series: [{
                 name: 'Jumlah',
-                data: [12, 18, 22, 28]
+                data: [{{json_encode($kurangSetahunPensiun)}}, {{json_encode($satuSampaiLimaPensiun)}}, {{json_encode($limaSampaiSepuluhPensiun)}}, {{json_encode($lebihSepuluhPensiun)}}]
             }],
             chart: {
                 stacked: true,
@@ -441,7 +275,7 @@
             tooltip: {
                 y: {
                     formatter: function (val) {
-                    return val + " Pegawai"
+                    return val + " Guru"
                     }
                 }
             }
@@ -454,7 +288,7 @@
     var durasiKerjaOptions = {
             series: [{
                 name: 'Jumlah',
-                data: [12, 18, 22, 28, 25]
+                data: [{{json_encode($kurangSetahunMK)}}, {{json_encode($satuSampaiLimaMK)}}, {{json_encode($limaSampaiSepuluhMK)}}, {{json_encode($sepuluhSampaiLimaBelasMK)}}, {{json_encode($lebihLimaBelasMK)}}]
             }],
             chart: {
                 stacked: true,
@@ -495,7 +329,7 @@
             tooltip: {
                 y: {
                     formatter: function (val) {
-                    return val + " Pegawai"
+                    return val + " Guru"
                     }
                 }
             }
