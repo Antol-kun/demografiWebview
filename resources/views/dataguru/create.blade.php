@@ -386,7 +386,7 @@
                     <!--begin::Col-->
                     <div class="col-md-6 fv-row">
                         <!--begin::Label-->
-                        <label class="fs-5 fw-bold mb-2">Balas Bakti 15 Tahun</label>
+                        <label class="fs-5 fw-bold mb-2">Balas Bakti 10 Tahun</label>
                         <!--end::Label-->
                         <!--begin::Input-->
                         <input type="date" class="form-control form-control-solid" placeholder="" name="bakti_15" id="bakti_15" />
@@ -408,7 +408,7 @@
                     <!--begin::Col-->
                     <div class="col-md-6 fv-row">
                         <!--begin::Label-->
-                        <label class="fs-5 fw-bold mb-2">Pensiun 55 tahun</label>
+                        <label class="fs-5 fw-bold mb-2">Pensiun 57 tahun</label>
                         <!--end::Label-->
                         <!--begin::Input-->
                         <input type="date" class="form-control form-control-solid" placeholder="" name="pensiun" id="pensiun" />
@@ -876,7 +876,7 @@
             
             var pars = new Date(tgl);
 
-            targetDate1.setDate(targetDate1.getDate() + 5478); //15 tahun
+            targetDate1.setDate(targetDate1.getDate() + 3653); //10 tahun
             targetDate2.setDate(targetDate2.getDate() + 9131); //25 tahun
 
             var dd = ("0" + (pars.getDate() + 1)).slice(-2)
@@ -899,7 +899,7 @@
             var pensiun = document.getElementById('pensiun');
             var targetDate3 = new Date(tgllahir);
             var pars = new Date(tgllahir);
-            targetDate3.setDate(targetDate3.getDate() + 20088); //55 tahun
+            targetDate3.setDate(targetDate3.getDate() + 20805); //57 tahun
             var dd = ("0" + (pars.getDate() + 1)).slice(-2)
             var mm = ("0" + (pars.getMonth() + 1)).slice(-2);
             var yyyy3 = targetDate3.getFullYear();
