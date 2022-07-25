@@ -175,12 +175,18 @@
 					event.preventDefault()
 					$(this).tab('show')
 				});
-				$('#tabeldata').dataTable({
+
+				// prefix untuk setting siswa
+				$('#tabeldatasetting').dataTable({
 					"ordering": false
 				});
-				$('#tabeldatas').dataTable({
+				$('#tabeldatasettings').dataTable({
 					"ordering": false
 				});
+				// end setting siswa
+
+				$('#tabeldata').dataTable();
+				$('#tabeldatas').dataTable();
                 // initToast('Berhasil', 'Dokumen berhasil dihapus!', 'success', '11 menit yang lalu')
                 $('.select2').select2({
                     placeholder: 'Pilih data'

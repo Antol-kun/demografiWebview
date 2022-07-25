@@ -137,14 +137,14 @@
                             <option value="XII">XII</option>
                         </select><br/><br/><br/> -->
 
-                    <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="tabeldata" role="grid">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="tabeldatasetting" role="grid">
                             <!--begin::Table head-->
                             <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0" role="row">
                                 <th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 5.25px;">
                                     <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#tabeldata .form-check-input" value="1">
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#tabeldatasetting .form-check-input" value="1">
                                     </div>
                                 </th>
                                 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 5.25px;">NIS / NISN</th>

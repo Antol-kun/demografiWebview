@@ -210,14 +210,14 @@
                         <input type="hidden" name="thn" id="thn" value="{{ base64_encode($tahun) }}"/>
                         <input type="hidden" name="sms" id="sms" value="{{ base64_encode($semester) }}"/>
                         <button type="button" class="btn btn-sm btn-primary" style="position: absolute; left: 750px;" name="btnSimpan" id="btnSimpan">Simpan Siswa</button><br/><br/>
-                        <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="tabeldatas" role="grid">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="tabeldatasettings" role="grid">
                             <!--begin::Table head-->
                             <thead>
                             <!--begin::Table row-->
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0" role="row">
                                 <th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 5.25px;">
                                     <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#tabeldatas .form-check-input" value="1">
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#tabeldatasettings .form-check-input" value="1">
                                     </div>
                                 </th>
                                 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 5.25px;">NIS / NISN</th>
