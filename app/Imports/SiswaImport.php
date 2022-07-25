@@ -50,30 +50,34 @@ class SiswaImport implements ToModel, WithHeadingRow
 
         $seq = DB::table('tbuser')->max('id') + 1; 
 
-        $datakun = DB::table('tbuser')->insert([
-                    'id' => $seq,
-                    'username' => $row['nisn'],
-                    'password' => password_hash('12345678', PASSWORD_DEFAULT),
-                    'nama' => $row['nama_siswa'],
-                    'email' => $row['email_siswa'],
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'active' => 'TRUE',
-                    'id_hakakses' => $hakakses->idhakakses
-        ]);
+        $cekSiswa = DB::table('tblsiswa')->where('nisn', $row['nisn'])->count();
+        // dd($cekSiswa);
+        if($cekSiswa == 0){
+            $datakun = DB::table('tbuser')->insert([
+                'id' => $seq,
+                'username' => $row['nisn'],
+                'password' => password_hash('12345678', PASSWORD_DEFAULT),
+                'nama' => $row['nama_siswa'],
+                'email' => $row['email_siswa'],
+                'created_at' => Carbon::now()->toDateTimeString(),
+                'active' => 'TRUE',
+                'id_hakakses' => $hakakses->idhakakses
+            ]);
 
-        $datakun_ortu = DB::table('tbuser')->insert([
-            'id' => $seq + 1,
-            'username' => 'wali'.$row['nisn'],
-            'password' => password_hash('12345678', PASSWORD_DEFAULT),
-            'nama' => $row['nama_ayah'],
-            'email' => $row['email_wali'],
-            'created_at' => Carbon::now()->toDateTimeString(),
-            'active' => 'TRUE',
-            'id_hakakses' => $hak_ortu->idhakakses,
-            'id_siswa'   => $row['nisn']
-        ]);
+            $datakun_ortu = DB::table('tbuser')->insert([
+                'id' => $seq + 1,
+                'username' => 'wali'.$row['nisn'],
+                'password' => password_hash('12345678', PASSWORD_DEFAULT),
+                'nama' => $row['nama_ayah'],
+                'email' => $row['email_wali'],
+                'created_at' => Carbon::now()->toDateTimeString(),
+                'active' => 'TRUE',
+                'id_hakakses' => $hak_ortu->idhakakses,
+                'id_siswa'   => $row['nisn']
+            ]);
 
-        $siswa = DB::table('tblsiswa')->insert($data);
+            $siswa = DB::table('tblsiswa')->insert($data);
+        }
         // dd($data);
     }
 

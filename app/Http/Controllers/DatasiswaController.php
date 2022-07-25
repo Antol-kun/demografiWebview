@@ -151,176 +151,180 @@ class DatasiswaController extends Controller
 
     public function store(Request $request)
     {
-
         $batas = request()->validate([
             'pasfoto'  => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // dd($request->all());
-
-        if ($files = $request->file('pasfoto')) {
-            //store file into document folder
-            $image = $request->file('pasfoto');
-            $new_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('pasfoto/siswa/'), $new_name);
-
-            // get request data from form add siswa
-            $data = array(
-                'nis' => $request->input('nis'),
-                'nisn' => $request->input('nisn'),
-                'nama_siswa' => $request->input('nama'),
-                'jenkel' => $request->input('jeniskelamin'),
-                'tempat_lahir' => $request->input('tempatlahir'),
-                'tgl_lahir' => $request->input('tanggallahir'),
-                'agama' => $request->input('agama'),
-                'nama_ayah' => $request->input('nama_ayah'),
-                'nama_ibu' => $request->input('nama_ibu'),
-                'alamat' => $request->input('alamat'),
-                'ijazah_tahun' => $request->input('tahun'),
-                'ijazah_nopes' => $request->input('nopes'),
-                'ijazah_no_shun' => $request->input('no_shun'),
-                'ijazah_no' => $request->input('no_ijazah'),
-                'asal_sekolah' => $request->input('asal_sekolah'),
-                'no_telp' => $request->input('no_telp'),
-                'tgl_masuk' => $request->input('tgl_masuk'),
-                'tgl_keluar' => $request->input('tgl_keluar'),
-                'kerja_ayah' => $request->input('kerja_ayah'),
-                'kerja_ibu' => $request->input('kerja_ibu'),
-                'anak_ke' => $request->input('anak_ke'),
-                'reg_date' => Carbon::now()->toDateTimeString(),
-                'email_wali' => $request->input('emailwali'),
-                'email_siswa' => $request->input('emailsiswa'),
-                'status_siswa' => 'BT',
-                'no_telp_wali' => $request->input('no_telp_wali'),
-                'tahunmasuk' => $request->input('tahun_masuk'),
-                'tingkatkelas' => $request->input('tingkat'),
-                'statussiswa' => $request->input('status_siswa'),
-                'nik' => $request->input('nik'),
-                'kk' => $request->input('kk'),
-                'foto' => $new_name
-            );
-
-            $hak_ortu = DB::table('tblhakakses')->where('nama_akses', 'Orang Tua')->first();
-            $hakakses = DB::table('tblhakakses')->where('nama_akses', 'Siswa')->first();
-            if (!empty($hakakses)) {
-                $siswa = DB::table('tblsiswa')->insert($data);
-
-                $seq = DB::table('tbuser')->max('id') + 1;
-
-                DB::table('tbuser')->insert([
-                    'id' => $seq,
-                    'username' => $request->input('nisn'),
-                    'password' => password_hash('12345678', PASSWORD_DEFAULT),
-                    'nama' => $request->input('nama'),
-                    'email' => $request->input('emailsiswa'),
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'active' => 'TRUE',
-                    'id_hakakses' => $hakakses->idhakakses
-                ]);
+        $cekSiswa = DB::table('tblsiswa')->where('nisn', $request->nisn)->count();
+        if($cekSiswa == 0){
+            if ($files = $request->file('pasfoto')) {
+                //store file into document folder
+                $image = $request->file('pasfoto');
+                $new_name = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('pasfoto/siswa/'), $new_name);
     
-                DB::table('tbuser')->insert([
-                    'id' => $seq + 1,
-                    'username' => 'wali'.$request->input('nisn'),
-                    'password' => password_hash('12345678', PASSWORD_DEFAULT),
-                    'nama' => $request->input('nama_ayah'),
-                    'email' => $request->input('emailwali'),
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'active' => 'TRUE',
-                    'id_hakakses' => $hak_ortu->idhakakses,
-                    'id_siswa'   => $request->input('nisn')
-                ]);
-
-                if ($siswa) {
-                    Alert::success('Berhasil', 'Data berhasil ditambahkan');
-                    return redirect('/datasiswa');
+                // get request data from form add siswa
+                $data = array(
+                    'nis' => $request->input('nis'),
+                    'nisn' => $request->input('nisn'),
+                    'nama_siswa' => $request->input('nama'),
+                    'jenkel' => $request->input('jeniskelamin'),
+                    'tempat_lahir' => $request->input('tempatlahir'),
+                    'tgl_lahir' => $request->input('tanggallahir'),
+                    'agama' => $request->input('agama'),
+                    'nama_ayah' => $request->input('nama_ayah'),
+                    'nama_ibu' => $request->input('nama_ibu'),
+                    'alamat' => $request->input('alamat'),
+                    'ijazah_tahun' => $request->input('tahun'),
+                    'ijazah_nopes' => $request->input('nopes'),
+                    'ijazah_no_shun' => $request->input('no_shun'),
+                    'ijazah_no' => $request->input('no_ijazah'),
+                    'asal_sekolah' => $request->input('asal_sekolah'),
+                    'no_telp' => $request->input('no_telp'),
+                    'tgl_masuk' => $request->input('tgl_masuk'),
+                    'tgl_keluar' => $request->input('tgl_keluar'),
+                    'kerja_ayah' => $request->input('kerja_ayah'),
+                    'kerja_ibu' => $request->input('kerja_ibu'),
+                    'anak_ke' => $request->input('anak_ke'),
+                    'reg_date' => Carbon::now()->toDateTimeString(),
+                    'email_wali' => $request->input('emailwali'),
+                    'email_siswa' => $request->input('emailsiswa'),
+                    'status_siswa' => 'BT',
+                    'no_telp_wali' => $request->input('no_telp_wali'),
+                    'tahunmasuk' => $request->input('tahun_masuk'),
+                    'tingkatkelas' => $request->input('tingkat'),
+                    'statussiswa' => $request->input('status_siswa'),
+                    'nik' => $request->input('nik'),
+                    'kk' => $request->input('kk'),
+                    'foto' => $new_name
+                );
+    
+                $hak_ortu = DB::table('tblhakakses')->where('nama_akses', 'Orang Tua')->first();
+                $hakakses = DB::table('tblhakakses')->where('nama_akses', 'Siswa')->first();
+                if (!empty($hakakses)) {
+                    $siswa = DB::table('tblsiswa')->insert($data);
+    
+                    $seq = DB::table('tbuser')->max('id') + 1;
+    
+                    DB::table('tbuser')->insert([
+                        'id' => $seq,
+                        'username' => $request->input('nisn'),
+                        'password' => password_hash('12345678', PASSWORD_DEFAULT),
+                        'nama' => $request->input('nama'),
+                        'email' => $request->input('emailsiswa'),
+                        'created_at' => Carbon::now()->toDateTimeString(),
+                        'active' => 'TRUE',
+                        'id_hakakses' => $hakakses->idhakakses
+                    ]);
+        
+                    DB::table('tbuser')->insert([
+                        'id' => $seq + 1,
+                        'username' => 'wali'.$request->input('nisn'),
+                        'password' => password_hash('12345678', PASSWORD_DEFAULT),
+                        'nama' => $request->input('nama_ayah'),
+                        'email' => $request->input('emailwali'),
+                        'created_at' => Carbon::now()->toDateTimeString(),
+                        'active' => 'TRUE',
+                        'id_hakakses' => $hak_ortu->idhakakses,
+                        'id_siswa'   => $request->input('nisn')
+                    ]);
+    
+                    if ($siswa) {
+                        Alert::success('Berhasil', 'Data berhasil ditambahkan');
+                        return redirect('/datasiswa');
+                    } else {
+                        //DB::rollback();
+                        Alert::error('Gagal', 'Gagal menambahkan data !');
+                        return redirect('/datasiswa/create');
+                    }
                 } else {
-                    //DB::rollback();
-                    Alert::error('Gagal', 'Gagal menambahkan data !');
-                    return redirect('/datasiswa/create');
+                    // dd('pakai foto', $data);
+                    Alert::warning('Perhatian !', 'Data role Siswa belum dibuat !');
+                    // return redirect('/datasiswa/create');
                 }
             } else {
-                // dd('pakai foto', $data);
-                Alert::warning('Perhatian !', 'Data role Siswa belum dibuat !');
-                // return redirect('/datasiswa/create');
-            }
-        } else {
-            $data = array(
-                'nis' => $request->input('nis'),
-                'nisn' => $request->input('nisn'),
-                'nama_siswa' => $request->input('nama'),
-                'jenkel' => $request->input('jeniskelamin'),
-                'tempat_lahir' => $request->input('tempatlahir'),
-                'tgl_lahir' => $request->input('tanggallahir'),
-                'agama' => $request->input('agama'),
-                'nama_ayah' => $request->input('nama_ayah'),
-                'nama_ibu' => $request->input('nama_ibu'),
-                'alamat' => $request->input('alamat'),
-                'ijazah_tahun' => $request->input('tahun'),
-                'ijazah_nopes' => $request->input('nopes'),
-                'ijazah_no_shun' => $request->input('no_shun'),
-                'ijazah_no' => $request->input('no_ijazah'),
-                'asal_sekolah' => $request->input('asal_sekolah'),
-                'no_telp' => $request->input('no_telp'),
-                'tgl_masuk' => $request->input('tgl_masuk'),
-                'tgl_keluar' => $request->input('tgl_keluar'),
-                'kerja_ayah' => $request->input('kerja_ayah'),
-                'kerja_ibu' => $request->input('kerja_ibu'),
-                'anak_ke' => $request->input('anak_ke'),
-                'reg_date' => Carbon::now()->toDateTimeString(),
-                'email_wali' => $request->input('emailwali'),
-                'email_siswa' => $request->input('emailsiswa'),
-                'status_siswa' => 'BT',
-                'no_telp_wali' => $request->input('no_telp_wali'),
-                'tahunmasuk' => $request->input('tahun_masuk'),
-                'tingkatkelas' => $request->input('tingkat'),
-                'statussiswa' => $request->input('status_siswa'),
-                'nik' => $request->input('nik'),
-                'kk' => $request->input('kk')
-            );
-
-            $hak_ortu = DB::table('tblhakakses')->where('nama_akses', 'Orang Tua')->first();
-            $hakakses = DB::table('tblhakakses')->where('nama_akses', 'Siswa')->first();
-            if (!empty($hakakses)) {
-                $siswa = DB::table('tblsiswa')->insert($data);
-
-                $seq = DB::table('tbuser')->max('id') + 1;
-
-                DB::table('tbuser')->insert([
-                    'id' => $seq,
-                    'username' => $request->input('nisn'),
-                    'password' => password_hash('12345678', PASSWORD_DEFAULT),
-                    'nama' => $request->input('nama'),
-                    'email' => $request->input('emailsiswa'),
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'active' => 'TRUE',
-                    'id_hakakses' => $hakakses->idhakakses
-                ]);
-
-                DB::table('tbuser')->insert([
-                    'id' => $seq + 1,
-                    'username' => 'wali'.$request->input('nisn'),
-                    'password' => password_hash('12345678', PASSWORD_DEFAULT),
-                    'nama' => $request->input('nama_ayah'),
-                    'email' => $request->input('emailwali'),
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'active' => 'TRUE',
-                    'id_hakakses' => $hak_ortu->idhakakses,
-                    'id_siswa'   => $request->input('nisn')
-                ]);
-
-                if ($siswa) {
-                    Alert::success('Berhasil', 'Data berhasil ditambahkan');
-                    return redirect('/datasiswa');
+                $data = array(
+                    'nis' => $request->input('nis'),
+                    'nisn' => $request->input('nisn'),
+                    'nama_siswa' => $request->input('nama'),
+                    'jenkel' => $request->input('jeniskelamin'),
+                    'tempat_lahir' => $request->input('tempatlahir'),
+                    'tgl_lahir' => $request->input('tanggallahir'),
+                    'agama' => $request->input('agama'),
+                    'nama_ayah' => $request->input('nama_ayah'),
+                    'nama_ibu' => $request->input('nama_ibu'),
+                    'alamat' => $request->input('alamat'),
+                    'ijazah_tahun' => $request->input('tahun'),
+                    'ijazah_nopes' => $request->input('nopes'),
+                    'ijazah_no_shun' => $request->input('no_shun'),
+                    'ijazah_no' => $request->input('no_ijazah'),
+                    'asal_sekolah' => $request->input('asal_sekolah'),
+                    'no_telp' => $request->input('no_telp'),
+                    'tgl_masuk' => $request->input('tgl_masuk'),
+                    'tgl_keluar' => $request->input('tgl_keluar'),
+                    'kerja_ayah' => $request->input('kerja_ayah'),
+                    'kerja_ibu' => $request->input('kerja_ibu'),
+                    'anak_ke' => $request->input('anak_ke'),
+                    'reg_date' => Carbon::now()->toDateTimeString(),
+                    'email_wali' => $request->input('emailwali'),
+                    'email_siswa' => $request->input('emailsiswa'),
+                    'status_siswa' => 'BT',
+                    'no_telp_wali' => $request->input('no_telp_wali'),
+                    'tahunmasuk' => $request->input('tahun_masuk'),
+                    'tingkatkelas' => $request->input('tingkat'),
+                    'statussiswa' => $request->input('status_siswa'),
+                    'nik' => $request->input('nik'),
+                    'kk' => $request->input('kk')
+                );
+    
+                $hak_ortu = DB::table('tblhakakses')->where('nama_akses', 'Orang Tua')->first();
+                $hakakses = DB::table('tblhakakses')->where('nama_akses', 'Siswa')->first();
+                if (!empty($hakakses)) {
+                    $siswa = DB::table('tblsiswa')->insert($data);
+    
+                    $seq = DB::table('tbuser')->max('id') + 1;
+    
+                    DB::table('tbuser')->insert([
+                        'id' => $seq,
+                        'username' => $request->input('nisn'),
+                        'password' => password_hash('12345678', PASSWORD_DEFAULT),
+                        'nama' => $request->input('nama'),
+                        'email' => $request->input('emailsiswa'),
+                        'created_at' => Carbon::now()->toDateTimeString(),
+                        'active' => 'TRUE',
+                        'id_hakakses' => $hakakses->idhakakses
+                    ]);
+    
+                    DB::table('tbuser')->insert([
+                        'id' => $seq + 1,
+                        'username' => 'wali'.$request->input('nisn'),
+                        'password' => password_hash('12345678', PASSWORD_DEFAULT),
+                        'nama' => $request->input('nama_ayah'),
+                        'email' => $request->input('emailwali'),
+                        'created_at' => Carbon::now()->toDateTimeString(),
+                        'active' => 'TRUE',
+                        'id_hakakses' => $hak_ortu->idhakakses,
+                        'id_siswa'   => $request->input('nisn')
+                    ]);
+    
+                    if ($siswa) {
+                        Alert::success('Berhasil', 'Data berhasil ditambahkan');
+                        return redirect('/datasiswa');
+                    } else {
+                        //DB::rollback();
+                        Alert::error('Gagal', 'Gagal menambahkan data !');
+                        return redirect('/datasiswa/create');
+                    }
                 } else {
-                    //DB::rollback();
-                    Alert::error('Gagal', 'Gagal menambahkan data !');
-                    return redirect('/datasiswa/create');
+                    // dd('tanpa foto', $data);
+                    Alert::warning('Perhatian !', 'Data role Siswa belum dibuat !');
+                    // return redirect('/datasiswa/create');
                 }
-            } else {
-                // dd('tanpa foto', $data);
-                Alert::warning('Perhatian !', 'Data role Siswa belum dibuat !');
-                // return redirect('/datasiswa/create');
             }
+        }else{
+            Alert::warning('Perhatian !', 'NISN Siswa Telah Terdaftar !');
+            return redirect('/datasiswa');
         }
     }
 
