@@ -163,8 +163,8 @@
                                 <tr>
                                     <th width="50" style="text-align:center;">No</th>
                                     <th>Nama Siswa</th>
-                                    <th>Kelas</th>
-                                    <th>Walikelas</th>
+                                    {{-- <th>Kelas</th> --}}
+                                    {{-- <th>Walikelas</th> --}}
                                     <th>Tgl Mulai</th>
                                     <th>Tgl Selesai</th>
                                     <th>Keterangan</th>
@@ -180,8 +180,8 @@
                                 <tr style="height: 40px">
                                     <td style="text-align:center;">{{ $no++ }}</td>
                                     <td>{{ $i->nisn }} - {{ $i->nama_siswa }}</td>
-                                    <td>{{ $i->kode_kelompok }}</td>
-                                    <td>{{ $i->Nama }}</td>
+                                    {{-- <td>{{ $i->kode_kelompok }}</td> --}}
+                                    {{-- <td>{{ $i->Nama }}</td> --}}
                                     <td>{{ $i->tgl_mulai }}</td>
                                     <td>{{ $i->tgl_selesai }}</td>
                                     <td>{{ $i->keterangan }}</td>

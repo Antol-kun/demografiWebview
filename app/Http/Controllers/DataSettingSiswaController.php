@@ -47,7 +47,7 @@ class DataSettingSiswaController extends Controller
 
         $arr = array();
         foreach($setsiswa as $datasis){
-            array_push($arr, array($datasis->nisn));            
+            array_push($arr, $datasis->nisn);            
         }
             
         $siswa = DB::table('tblsiswa')

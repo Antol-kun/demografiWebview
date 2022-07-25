@@ -269,7 +269,7 @@
                             $('#pelanggarinput').trigger('reset');
                             $('#saveBtn').disabled = false;
                             $('#saveBtn').html('Simpan');
-                            // location.href = "/datapelanggaransiswa/";
+                            location.href = "/datapelanggaransiswa/";
                         } else {
                             Swal.fire("Gagal !", "Data belum lengkap !", "error");
                             $('#saveBtn').disabled = false;

@@ -217,7 +217,7 @@
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0" role="row">
                                 <th class="w-10px pe-2 sorting_disabled" rowspan="1" colspan="1" aria-label="" style="width: 5.25px;">
                                     <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" checked="checked" data-kt-check="true" data-kt-check-target="#tabeldatas .form-check-input" value="1">
+                                        <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#tabeldatas .form-check-input" value="1">
                                     </div>
                                 </th>
                                 <th class="min-w-125px sorting" tabindex="0" aria-controls="kt_table_users" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 5.25px;">NIS / NISN</th>
@@ -232,7 +232,7 @@
                             <tbody class="text-gray-600 fw-bold" id="show_data">
                             @foreach($siswa as $datasiswas)
                             <tr class="odd">
-                                <td><div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input" type="checkbox" checked="checked" name="id[]" value="{{$datasiswas->nisn}}"></div></td>
+                                <td><div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input" type="checkbox" name="id[]" value="{{$datasiswas->nisn}}"></div></td>
                                 <td class="d-flex align-items-center">{{$datasiswas->nis}} / {{$datasiswas->nisn}}</td>
                                 <td>{{$datasiswas->nama_siswa}}</td>
                                 <td>{{$datasiswas->tingkatkelas}}</td>

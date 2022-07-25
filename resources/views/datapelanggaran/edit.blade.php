@@ -213,7 +213,7 @@
                                         <input type="file" class="form-control form-control-solid" placeholder=""
                                             name="bukti_pelanggaran" id="bukti_pelanggaran" onchange="readURL(this);"/><br />
                                         @if ($siswa[0]->img_kasus)
-                                            <img id="blah" class="img-thumbnail" src="{{ asset('/bukti_pelanggaran/'.$siswa[0]->img_kasus) }}" width="204" height="136">
+                                            <img id="blah" class="img-thumbnail" src="{{ $siswa[0]->img_kasus }}" width="204" height="136">
                                         @else
                                             <img id="blah" src="{{ asset('pasfoto/siswa/no-image.png') }}"
                                             class="img-thumbnail" alt="bukti_pelanggaran" width="204" height="136">

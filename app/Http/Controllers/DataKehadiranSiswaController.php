@@ -17,7 +17,7 @@ class DataKehadiranSiswaController extends Controller
                 ['url' => '/interface' , 'name' => 'Interface'],
                 ['url' => '/master' , 'name' => 'List Data Kehadiran'],
             ],
-            'izin' => DB::table('v_izin_wkelas')->orderBy('idizin', 'DESC')->get(),
+            'izin' => DB::table('tblizinsiswa')->join('tblsiswa', 'tblsiswa.nisn', '=', 'tblizinsiswa.nisn')->orderBy('idizin', 'DESC')->get(),
             'testVariable' => 'Kehadiran Siswa'
         ];
         return view('datakehadiran.index', $data);
@@ -40,8 +40,7 @@ class DataKehadiranSiswaController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-
+        // dd($request);
         $validate = Validator::make($request->all(), [
             'nisn'        => 'required',
             'keterangan'  => 'required',    
@@ -65,6 +64,7 @@ class DataKehadiranSiswaController extends Controller
                         ->where('tgl_mulai', '<=', $request->tgl_mulai)
                         ->first();
 
+            // dd($cek_tgl, $cek_tgl2);
             if(!empty($cek_tgl) or !empty($cek_tgl2)){
                 DB::table('tblizinsiswa')
                     ->where('idizin', $cek_tgl2->idizin)

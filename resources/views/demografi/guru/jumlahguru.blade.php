@@ -15,12 +15,47 @@
     <div id="kt_content_container" class="container">
         {{-- chart jumlah semua guru, GTY, GTT --}}
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-6">
+                <a href="#" class="card bg-info hoverable card-xl-stretch mb-5 mb-xl-8">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
+                        <span class="svg-icon svg-icon-white svg-icon-3x ms-n1">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M10.9607 12.9128H18.8607C19.4607 12.9128 19.9607 13.4128 19.8607 14.0128C19.2607 19.0128 14.4607 22.7128 9.26068 21.7128C5.66068 21.0128 2.86071 18.2128 2.16071 14.6128C1.16071 9.31284 4.96069 4.61281 9.86069 4.01281C10.4607 3.91281 10.9607 4.41281 10.9607 5.01281V12.9128Z" fill="currentColor"></path>
+                                <path d="M12.9607 10.9128V3.01281C12.9607 2.41281 13.4607 1.91281 14.0607 2.01281C16.0607 2.21281 17.8607 3.11284 19.2607 4.61284C20.6607 6.01284 21.5607 7.91285 21.8607 9.81285C21.9607 10.4129 21.4607 10.9128 20.8607 10.9128H12.9607Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <div class="text-white fw-bold fs-2 mb-2 mt-5">{{$totalGuruPegawai}} Orang</div>
+                        <div class="fw-semibold text-white">Total Pegawai berstatus guru</div>
+                    </div>
+                    <!--end::Body-->
+                </a>
+
+                <a href="#" class="card bg-success hoverable card-xl-stretch mb-5 mb-xl-8">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        <!--begin::Svg Icon | path: icons/duotune/graphs/gra007.svg-->
+                        <span class="svg-icon svg-icon-white svg-icon-3x ms-n1">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.3" d="M10.9607 12.9128H18.8607C19.4607 12.9128 19.9607 13.4128 19.8607 14.0128C19.2607 19.0128 14.4607 22.7128 9.26068 21.7128C5.66068 21.0128 2.86071 18.2128 2.16071 14.6128C1.16071 9.31284 4.96069 4.61281 9.86069 4.01281C10.4607 3.91281 10.9607 4.41281 10.9607 5.01281V12.9128Z" fill="currentColor"></path>
+                                <path d="M12.9607 10.9128V3.01281C12.9607 2.41281 13.4607 1.91281 14.0607 2.01281C16.0607 2.21281 17.8607 3.11284 19.2607 4.61284C20.6607 6.01284 21.5607 7.91285 21.8607 9.81285C21.9607 10.4129 21.4607 10.9128 20.8607 10.9128H12.9607Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <div class="text-white fw-bold fs-2 mb-2 mt-5">{{$jumlahGuruMengajar}} Orang</div>
+                        <div class="fw-semibold text-white">Total Guru Mengajar</div>
+                    </div>
+                    <!--end::Body-->
+                </a>
+            </div>
+            {{-- <div class="col-md-4">
                 <!--begin::Card-->
                 <div class="card card-custom gutter-b mb-3">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3 class="card-label">Jumlah Guru Total</h3>
+                            <h3 class="card-label">Jumlah Guru Mengajar</h3>
                         </div>
                     </div>
                     <div class="card-body">
@@ -28,8 +63,8 @@
                     </div>
                 </div>
                 <!--end::Card-->
-            </div>
-            <div class="col-md-4">
+            </div> --}}
+            <div class="col-md-6">
                 <!--begin::Card-->
                 <div class="card card-custom gutter-b mb-3">
                     <div class="card-header">
@@ -164,8 +199,9 @@
     // Chart Jumlah guru
     var guruChart = {
         series: [{
-            name: 'Jumlah Guru',
-            data: {!!json_encode($JumlahGuruFinal)!!}
+            name: 'Jumlah Guru Mengajar',
+            // data: {!!json_encode($JumlahGuruFinal)!!}
+            data: {{$jumlahGuruMengajar}}
         }],
         chart: {
             stacked: true,
@@ -201,11 +237,12 @@
             colors: ['transparent']
         },
         xaxis: {
-            categories: {!!json_encode($tahunGuruLabels)!!}.reverse(),
+            // categories: {!!json_encode($tahunGuruLabels)!!}.reverse(),
+            categories: 'Jumlah Guru Mengajar',
         },
         yaxis: {
             title: {
-                text: 'Jumlah Guru Keseluruhan'
+                text: 'Jumlah Guru Mengajar'
             }
         },
         fill: {
@@ -219,12 +256,29 @@
             }
         }
     };
+    var guruChart = {
+          series: [{{$jumlahGuruMengajar}}],
+          chart: {
+          type: 'donut',
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+    };
     new ApexCharts(document.querySelector("#jumlahGuruChart"), guruChart).render();
     // end chart jumlah guru
 
     // chart GTY && GTT
     var statusGuruOptions = {
-        series: [{{$BelumDiset}}, {{$GTY}}, {{$GTT}}],
+        series: [{{$BelumDiset}}, {{$GTT}}, {{$GTY}}],
         chart: {
             height: 350,
             type: 'pie',

@@ -175,8 +175,12 @@
 					event.preventDefault()
 					$(this).tab('show')
 				});
-				$('#tabeldata').dataTable();
-				$('#tabeldatas').dataTable();
+				$('#tabeldata').dataTable({
+					"ordering": false
+				});
+				$('#tabeldatas').dataTable({
+					"ordering": false
+				});
                 // initToast('Berhasil', 'Dokumen berhasil dihapus!', 'success', '11 menit yang lalu')
                 $('.select2').select2({
                     placeholder: 'Pilih data'

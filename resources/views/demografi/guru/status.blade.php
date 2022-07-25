@@ -202,7 +202,7 @@
 <script>
     // chart GTY && GTT
     var statusGuruOptions = {
-        series: [{{$BelumDiset}}, {{$GTY}}, {{$GTT}}],
+        series: [{{$BelumDiset}}, {{$GTT}}, {{$GTY}}],
         chart: {
             height: 350,
             type: 'pie',

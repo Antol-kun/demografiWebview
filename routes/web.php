@@ -198,7 +198,7 @@ Route::get('/demografi/keuangan/semua', [DemografiKeuanganSiswaController::class
 Route::get('/demografi/keuangan/kelompokkelas', [DemografiKeuanganSiswaController::class, 'kelompokkelas'])->name('demokeuangankk');
 
 // Route Data Pelanggar Siswa
-Route::get('/datapelanggaransiswa', [DataPelanggaranSiswaController::class, 'index']);
+Route::get('/datapelanggaransiswa/', [DataPelanggaranSiswaController::class, 'index']);
 Route::get('/datapelanggaransiswa/create', [DataPelanggaranSiswaController::class, 'create']);
 Route::post('/datapelanggaransiswa/store', [DataPelanggaranSiswaController::class, 'store'])->name('pelanggar.create');
 Route::get('/datapelanggaransiswa/edit/{id}', [DataPelanggaranSiswaController::class, 'edit']);

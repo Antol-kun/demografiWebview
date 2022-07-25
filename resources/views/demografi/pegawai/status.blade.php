@@ -202,7 +202,7 @@
 <script>
     // chart PTY && PTT
     var statusGuruOptions = {
-        series: [{{$BelumDiset}}, {{$PTY}}, {{$PTT}}],
+        series: [{{$BelumDiset}}, {{$PTT}}, {{$PTY}}],
         chart: {
             height: 350,
             type: 'pie',

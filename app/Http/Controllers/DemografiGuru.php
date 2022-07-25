@@ -53,6 +53,11 @@ class DemografiGuru extends Controller
             'testVariable' => 'Demografi Guru'
         ];
 
+        // jumlah guru berstatus pegawai
+        $data['totalGuruPegawai'] = DB::table('v_tb_jadwal_guru')->distinct('NIP')->where('Jabatansekolah', 'Guru, Staff')->count();
+        $data['jumlahGuruMengajar'] = DB::table('v_tb_jadwal_guru')->distinct('NIP')->where('Jabatansekolah', 'Guru')->count();
+        // end jumlah guru berstatus pegawai
+
         // jumlah guru total
         $jumlahGuruTahun = DB::table('v_tb_jadwal_guru')->join('tabeltahunajaran', 'tabeltahunajaran.idsettingtahun', '=', 'v_tb_jadwal_guru.id_tahun_ajaran')->distinct('NIP')->pluck('tahunakademik');
         $tahunGuru = DB::table('tabeltahunajaran')->distinct('tahunakademik')->limit('3')->orderBy('tahunakademik', 'desc')->pluck('tahunakademik');
@@ -68,7 +73,7 @@ class DemografiGuru extends Controller
         }
 
         $data['JumlahGuruFinal'] = [];
-        foreach($tahunGuru as $tg){
+        foreach($tahunGuru->reverse() as $tg){
             array_push($data['JumlahGuruFinal'], $data[$tg]);
         }
         // end guru total
@@ -81,7 +86,8 @@ class DemografiGuru extends Controller
 
         foreach($getKepegawaianLabels as $gtp){
             if($gtp == null){
-                $statPG[2] = null;
+                array_push($statPG, null);
+                // $statPG[2] = null;
                 array_unshift($data['statLabel'], "Belum Disetting");
             }
         }
@@ -97,6 +103,7 @@ class DemografiGuru extends Controller
                 $data['BelumDiset'] = $this->getStatusKepegawaian(null);
             }
         }
+        // dd($data);
         // end per status kepegawaian
 
         // per jenis kelamin
@@ -123,9 +130,9 @@ class DemografiGuru extends Controller
             $umur = $lahir->diffInYears($now);
             $sisaPensiun = 55 - $umur;
 
-            if($sisaPensiun >= 0 AND $sisaPensiun < 1){
+            if($sisaPensiun >= 0 AND $sisaPensiun <= 1){
                 $data['kurangSetahunPensiun']++;
-            }elseif($sisaPensiun >= 1 AND $sisaPensiun <= 5){
+            }elseif($sisaPensiun > 1 AND $sisaPensiun <= 5){
                 $data['satuSampaiLimaPensiun']++;
             }elseif($sisaPensiun > 5 AND $sisaPensiun <= 10){
                 $data['limaSampaiSepuluhPensiun']++;
@@ -148,9 +155,9 @@ class DemografiGuru extends Controller
             $thnMasuk = Carbon::parse($tm);
             $masakerja = $thnMasuk->diffInYears($now);
 
-            if($masakerja >= 0 AND $masakerja < 1){
+            if($sisaPensiun >= 0 AND $sisaPensiun <= 1){
                 $data['kurangSetahunMK']++;
-            }elseif($masakerja >= 1 AND $masakerja <= 5){
+            }elseif($masakerja > 1 AND $masakerja <= 5){
                 $data['satuSampaiLimaMK']++;
             }elseif($masakerja > 5 AND $masakerja <= 10){
                 $data['limaSampaiSepuluhMK']++;
@@ -278,7 +285,8 @@ class DemografiGuru extends Controller
 
         foreach($getKepegawaianLabels as $gtp){
             if($gtp == null){
-                $statPG[2] = null;
+                array_push($statPG, null);
+                // $statPG[2] = null;
                 array_unshift($data['statLabel'], "Belum Disetting");
             }
         }
@@ -309,9 +317,9 @@ class DemografiGuru extends Controller
             $umur = $lahir->diffInYears($now);
             $sisaPensiun = 55 - $umur;
 
-            if($sisaPensiun >= 0 AND $sisaPensiun < 1){
+            if($sisaPensiun >= 0 AND $sisaPensiun <= 1){
                 $data['kurangSetahunPensiun']++;
-            }elseif($sisaPensiun >= 1 AND $sisaPensiun <= 5){
+            }elseif($sisaPensiun > 1 AND $sisaPensiun <= 5){
                 $data['satuSampaiLimaPensiun']++;
             }elseif($sisaPensiun > 5 AND $sisaPensiun <= 10){
                 $data['limaSampaiSepuluhPensiun']++;
@@ -325,16 +333,18 @@ class DemografiGuru extends Controller
         $data['detailLimaSampaiSepuluhPensiun'] = [];
         $data['detailLebihSepuluhPensiun'] = [];
 
-        $detailGuru = DB::table('tabelguru')->whereIn('Jabatansekolah', ['Guru', 'Guru, Staff'])->get();
+        $detailGuru = DB::table('tabelguru')->whereIn('Jabatansekolah', ['Guru', 'Guru, Staff'])                
+                        ->orderBy('Gelardepan', 'desc')
+                        ->orderBy('Nama', 'asc')->get();
         foreach($detailGuru as $dg){
             $now = Carbon::parse(date('Y-m-d'));
             $lahir = Carbon::parse($dg->Tanggallahir);
             $umur = $lahir->diffInYears($now);
             $sisaPensiun = 55 - $umur;
 
-            if($sisaPensiun >= 0 AND $sisaPensiun < 1){
+            if($sisaPensiun >= 0 AND $sisaPensiun <= 1){
                 array_push($data['detailKurangSetahunPensiun'], $dg);
-            }elseif($sisaPensiun >= 1 AND $sisaPensiun <= 5){
+            }elseif($sisaPensiun > 1 AND $sisaPensiun <= 5){
                 array_push($data['detailSatuSampaiLimaPensiun'], $dg);
             }elseif($sisaPensiun > 5 AND $sisaPensiun <= 10){
                 array_push($data['detailLimaSampaiSepuluhPensiun'], $dg);
@@ -357,9 +367,9 @@ class DemografiGuru extends Controller
             $thnMasuk = Carbon::parse($tm);
             $masakerja = $thnMasuk->diffInYears($now);
 
-            if($masakerja >= 0 AND $masakerja < 1){
+            if($masakerja >= 0 AND $masakerja <= 1){
                 $data['kurangSetahunMK']++;
-            }elseif($masakerja >= 1 AND $masakerja <= 5){
+            }elseif($masakerja > 1 AND $masakerja <= 5){
                 $data['satuSampaiLimaMK']++;
             }elseif($masakerja > 5 AND $masakerja <= 10){
                 $data['limaSampaiSepuluhMK']++;

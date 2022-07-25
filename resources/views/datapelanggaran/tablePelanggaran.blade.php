@@ -1,3 +1,6 @@
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 <div id="kt_table_users_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-responsive data-table" id="tabeldata">
@@ -5,6 +8,7 @@
                 <tr>
                     <th width="50" style="text-align:center;">No</th>
                     <th>Nama Siswa</th>
+                    <th>Kelas (TA)</th>
                     <th>Tgl Kejadian</th>
                     <th>Tempat Kejadian</th>
                     <th>Kasus</th>
@@ -20,6 +24,7 @@
                     <tr style="height: 40px">
                         <td style="text-align:center;">{{ $no++ }}</td>
                         <td>{{ $ssw->nisn }} - {{ $ssw->nama_siswa }}</td>
+                        <td>{{ $ssw->kode_kelompok }} ({{$ssw->tahunakademik}})</td>
                         <td>{{ $ssw->tgl_kejadian }}</td>
                         <td>{{ $ssw->tempat_kejadian }}</td>
                         <td>{{ $ssw->kasus }}</td>
@@ -76,3 +81,9 @@
         </table>
     </div>
 </div>
+
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $('#tabeldata').dataTable();
+</script>
