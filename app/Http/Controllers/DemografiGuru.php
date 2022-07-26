@@ -54,8 +54,8 @@ class DemografiGuru extends Controller
         ];
 
         // jumlah guru berstatus pegawai
-        $data['totalGuruPegawai'] = DB::table('v_tb_jadwal_guru')->distinct('NIP')->where('Jabatansekolah', 'Guru, Staff')->count();
-        $data['jumlahGuruMengajar'] = DB::table('v_tb_jadwal_guru')->distinct('NIP')->where('Jabatansekolah', 'Guru')->count();
+        $data['totalGuruPegawai'] = DB::table('tabelguru')->whereIn('Jabatansekolah', ['Guru, Staff','Guru'])->count();
+        $data['jumlahGuruMengajar'] = DB::table('v_tb_jadwal_guru')->distinct('NIP')->whereIn('Jabatansekolah', ['Guru','Guru, Staff'])->count();
         // end jumlah guru berstatus pegawai
 
         // jumlah guru total
@@ -130,7 +130,7 @@ class DemografiGuru extends Controller
             $umur = $lahir->diffInYears($now);
             $sisaPensiun = 55 - $umur;
 
-            if($sisaPensiun >= 0 AND $sisaPensiun <= 1){
+            if($sisaPensiun <= 1){
                 $data['kurangSetahunPensiun']++;
             }elseif($sisaPensiun > 1 AND $sisaPensiun <= 5){
                 $data['satuSampaiLimaPensiun']++;
@@ -155,7 +155,7 @@ class DemografiGuru extends Controller
             $thnMasuk = Carbon::parse($tm);
             $masakerja = $thnMasuk->diffInYears($now);
 
-            if($sisaPensiun >= 0 AND $sisaPensiun <= 1){
+            if($masakerja <= 1){
                 $data['kurangSetahunMK']++;
             }elseif($masakerja > 1 AND $masakerja <= 5){
                 $data['satuSampaiLimaMK']++;
@@ -317,7 +317,7 @@ class DemografiGuru extends Controller
             $umur = $lahir->diffInYears($now);
             $sisaPensiun = 55 - $umur;
 
-            if($sisaPensiun >= 0 AND $sisaPensiun <= 1){
+            if($sisaPensiun <= 1){
                 $data['kurangSetahunPensiun']++;
             }elseif($sisaPensiun > 1 AND $sisaPensiun <= 5){
                 $data['satuSampaiLimaPensiun']++;
@@ -342,7 +342,7 @@ class DemografiGuru extends Controller
             $umur = $lahir->diffInYears($now);
             $sisaPensiun = 55 - $umur;
 
-            if($sisaPensiun >= 0 AND $sisaPensiun <= 1){
+            if($sisaPensiun <= 1){
                 array_push($data['detailKurangSetahunPensiun'], $dg);
             }elseif($sisaPensiun > 1 AND $sisaPensiun <= 5){
                 array_push($data['detailSatuSampaiLimaPensiun'], $dg);
@@ -367,7 +367,7 @@ class DemografiGuru extends Controller
             $thnMasuk = Carbon::parse($tm);
             $masakerja = $thnMasuk->diffInYears($now);
 
-            if($masakerja >= 0 AND $masakerja <= 1){
+            if($masakerja <= 1){
                 $data['kurangSetahunMK']++;
             }elseif($masakerja > 1 AND $masakerja <= 5){
                 $data['satuSampaiLimaMK']++;
