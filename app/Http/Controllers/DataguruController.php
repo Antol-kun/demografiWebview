@@ -46,6 +46,9 @@ class DataguruController extends Controller
         if($row){
             Alert::success('Berhasil', 'Data berhasil disimpan');
             return redirect('/dataguru');
+        }else {
+            Alert::warning('Perhatian !', 'NIP Guru telah terdaftar!');
+            return redirect('/dataguru');
         }
     }
 
@@ -56,7 +59,7 @@ class DataguruController extends Controller
     }
 
     public function getKeluarga(Request $request) {
-        $keluarga = DB::table('tblkeluarga')->whereNotNull('nama_keluarga')->where('idguru', base64_decode($request->id))->get();
+        $keluarga = DB::table('tblkeluarga')->whereNotNull('nama_keluarga')->where('idguru', $request->id)->get();
         
         $data = [
             'title' => 'Data keluarga',
@@ -396,262 +399,272 @@ class DataguruController extends Controller
          'pasfoto'  => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        if ($files = $request->file('pasfoto')) {
-            //store file into document folder
-            $image = $request->file('pasfoto');
-            $new_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('pasfoto/guru/'), $new_name);
+        $cekSiswa = DB::table('tblsiswa')->where('nisn', $request->nip)->count();
+        $cekGuruLain = DB::table('tabelguru')->where('Nip', $request->nip)->count();
 
-            // $mapel = $request->input('mapel');
-            // $jam = $request->input('jumlah_jam');
-            // $kelas = $request->input('kelas');
-            $idguru="";
-
-            $for_query = '';
-            $tugas = $request->input('tugas');
-            if(!empty($tugas)){
-                foreach ($tugas as $key) {            
-                    $for_query .= $key . ', ';
+        if($cekSiswa == 0 && $cekGuruLain == 0){
+            if ($files = $request->file('pasfoto')) {
+                //store file into document folder
+                $image = $request->file('pasfoto');
+                $new_name = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('pasfoto/guru/'), $new_name);
+    
+                // $mapel = $request->input('mapel');
+                // $jam = $request->input('jumlah_jam');
+                // $kelas = $request->input('kelas');
+                $idguru="";
+    
+                $for_query = '';
+                $tugas = $request->input('tugas');
+                if(!empty($tugas)){
+                    foreach ($tugas as $key) {            
+                        $for_query .= $key . ', ';
+                    }
                 }
-            }
-            $for_query = substr($for_query, 0, -2);
-            
-            $data = array(
-                'Nip' => $request->input('nip'),
-                'Nik' => $request->input('nik'),
-                'Nama' => $request->input('nama_lengkap'),
-                'Agama' => $request->input('agama'),
-                'Tempatlahir' => $request->input('tempatlahir'),
-                'Tanggallahir' => $request->input('tanggallahir'),
-                'Jeniskelamin' => $request->input('jenkel'),
-                'Alamat' => $request->input('alamat'),
-                'NoHp' => $request->input('notelp'),
-                'Email' => $request->input('email'),
-                'Jabatan' => $request->input('jabatan'),
-                'Pangkat' => $request->input('pangkat'),
-                'Golongan' => $request->input('golongan'),
-                'NUPTK' => $request->input('nuptk'),
-                'StatusMenikah' => $request->input('status_marital'),
-                'Goldarah' => $request->input('gol_darah'),
-                'Gelardepan' => $request->input('gelar_depan'),
-                'Gelarbelakang' => $request->input('gelar_belakang'),
-                'Tahunmasuk' => $request->input('tmt'),
-                'Jabatansekolah' => $for_query,
-                'Niy' => $request->input('niy'),
-                'status_guru' => $request->input('status_guru'),
-                'balas_bakti_15_tahun' => $request->input('bakti_15'),
-                'balas_bakti_25_tahun' => $request->input('bakti_25'),
-                'pensiun_55_tahun' => $request->input('pensiun'),
-                'masa_perpanjangan_1' => $request->input('perpanjangan_pertama'),
-                'masa_perpanjangan_2' => $request->input('perpanjangan_kedua'),
-                'masa_perpanjangan_3' => $request->input('perpanjangan_ketiga'),
-                'sertifikasi' => $request->input('sertifikasi'),
-                'reg_date' => Carbon::now()->toDateTimeString(),
-                'paspoto' => $new_name
-            );
-
-
-            $hakakses = DB::table('tblhakakses')->where('nama_akses','Guru')->first();
-            if(!empty($hakakses)){
+                $for_query = substr($for_query, 0, -2);
                 
-                $simpan = DB::table('tabelguru')->insert($data);        
-                $idgr =  DB::table('tabelguru')->latest('id')->first();
-                $idguru = $idgr->id; 
-
-                if(!empty($hubungan)){
-                    for($a=0;$a<count($hubungan); $a++){
-                        $tgllahirs = date('Y', strtotime($tgllahir[$a]));
-                        $thnsekarang = Carbon::now()->format('Y');
-                        $umur = $thnsekarang - $tgllahirs;
-
-                        $datakeluarga = array(
-                            'idguru' => $idguru,
-                            'nama_keluarga' => $nama[$a],
-                            'hubungan' => $hubungan[$a],
-                            'tempat_lahir' => $tmplahir[$a],
-                            'tgl_lahir_keluarga' => $tgllahir[$a],
-                            'umur_anak' => $umur,
-                            'reg_date' => Carbon::now()->toDateTimeString()
-                        );
-                        $simpan = DB::table('tblkeluarga')->insert($datakeluarga);
+                $data = array(
+                    'Nip' => $request->input('nip'),
+                    'Nik' => $request->input('nik'),
+                    'Nama' => $request->input('nama_lengkap'),
+                    'Agama' => $request->input('agama'),
+                    'Tempatlahir' => $request->input('tempatlahir'),
+                    'Tanggallahir' => $request->input('tanggallahir'),
+                    'Jeniskelamin' => $request->input('jenkel'),
+                    'Alamat' => $request->input('alamat'),
+                    'NoHp' => $request->input('notelp'),
+                    'Email' => $request->input('email'),
+                    'Jabatan' => $request->input('jabatan'),
+                    'Pangkat' => $request->input('pangkat'),
+                    'Golongan' => $request->input('golongan'),
+                    'NUPTK' => $request->input('nuptk'),
+                    'StatusMenikah' => $request->input('status_marital'),
+                    'Goldarah' => $request->input('gol_darah'),
+                    'Gelardepan' => $request->input('gelar_depan'),
+                    'Gelarbelakang' => $request->input('gelar_belakang'),
+                    'Tahunmasuk' => $request->input('tmt'),
+                    'Jabatansekolah' => $for_query,
+                    'Niy' => $request->input('niy'),
+                    'status_guru' => $request->input('status_guru'),
+                    'balas_bakti_15_tahun' => $request->input('bakti_15'),
+                    'balas_bakti_25_tahun' => $request->input('bakti_25'),
+                    'pensiun_55_tahun' => $request->input('pensiun'),
+                    'masa_perpanjangan_1' => $request->input('perpanjangan_pertama'),
+                    'masa_perpanjangan_2' => $request->input('perpanjangan_kedua'),
+                    'masa_perpanjangan_3' => $request->input('perpanjangan_ketiga'),
+                    'sertifikasi' => $request->input('sertifikasi'),
+                    'reg_date' => Carbon::now()->toDateTimeString(),
+                    'paspoto' => $new_name
+                );
+    
+    
+                $hakakses = DB::table('tblhakakses')->where('nama_akses','Guru')->first();
+                if(!empty($hakakses)){
+                    
+                    $simpan = DB::table('tabelguru')->insert($data);        
+                    $idgr =  DB::table('tabelguru')->latest('id')->first();
+                    $idguru = $idgr->id; 
+    
+                    if(!empty($hubungan)){
+                        for($a=0;$a<count($hubungan); $a++){
+                            $tgllahirs = date('Y', strtotime($tgllahir[$a]));
+                            $thnsekarang = Carbon::now()->format('Y');
+                            $umur = $thnsekarang - $tgllahirs;
+    
+                            $datakeluarga = array(
+                                'idguru' => $idguru,
+                                'nama_keluarga' => $nama[$a],
+                                'hubungan' => $hubungan[$a],
+                                'tempat_lahir' => $tmplahir[$a],
+                                'tgl_lahir_keluarga' => $tgllahir[$a],
+                                'umur_anak' => $umur,
+                                'reg_date' => Carbon::now()->toDateTimeString()
+                            );
+                            $simpan = DB::table('tblkeluarga')->insert($datakeluarga);
+                        }
                     }
-                }
-
-                if(!empty($jenjang)){
-                        for($b=0;$b<count($jenjang); $b++){
-                        $datapendidikan = array(
-                            'idguru' => $idguru,
-                            'Jenjang' => $jenjang[$b],
-                            'Asalperguruantinggi' => $kampus[$b],
-                            'Prodi' => $prodi[$b],
-                            'Tahunmasuk' => $tahunmasuk[$b],
-                            'Tahunkeluar' => $tahunkeluar[$b],
-                            'Ipk' => $ipk[$b],
-                            'reg_date' => Carbon::now()->toDateTimeString()
-                        );
-                        $simpan = DB::table('tabelPendidikanGuru')->insert($datapendidikan);
+    
+                    if(!empty($jenjang)){
+                            for($b=0;$b<count($jenjang); $b++){
+                            $datapendidikan = array(
+                                'idguru' => $idguru,
+                                'Jenjang' => $jenjang[$b],
+                                'Asalperguruantinggi' => $kampus[$b],
+                                'Prodi' => $prodi[$b],
+                                'Tahunmasuk' => $tahunmasuk[$b],
+                                'Tahunkeluar' => $tahunkeluar[$b],
+                                'Ipk' => $ipk[$b],
+                                'reg_date' => Carbon::now()->toDateTimeString()
+                            );
+                            $simpan = DB::table('tabelPendidikanGuru')->insert($datapendidikan);
+                        }
                     }
+    
+                    if($for_query == 'Guru' OR $for_query == 'Guru, Staff'){
+                        $seq = DB::table('tbuser')->max('id') + 1; 
+    
+                        $datakun = DB::table('tbuser')->insert([
+                                'id' => $seq,
+                                'username' => $request->input('nip'),
+                                'password' => password_hash('12345678', PASSWORD_DEFAULT),
+                                'nama' => $request->input('nama_lengkap'),
+                                'email' => $request->input('email'),
+                                'created_at' => Carbon::now()->toDateTimeString(),
+                                'active' => 'TRUE',
+                                'id_hakakses' => $hakakses->idhakakses
+                        ]);
+                    }
+    
+                    // for($c=0;$c<count($mapel); $c++){
+                    //     $datamapel = array(
+                    //         'idguru' => $idguru,
+                    //         'idmapel' => $mapel[$c],
+                    //         'jumlah_jam' => $jam[$c],
+                    //         'kelas' => $kelas[$c],
+                    //         'reg_date' => Carbon::now()->toDateTimeString()
+                    //     );
+                    //     $simpan = DB::table('tblmapeldiampu')->insert($datamapel);
+                    // }
+    
+                    Alert::success('Berhasil', 'Data berhasil disimpan');
+                    return redirect('/dataguru');
+                }else{
+                    Alert::warning('Perhatian !', 'Data role Guru belum dibuat !');
+                    return redirect('/dataguru/create');
                 }
-
-                if($for_query == 'Guru' OR $for_query == 'Guru, Staff'){
-                    $seq = DB::table('tbuser')->max('id') + 1; 
-
-                    $datakun = DB::table('tbuser')->insert([
-                            'id' => $seq,
-                            'username' => $request->input('nip'),
-                            'password' => password_hash('12345678', PASSWORD_DEFAULT),
-                            'nama' => $request->input('nama_lengkap'),
-                            'email' => $request->input('email'),
-                            'created_at' => Carbon::now()->toDateTimeString(),
-                            'active' => 'TRUE',
-                            'id_hakakses' => $hakakses->idhakakses
-                    ]);
-                }
-
-                // for($c=0;$c<count($mapel); $c++){
-                //     $datamapel = array(
-                //         'idguru' => $idguru,
-                //         'idmapel' => $mapel[$c],
-                //         'jumlah_jam' => $jam[$c],
-                //         'kelas' => $kelas[$c],
-                //         'reg_date' => Carbon::now()->toDateTimeString()
-                //     );
-                //     $simpan = DB::table('tblmapeldiampu')->insert($datamapel);
-                // }
-
-                Alert::success('Berhasil', 'Data berhasil disimpan');
-                return redirect('/dataguru');
+    
             }else{
-                Alert::warning('Perhatian !', 'Data role Guru belum dibuat !');
-                return redirect('/dataguru/create');
-            }
-
-        }else{
-
-            // $mapel = $request->input('mapel');
-            // $jam = $request->input('jumlah_jam');
-            // $kelas = $request->input('kelas');
-            $idguru="";
-
-            $for_query = '';
-            $tugas = $request->input('tugas');
-            if(!empty($tugas)){
-                foreach ($tugas as $key) {            
-                    $for_query .= $key . ', ';
-                }
-            }
-            $for_query = substr($for_query, 0, -2);
-            
-            $data = array(
-                'Nip' => $request->input('nip'),
-                'Nik' => $request->input('nik'),
-                'Nama' => $request->input('nama_lengkap'),
-                'Agama' => $request->input('agama'),
-                'Tempatlahir' => $request->input('tempatlahir'),
-                'Tanggallahir' => $request->input('tanggallahir'),
-                'Jeniskelamin' => $request->input('jenkel'),
-                'Alamat' => $request->input('alamat'),
-                'NoHp' => $request->input('notelp'),
-                'Email' => $request->input('email'),
-                'Jabatan' => $request->input('jabatan'),
-                'Pangkat' => $request->input('pangkat'),
-                'Golongan' => $request->input('golongan'),
-                'NUPTK' => $request->input('nuptk'),
-                'StatusMenikah' => $request->input('status_marital'),
-                'Goldarah' => $request->input('gol_darah'),
-                'Gelardepan' => $request->input('gelar_depan'),
-                'Gelarbelakang' => $request->input('gelar_belakang'),
-                'Tahunmasuk' => $request->input('tmt'),
-                'Jabatansekolah' => $for_query,
-                'Niy' => $request->input('niy'),
-                'status_guru' => $request->input('status_guru'),
-                'balas_bakti_15_tahun' => $request->input('bakti_15'),
-                'balas_bakti_25_tahun' => $request->input('bakti_25'),
-                'pensiun_55_tahun' => $request->input('pensiun'),
-                'masa_perpanjangan_1' => $request->input('perpanjangan_pertama'),
-                'masa_perpanjangan_2' => $request->input('perpanjangan_kedua'),
-                'masa_perpanjangan_3' => $request->input('perpanjangan_ketiga'),
-                'sertifikasi' => $request->input('sertifikasi'),
-                'reg_date' => Carbon::now()->toDateTimeString()
-            );
-            
-            $hakakses = DB::table('tblhakakses')->where('nama_akses','Guru')->first();
-            if(!empty($hakakses)){
-                
-                $simpan = DB::table('tabelguru')->insert($data);        
-                $idgr =  DB::table('tabelguru')->latest('id')->first();
-                $idguru = $idgr->id; 
-
-                if(!empty($hubungan)){
-                    for($a=0;$a<count($hubungan); $a++){
-                        $tgllahirs = date('Y', strtotime($tgllahir[$a]));
-                        $thnsekarang = Carbon::now()->format('Y');
-                        $umur = $thnsekarang - $tgllahirs;
-
-                        $datakeluarga = array(
-                            'idguru' => $idguru,
-                            'nama_keluarga' => $nama[$a],
-                            'hubungan' => $hubungan[$a],
-                            'tempat_lahir' => $tmplahir[$a],
-                            'tgl_lahir_keluarga' => $tgllahir[$a],
-                            'umur_anak' => $umur,
-                            'reg_date' => Carbon::now()->toDateTimeString()
-                        );
-                        $simpan = DB::table('tblkeluarga')->insert($datakeluarga);
+    
+                // $mapel = $request->input('mapel');
+                // $jam = $request->input('jumlah_jam');
+                // $kelas = $request->input('kelas');
+                $idguru="";
+    
+                $for_query = '';
+                $tugas = $request->input('tugas');
+                if(!empty($tugas)){
+                    foreach ($tugas as $key) {            
+                        $for_query .= $key . ', ';
                     }
                 }
-
-                if(!empty($jenjang)){
-                        for($b=0;$b<count($jenjang); $b++){
-                        $datapendidikan = array(
-                            'idguru' => $idguru,
-                            'Jenjang' => $jenjang[$b],
-                            'Asalperguruantinggi' => $kampus[$b],
-                            'Prodi' => $prodi[$b],
-                            'Tahunmasuk' => $tahunmasuk[$b],
-                            'Tahunkeluar' => $tahunkeluar[$b],
-                            'Ipk' => $ipk[$b],
-                            'reg_date' => Carbon::now()->toDateTimeString()
-                        );
-                        $simpan = DB::table('tabelPendidikanGuru')->insert($datapendidikan);
+                $for_query = substr($for_query, 0, -2);
+                
+                $data = array(
+                    'Nip' => $request->input('nip'),
+                    'Nik' => $request->input('nik'),
+                    'Nama' => $request->input('nama_lengkap'),
+                    'Agama' => $request->input('agama'),
+                    'Tempatlahir' => $request->input('tempatlahir'),
+                    'Tanggallahir' => $request->input('tanggallahir'),
+                    'Jeniskelamin' => $request->input('jenkel'),
+                    'Alamat' => $request->input('alamat'),
+                    'NoHp' => $request->input('notelp'),
+                    'Email' => $request->input('email'),
+                    'Jabatan' => $request->input('jabatan'),
+                    'Pangkat' => $request->input('pangkat'),
+                    'Golongan' => $request->input('golongan'),
+                    'NUPTK' => $request->input('nuptk'),
+                    'StatusMenikah' => $request->input('status_marital'),
+                    'Goldarah' => $request->input('gol_darah'),
+                    'Gelardepan' => $request->input('gelar_depan'),
+                    'Gelarbelakang' => $request->input('gelar_belakang'),
+                    'Tahunmasuk' => $request->input('tmt'),
+                    'Jabatansekolah' => $for_query,
+                    'Niy' => $request->input('niy'),
+                    'status_guru' => $request->input('status_guru'),
+                    'balas_bakti_15_tahun' => $request->input('bakti_15'),
+                    'balas_bakti_25_tahun' => $request->input('bakti_25'),
+                    'pensiun_55_tahun' => $request->input('pensiun'),
+                    'masa_perpanjangan_1' => $request->input('perpanjangan_pertama'),
+                    'masa_perpanjangan_2' => $request->input('perpanjangan_kedua'),
+                    'masa_perpanjangan_3' => $request->input('perpanjangan_ketiga'),
+                    'sertifikasi' => $request->input('sertifikasi'),
+                    'reg_date' => Carbon::now()->toDateTimeString()
+                );
+                
+                $hakakses = DB::table('tblhakakses')->where('nama_akses','Guru')->first();
+                if(!empty($hakakses)){
+                    
+                    $simpan = DB::table('tabelguru')->insert($data);        
+                    $idgr =  DB::table('tabelguru')->latest('id')->first();
+                    $idguru = $idgr->id; 
+    
+                    if(!empty($hubungan)){
+                        for($a=0;$a<count($hubungan); $a++){
+                            $tgllahirs = date('Y', strtotime($tgllahir[$a]));
+                            $thnsekarang = Carbon::now()->format('Y');
+                            $umur = $thnsekarang - $tgllahirs;
+    
+                            $datakeluarga = array(
+                                'idguru' => $idguru,
+                                'nama_keluarga' => $nama[$a],
+                                'hubungan' => $hubungan[$a],
+                                'tempat_lahir' => $tmplahir[$a],
+                                'tgl_lahir_keluarga' => $tgllahir[$a],
+                                'umur_anak' => $umur,
+                                'reg_date' => Carbon::now()->toDateTimeString()
+                            );
+                            $simpan = DB::table('tblkeluarga')->insert($datakeluarga);
+                        }
                     }
+    
+                    if(!empty($jenjang)){
+                            for($b=0;$b<count($jenjang); $b++){
+                            $datapendidikan = array(
+                                'idguru' => $idguru,
+                                'Jenjang' => $jenjang[$b],
+                                'Asalperguruantinggi' => $kampus[$b],
+                                'Prodi' => $prodi[$b],
+                                'Tahunmasuk' => $tahunmasuk[$b],
+                                'Tahunkeluar' => $tahunkeluar[$b],
+                                'Ipk' => $ipk[$b],
+                                'reg_date' => Carbon::now()->toDateTimeString()
+                            );
+                            $simpan = DB::table('tabelPendidikanGuru')->insert($datapendidikan);
+                        }
+                    }
+                    
+                    if($for_query == 'Guru' OR $for_query == 'Guru, Staff'){
+                        $seq = DB::table('tbuser')->max('id') + 1; 
+    
+                        $datakun = DB::table('tbuser')->insert([
+                                'id' => $seq,
+                                'username' => $request->input('nip'),
+                                'password' => password_hash('12345678', PASSWORD_DEFAULT),
+                                'nama' => $request->input('nama_lengkap'),
+                                'email' => $request->input('email'),
+                                'created_at' => Carbon::now()->toDateTimeString(),
+                                'active' => 'TRUE',
+                                'id_hakakses' => $hakakses->idhakakses
+                        ]);
+                    }
+                    
+                    // for($c=0;$c<count($mapel); $c++){
+                    //     $datamapel = array(
+                    //         'idguru' => $idguru,
+                    //         'idmapel' => $mapel[$c],
+                    //         'jumlah_jam' => $jam[$c],
+                    //         'kelas' => $kelas[$c],
+                    //         'reg_date' => Carbon::now()->toDateTimeString()
+                    //     );
+                    //     $simpan = DB::table('tblmapeldiampu')->insert($datamapel);
+                    // }
+    
+                    Alert::success('Berhasil', 'Data berhasil disimpan');
+                    return redirect('/dataguru');
+                }else{
+                    Alert::warning('Perhatian !', 'Data role Guru belum dibuat !');
+                    return redirect('/dataguru/create');
                 }
-                
-                if($for_query == 'Guru' OR $for_query == 'Guru, Staff'){
-                    $seq = DB::table('tbuser')->max('id') + 1; 
-
-                    $datakun = DB::table('tbuser')->insert([
-                            'id' => $seq,
-                            'username' => $request->input('nip'),
-                            'password' => password_hash('12345678', PASSWORD_DEFAULT),
-                            'nama' => $request->input('nama_lengkap'),
-                            'email' => $request->input('email'),
-                            'created_at' => Carbon::now()->toDateTimeString(),
-                            'active' => 'TRUE',
-                            'id_hakakses' => $hakakses->idhakakses
-                    ]);
-                }
-                
-                // for($c=0;$c<count($mapel); $c++){
-                //     $datamapel = array(
-                //         'idguru' => $idguru,
-                //         'idmapel' => $mapel[$c],
-                //         'jumlah_jam' => $jam[$c],
-                //         'kelas' => $kelas[$c],
-                //         'reg_date' => Carbon::now()->toDateTimeString()
-                //     );
-                //     $simpan = DB::table('tblmapeldiampu')->insert($datamapel);
-                // }
-
-                Alert::success('Berhasil', 'Data berhasil disimpan');
-                return redirect('/dataguru');
-            }else{
-                Alert::warning('Perhatian !', 'Data role Guru belum dibuat !');
-                return redirect('/dataguru/create');
+    
             }
-
+        }elseif($cekGuruLain > 0){
+            Alert::warning('Perhatian !', 'Data Guru Telah Terdaftar!');
+            return redirect('/dataguru/create');
+        }elseif($cekSiswa > 0){
+            Alert::warning('Perhatian !', 'NIP Guru tidak boleh sama dengan NISN siswa terdaftar!');
+            return redirect('/dataguru/create');
         }
-
 
     }
 

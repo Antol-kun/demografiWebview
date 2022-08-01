@@ -54,6 +54,9 @@ class DatasiswaController extends Controller
         if ($row) {
             Alert::success('Berhasil', 'Data berhasil disimpan');
             return redirect('/datasiswa');
+        }else {
+            Alert::warning('Perhatian !', 'NISN Siswa telah terdaftar!');
+            return redirect('/datasiswa');
         }
     }
 

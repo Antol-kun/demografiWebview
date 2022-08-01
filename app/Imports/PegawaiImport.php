@@ -37,25 +37,30 @@ class PegawaiImport implements ToModel, WithHeadingRow
                 'Tahunmasuk' => $row['tmt'],
                 'Jabatansekolah' => $row['jabatan_sekolah']
             );
-        
+
         $hakakses = DB::table('tblhakakses')->where('nama_akses','Guru')->first();
+        $cekguru = DB::table('tabelguru')->where('Nip', $row['niynip'])->count();
+        // dd($data, $cekguru);
 
-        if($row['jabatan_sekolah'] == 'Guru, Staff' OR $row['jabatan_sekolah'] == 'Guru'){
-            $seq = DB::table('tbuser')->max('id') + 1; 
+        if($cekguru == 0){
+            if($row['jabatan_sekolah'] == 'Guru, Staff' AND $row['jabatan_sekolah'] == 'Guru' AND $row['jabatan_sekolah'] == 'Staff'){
+                // dd($row['jabatan_sekolah']);
+                $seq = DB::table('tbuser')->max('id') + 1; 
+    
+                $datakun = DB::table('tbuser')->insert([
+                        'id' => $seq,
+                        'username' => $row['niynip'],
+                        'password' => password_hash('12345678', PASSWORD_DEFAULT),
+                        'nama' => $row['nama_pegawai'],
+                        'email' => $row['email_pegawai'],
+                        'created_at' => Carbon::now()->toDateTimeString(),
+                        'active' => 'TRUE',
+                        'id_hakakses' => $hakakses->idhakakses
+                ]);
 
-                    $datakun = DB::table('tbuser')->insert([
-                            'id' => $seq,
-                            'username' => $row['niynip'],
-                            'password' => password_hash('12345678', PASSWORD_DEFAULT),
-                            'nama' => $row['nama_pegawai'],
-                            'email' => $row['email_pegawai'],
-                            'created_at' => Carbon::now()->toDateTimeString(),
-                            'active' => 'TRUE',
-                            'id_hakakses' => $hakakses->idhakakses
-                    ]);
+                DB::table('tabelguru')->insert($data);
+            }
         }
-
-        $simpan = DB::table('tabelguru')->insert($data);
         // dd($row['jabatan_sekolah']);
         // $hakakses = DB::table('tblhakakses')->first();
         // dd($row['niynip']);
