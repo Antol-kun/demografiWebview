@@ -49,57 +49,8 @@
 	<!--begin::Main-->
 	<!--begin::Root-->
 	@include('sweetalert::alert')
-	<div class="d-flex flex-column flex-root">
-		<!--begin::Page-->
-		<div class="page d-flex flex-row flex-column-fluid">
-			@include('layouts._aside')
-			<!--begin::Wrapper-->
-			<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-				@include('layouts._header')
-				<!--begin::Content-->
-				<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-					@include('layouts._sub_header')
-					<!--begin::Post-->
-					@yield('content')
-					<!--end::Post-->
-				</div>
-				<!--end::Content-->
-				<!--begin::Footer-->
-				<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
-					<!--begin::Container-->
-					<div
-						class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-						<!--begin::Copyright-->
-						<div class="text-dark order-2 order-md-1">
-							<span class="text-muted fw-bold me-1">{{ now()->format('Y') }}©</span>
-							<a href="" target="_blank" class="text-gray-800 text-hover-primary">Edsy
-								<!-- {{ $settings['app_name'] ?? env('APP_NAME') }} -->
-							</a>
-						</div>
-						<!--end::Copyright-->
-						<!--begin::Menu-->
-						<ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1" style="display: none">
-							<li class="menu-item">
-								<a href="https://keenthemes.com/faqs" target="_blank" class="menu-link px-2">About</a>
-							</li>
-							<li class="menu-item">
-								<a href="https://keenthemes.com/support" target="_blank"
-									class="menu-link px-2">Support</a>
-							</li>
-							<li class="menu-item">
-								<a href="https://1.envato.market/EA4JP" target="_blank"
-									class="menu-link px-2">Purchase</a>
-							</li>
-						</ul>
-						<!--end::Menu-->
-					</div>
-					<!--end::Container-->
-				</div>
-				<!--end::Footer-->
-			</div>
-			<!--end::Wrapper-->
-		</div>
-		<!--end::Page-->
+	<div class="container">
+	@yield('content')
 	</div>
 	<!--end::Root-->
 	<!--begin::Scrolltop-->
